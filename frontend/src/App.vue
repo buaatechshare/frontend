@@ -2,11 +2,14 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <sui-button content="Next" icon="right arrow" label-position="right" />    
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import 'semantic-ui-css/semantic.min.css'
+
 
 export default {
   name: 'app',
