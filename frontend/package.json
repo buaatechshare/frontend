@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "material-design-icons-iconfont": "^4.0.5",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-vue": "^0.8.1",
-    "vue": "^2.6.6"
+    "vue": "^2.6.6",
+    "vuetify": "^1.5.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

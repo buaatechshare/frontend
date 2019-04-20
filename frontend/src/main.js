@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import SuiVue from 'semantic-ui-vue'
-import 'semantic-ui-css/semantic.min.css'
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import Vuetify from 'vuetify' // Import Vuetify to your project
+
+Vue.use(Vuetify) // Add Vuetify as a plugin
+
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
 }).$mount('#app')
-
-Vue.use(SuiVue)
