@@ -5,3 +5,4 @@ export default {
   name: "LoginView"
 };
 </script>
+
