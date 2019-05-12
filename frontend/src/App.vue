@@ -13,18 +13,17 @@
   border-radius: 3px;
   float: left;
   position: relative;
-  top: 15px;
-  left: 20px;
+  margin: 15px 20px 0px 20px;
 }
 .layout-search {
-  width: 800px;
+  width: 300px;
   float: center;
 }
 .layout-nav {
   width: 220px;
   margin: 0 auto;
-  margin-right: 20px;
-  text-align: right;
+  float: right;
+  height: 70px;
 }
 .layout-footer-center {
   text-align: center;
@@ -40,21 +39,17 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header :style="{position: 'fixed', width: '100%',background:'#fff'}">
-        <Menu mode="horizontal" theme="light" active-name="1">
+      <Header :style="{position: 'fixed', width: '100%',background:'#fff',height:'70px'}">
+        <Menu mode="horizontal" theme="light" active-name="1" style="height:70px">
           <div class="layout-logo"></div>
-          <div class="layout-search">
-            <MenuItem>
-              <Input size="large" search placeholder="Enter something..."/>
-            </MenuItem>
+          <div class="layout-search" style="display: inline">
+            <Input style="width: 300px" size="large" search placeholder="Enter something..."/>
           </div>
-          <div class="layout-nav">
-            <MenuItem name="1">
-              <Icon type="ios-contact-outline" size="30"></Icon>登录
-            </MenuItem>
-            <MenuItem name="2">
-              <Icon type="ios-person-add-outline" size="30"></Icon>注册
-            </MenuItem>
+          <div class="layout-nav" style="display: inline">
+            <icon type="ios-contact-outline" size="30"></icon>
+            <Button style="border-width:0px;margin:0px">登录</Button>
+            <icon type="ios-person-add-outline" size="30"></icon>
+            <Button style="border-width:0px;margin:0px">注册</Button>
           </div>
         </Menu>
       </Header>
