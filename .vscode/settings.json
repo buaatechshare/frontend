@@ -1,3 +1,4 @@
 {
     "editor.formatOnSave": true
+    "vetur.validation.template"：false
 }
