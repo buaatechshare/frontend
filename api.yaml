@@ -114,6 +114,7 @@ paths:
   /search/papers:
     get:
       description: get searched result
+      summary: get searched result
       parameters:
         - name: keywords
           in: query
@@ -129,6 +130,7 @@ paths:
   /search/patents:
     get:
       description: get searched result
+      summary: get searched result
       parameters: 
        - name: keywords
          in: query
@@ -144,6 +146,7 @@ paths:
   /search/professors:
     get:
       description: get searched professors
+      summary: get searched professors
       parameters:
         - name: keywords
           in: query
@@ -154,10 +157,11 @@ paths:
           description: a list of professors
           schema:
             $ref: '#/definitions/professorlist'
-            
+  #? 前端可以知道resourceID吗？
   /paperDetail/{resourceID}:
     get:
       description: get paper detail
+      summary: get paper detail
       parameters:
         - name: resourceID
           in: path
@@ -208,6 +212,7 @@ paths:
   /patentDetail/{resourceID}:
     get:
       description:  get patent detail
+      summary: get patent detail
       parameters: 
         - name: resourceID
           description: resourceID
@@ -236,11 +241,7 @@ paths:
               otherClasses:
                 type: array
                 items:
-                  required: 
-                    - name
-                  properties:
-                    name:
-                      type: string
+                  type: string
               applicationAddress:
                 type: "string"
               rightHolder:
@@ -262,19 +263,11 @@ paths:
               inventors:
                 type: array
                 items:
-                  required: 
-                    - name
-                  properties:
-                    name:
-                      type: string
+                  type: string
               agent:
                 type: array
                 items:
-                  required: 
-                    - name
-                  properties:
-                    name:
-                      type: string
+                  type: string
               priority:
                 type: "string"
               currentState:
@@ -282,6 +275,93 @@ paths:
               summary:
                 type: string
                 format: text
+  /interests:
+    get:
+      summary: get all interest tags from backend
+      description: get all interest tags from backend
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              tags:
+                type: array
+                items:
+                  type: string
+  
+  /userinfo/{email}:
+    get:
+      summary: get user infomation
+      description: get user infomation including email, username, email and password
+      parameters: 
+        - $ref: '#/parameters/email'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/userInfo'
+        404:
+          description: the user not found
+    put:
+      summary: update user information
+      description: update all information of user
+      parameters: 
+        - $ref: '#/parameters/email'
+        - name: password
+          in: query
+          type: string
+          format: password
+        - name: username
+          in: query
+          type: string
+      responses:
+        200:
+          description: OK
+        404: 
+          description: the user not found
+
+  /collections/papers/{email}:
+    get:
+      description: get all collections of a user
+      parameters:
+        - $ref: '#/parameters/email'    
+      responses:
+        200: 
+          description: OK
+          schema: 
+            $ref: '#/definitions/paperlist'
+        404:
+          description: the user not found
+    post:
+      description: post a new collection of paper
+      parameters:
+        - $ref: '#/parameters/email'
+        #? 前端可以知道resourceID吗
+        - $ref: '#/definitions/paper'
+          in: query
+      responses:
+        201:
+          description: post successfully
+        404:
+          description: the user not found
+    delete:
+      description: delete a collection of paper
+      parameters:
+      - $ref: '#/parameters/email'
+      - $ref: '#/definitions/paper'
+        in: query
+
+
+        
+    
+    
+parameters:
+  email:
+    name: email
+    in: path
+    required: true
+    type: string
+    format: email
 definitions:
   userInfo:
     type: object
@@ -292,6 +372,8 @@ definitions:
       password:
         type: string
         format: password
+      username:
+        type: string
   paper:
     type: object
     required:
