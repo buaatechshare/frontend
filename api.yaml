@@ -1,0 +1,600 @@
+swagger: "2.0"
+
+info:
+  description: "the api document for BUAA techshare platform"
+  version: "1.0.0"
+  title: "techshare API"
+  termsOfService: "http://swagger.io/terms/"
+# host: "http://rap2api.taobao.org/app/mock/161835/"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /login:
+    get:
+      summary: login with email and password
+      description: login with email and password
+      parameters: 
+        - name: email
+          in: query
+          type: "string"
+          format: email
+        - name: password
+          in: query
+          type: string
+          format: password
+      responses:
+        200: 
+          description: finished
+        404:
+          description: not found
+  /register:
+    post:
+      summary: register and post a new user
+      parameters:
+        - name: email
+          in: query
+          type: "string"
+          format: email
+        - name: userName
+          in: query
+          type: "string"
+        - name: phoneNumber
+          in: query
+          type: "string"
+        - name: password
+          in: query
+          type: string
+          format: password
+      responses:
+        200:
+          description: register successfully
+        500:
+          description: fail to register
+  /papers:
+    get:
+      summary: get a list of papers
+      parameters:
+        - $ref: '#/definitions/pages'
+      responses:
+        200:
+          description: a list of papers
+          schema:
+            $ref: '#/definitions/paperlist'
+        404:
+          description: the papers has not been found
+          
+  /papers/{email}:
+    get:
+      summary: get a list papers for a certain user
+      parameters:
+        - $ref: '#/definitions/pages'
+        - name: email
+          in: path
+          required: true
+          type: string
+          format: email
+          
+      responses:
+        200:
+          description: a list of paper for a certain user
+          schema:
+            $ref: '#/definitions/paperlist'
+    
+  /patents:
+    get:
+      summary: get a list of patents
+      parameters:
+        - $ref: '#/definitions/pages'
+      responses:
+        200:
+          description: a list of patents
+          schema:
+            $ref: '#/definitions/patentlist'
+        404:
+          description: the patents have not been found
+          
+  /patents/{email}:
+    get:
+      summary: get a list patents for a certain user
+      parameters:
+        - $ref: '#/definitions/pages'
+        - name: email
+          in: path
+          required: true
+          type: string
+          format: email
+          
+      responses:
+        200:
+          description: a list of patents for a certain user
+          schema:
+            $ref: '#/definitions/patentlist'
+
+  /search/papers:
+    get:
+      description: get searched result
+      summary: get searched result
+      parameters:
+        - name: keywords
+          in: query
+          type: "string"
+          description: the searching information and keywords
+      responses:
+        200:
+          description: a list of papers
+          schema:
+            $ref: '#/definitions/paperlist'
+        404:
+          description: not found
+  /search/patents:
+    get:
+      description: get searched result
+      summary: get searched result
+      parameters: 
+       - name: keywords
+         in: query
+         type: "string"
+         description: searching information
+      responses:
+        200:
+          description: a list of patents
+          schema:
+            $ref: '#/definitions/patentlist'
+        404:
+          description: not found
+  /search/professors:
+    get:
+      description: get searched professors
+      summary: get searched professors
+      parameters:
+        - name: keywords
+          in: query
+          type: "string"
+          description: searching information
+      responses:
+        200:
+          description: a list of professors
+          schema:
+            $ref: '#/definitions/professorlist'
+  #? 前端可以知道resourceID吗？
+  /paperDetail/{resourceID}:
+    get:
+      description: get paper detail
+      summary: get paper detail
+      parameters:
+        - name: resourceID
+          in: path
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: the full details for a paper
+          schema:
+            required:
+              - author
+              - paperName
+              - abstract
+            properties:
+              DOI:
+                type: "string"
+              author:
+                type: "string"
+              paperName:
+                type: "string"
+              abstract:
+                type: "string"
+              originalTitle:
+                type: "string"
+              bookTitle:
+                type: "string"
+              #? seperated year and data
+              year:
+                type: integer
+              data:
+                type: string
+                format: datetime
+              publisher:
+                type: "string"
+              journal:
+                type: "string"
+              conference:
+                type: "string"
+              volume:
+                type: "string"
+              issue:
+                type: "string"
+              referenceCount:
+                type: integer
+              citationCount:
+                type: integer
+                
+  /patentDetail/{resourceID}:
+    get:
+      description:  get patent detail
+      summary: get patent detail
+      parameters: 
+        - name: resourceID
+          description: resourceID
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: get detail succesfully
+          schema:
+            required:
+              - title
+              - rightHolder
+            properties:
+              title:
+                type: "string"
+              country_province:
+                type: "string"
+              publicationDate:
+                type: string
+                format: datetime
+              authorizedAnnouncementDate:
+                type: string
+                format: datetime
+              #? 分类号为什么是set
+              otherClasses:
+                type: array
+                items:
+                  type: string
+              applicationAddress:
+                type: "string"
+              rightHolder:
+                type: "string"
+              assignee:
+                type: integer
+              keywords:
+                type: "string"
+              filingDate:
+                type: string
+                format: datetime
+              publicationNumber:
+                type: integer
+              authorizedPublicNumber:
+                type: integer
+                #? 申请人为什么是int
+              applicant:
+                type: integer
+              inventors:
+                type: array
+                items:
+                  type: string
+              agent:
+                type: array
+                items:
+                  type: string
+              priority:
+                type: "string"
+              currentState:
+                type: integer
+              summary:
+                type: string
+                format: text
+  /interests:
+    get:
+      summary: get all interest tags from backend
+      description: get all interest tags from backend
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              tags:
+                type: array
+                items:
+                  type: string
+  
+  /userinfo/{user}:
+    get:
+      summary: get user infomation
+      description: get user infomation including email, username, email and password
+      parameters: 
+        - $ref: '#/parameters/user'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/userInfo'
+        404:
+          description: the user not found
+    put:
+      summary: update user information
+      description: update all information of user
+      parameters: 
+        - $ref: '#/parameters/user'
+        - name: password
+          in: query
+          type: string
+          format: password
+        - name: username
+          in: query
+          type: string
+      responses:
+        200:
+          description: OK
+        404: 
+          description: the user not found
+  /collections/{user}:
+    post:
+      description: post a new collection of paper
+      parameters:
+        - $ref: '#/parameters/user'
+        #? 前端可以知道resourceID吗
+        - name: resourceID
+          in: query
+          required: true
+          type: string
+      responses:
+        201:
+          description: post successfully
+        404:
+          description: the user not found
+    delete:
+      description: delete a collection of paper
+      parameters:
+      - $ref: '#/parameters/user'
+      - name: resourceID
+        in: query
+        required: true
+        type: string
+      responses:
+        204:
+          description: delete successfully
+        404:
+          description: user or resource not found
+  /collections/papers/{user}:
+    get:
+      description: get all collections of a user
+      parameters:
+        - $ref: '#/parameters/user'    
+      responses:
+        200: 
+          description: OK
+          schema: 
+            $ref: '#/definitions/paperlist'
+        404:
+          description: the user not found
+  
+  /collections/patents/{user}:
+    get:
+      description: get all collections of a user
+      parameters:
+        - $ref: '#/parameters/user'    
+      responses:
+        200: 
+          description: OK
+          schema: 
+            $ref: '#/definitions/patentlist'
+        404:
+          description: the user not found
+
+  #TODO: 之后加上分页机制
+
+  #TODO: 站内消息表加上已读和未读标志
+  /messages:
+    get:
+      description: get all message with receiver or sender
+      parameters:
+        - name: receiver
+          in: query
+          type: string
+          format: email
+        - name: sender
+          in: query
+          type: string
+          format: email
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/messagelist'
+        404:
+          description: user or message not found
+    post:
+      description: post a message 
+      parameters:
+        - name: receiver
+          in: query
+          type: string
+          format: email
+        - name: sender
+          in: query
+          type: string
+          format: email
+        - name: content
+          in: query
+          type: string
+          format: text
+      responses:
+        201:
+          description: add the new message successfully
+        400:
+          description: fail to add the new message
+  
+  /follow/{user}:
+    get:
+      description: get the proflist the user follows
+      summary: get the proflist the user follows
+      parameters:
+        - $ref: '#/parameters/user'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/professorlist'
+        400:
+          description: invalid request
+        404:
+          description: not found
+    post:
+      description: post a new prof followed by the user
+      summary: psot a new prof followed by the user
+      parameters:
+        - $ref: '#/parameters/user'
+        - name: professor
+          in: query
+          required: true
+          type: string
+          format: email
+      responses:
+        201: 
+          description: created
+        400:
+          description: invalid request
+        404:
+          description: user not found
+    delete:
+      description: unfollow the professor
+      summary: unfollow the professor
+      parameters:
+        - $ref: '#/parameters/user'
+        - name: professor
+          in: query
+          required: true
+          type: string
+          format: email
+      responses:
+        201:
+          description: deleted
+        400:
+          description: invalid request
+        404: 
+          description: the follower or professor not found
+  
+  #? 待申请的专家信息在哪里？
+  #TODO： applicaition 未完成
+  /application/{user}:
+    post:
+      description: post the application to be professor
+      parameters:
+        - $ref: '#/parameters/user'
+        - name: content
+          in: query
+          required: true
+          type: string
+          format: text
+      responses:
+        201:
+          description: created
+        400:
+          description: invalid
+        404:
+          description: user not found
+    get:
+      description: get the application
+      parameters:
+        - $ref: '#/parameters/user'
+      responses:
+        201:
+          description: get successfully
+          
+  #TODO: 学术管理接口
+
+
+
+
+        
+    
+    
+parameters:
+  user:
+    name: user
+    in: path
+    required: true
+    type: string
+    format: email
+definitions:
+  userInfo:
+    type: object
+    properties:
+      email:
+        type: "string"
+        format: email
+      password:
+        type: string
+        format: password
+      username:
+        type: string
+  paper:
+    type: object
+    required:
+      - author
+      - paperName
+    properties:
+      author:
+        type: "string"
+      paperName:
+        type: "string"
+      abstract:
+        type: string
+        format: text
+  patent:
+    type: object
+    required:
+      - rightHolder
+      - patentName
+    properties:
+      rightHolder:
+        type: "string"
+      patentName:
+        type: "string"
+      summary:
+        type: string
+        format: text
+  professor:
+    type: object
+    required:
+      - name
+      - field
+    properties:
+      name:
+        type: "string"
+      field:
+        type: "string"
+      constitution:
+        type: "string"
+  message:
+    type: object
+    required:
+      - receiverName
+      - senderName
+      - content
+    properties:
+      receiverName:
+        type: string
+      senderName:
+        type: string
+      content:
+        type: string
+        format: text
+  pages:
+    type: object
+    properties:
+      pagesize:
+        type: integer
+      pageNumber:
+        type: integer
+
+  paperlist:
+    type: array
+    items:
+      $ref: '#/definitions/paper'
+
+  patentlist:
+    type: array
+    items:
+      $ref: '#/definitions/patent'
+
+  professorlist:
+    type: array
+    items:
+      $ref: '#/definitions/professor'
+  messagelist:
+    type: array
+    items:
+      $ref: '#/definitions/message'
