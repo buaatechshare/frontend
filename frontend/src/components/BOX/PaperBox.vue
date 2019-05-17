@@ -7,7 +7,7 @@
       </sui-card-meta>
     </sui-card-content>
     <sui-card-content>
-      <sui-card-header>Domain Adaptation via Transfer Component Analysis</sui-card-header>
+      <sui-card-header>paper name</sui-card-header>
       <div class="event">
         <div class="content">
           <div
