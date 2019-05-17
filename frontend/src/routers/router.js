@@ -1,15 +1,16 @@
-import index from '../components/Index.vue'
-import infoAlterView from '../components/InfoAlterView.vue'
-import MessageBoxList from '../components/BOXList/MessageBoxList.vue'
-import MyPaperBoxList from '../components/BOXList/MyPaperBoxList.vue'
-import MyPatentBoxList from '../components/BOXList/MyPatentBoxList.vue'
+import defaultIndex from '../components/defaultIndex.vue'
+import userIndex from '../components/userIndex.vue'
+// import infoAlterView from '../components/InfoAlterView.vue'
+// import MessageBoxList from '../components/BOXList/MessageBoxList.vue'
+// import MyPaperBoxList from '../components/BOXList/MyPaperBoxList.vue'
+// import MyPatentBoxList from '../components/BOXList/MyPatentBoxList.vue'
 import PaperBoxList from '../components/BOXList/PaperBoxList.vue'
 import PatentBoxList from '../components/BOXList/PatentBoxList.vue'
-import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
-
+// import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
+import register from '../components/SignupView.vue'
 export default [{
         path: "/",
-        component: index,
+        component: defaultIndex,
         children: [{
                 // 当 /user/:id/profile 匹配成功，
                 // UserProfile 会被渲染在 User 的 <router-view> 中
@@ -21,11 +22,15 @@ export default [{
                 // UserPosts 会被渲染在 User 的 <router-view> 中
                 path: 'patents',
                 component: PatentBoxList
+            },
+            {
+                path: 'register',
+                component: register
             }
         ]
     },
     {
-        path: "/infoAlterView",
-        component: infoAlterView
+        path: "/user",
+        component: userIndex
     },
 ]
