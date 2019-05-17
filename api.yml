@@ -47,7 +47,7 @@ paths:
           type: string
           format: password
       responses:
-        200:
+        201:
           description: register successfully
         500:
           description: fail to register
