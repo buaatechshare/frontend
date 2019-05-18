@@ -1,25 +1,29 @@
-import Vue from "vue";
-import App from "./App.vue";
+import Vue from 'vue';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import SuiVue from 'semantic-ui-vue';
-import 'semantic-ui-css/semantic.min.css'
-import VueRouter from 'vue-router'
-import Routes from './routers/router'
+import 'semantic-ui-css/semantic.min.css';
+import VueRouter from 'vue-router';
+import axios from 'axios';
+import Routes from './routers/router';
+import App from './App.vue';
 
 Vue.use(iView);
 Vue.use(SuiVue);
 Vue.use(VueRouter);
+Vue.use(axios);
+
+axios.defaults.baseURL = 'https://easy-mock.com/mock/5cdc07a972d20750a604ae1c/example';
 
 Vue.config.productionTip = false;
 
-//TODO: config the vue router
+// TODO: config the vue router
 const routers = new VueRouter({
   routes: Routes,
-  mode: "history"
-})
+  mode: 'history',
+});
 
 new Vue({
   router: routers,
-  render: h => h(App)
-}).$mount("#app");
+  render: h => h(App),
+}).$mount('#app');
