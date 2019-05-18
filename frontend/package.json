@@ -30,6 +30,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "vue-axios": "^2.1.4",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.5.21"
   },
