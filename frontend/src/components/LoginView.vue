@@ -1,28 +1,30 @@
-<template lang="html">
-  <div>
-    <Modal class="login-modal" v-model="loginModal" width="360" :closable="false" :mask-closable="false">
-      <Form ref="formValidate" :model="formValidate" :rules="ruleValidate">
-          <Form-item prop="name">
-            <Input v-model="formValidate.name" placeholder="请输入姓名"></Input>
-          </Form-item>
-          <Form-item prop="password">
-            <Input v-model="formValidate.password" @keyup.native.enter="handleSubmit('formValidate')" type="password" placeholder="请输入密码"></Input>
-          </Form-item>
-
-          <Row>
-            <Col span="12">
-            <Checkbox-group v-model="formValidate.remember">
-              <Checkbox label="记住我"></Checkbox>
-            </Checkbox-group>
-            </Col>
-            <Col span="12">
-            <a style="float:right" @click="toRegister">新用户注册</a>
-            </Col>
-          </Row>
-
+<template>
+  <div id="loginView">
+    <img src="../assets/bg.jpg" style="width:100%">
+    <div style="margin-top:200px">
+      <Modal v-model="loginShow" width="540" :closable="false" :mask-closable="false">
+        <h2 style="margin:10px;color:#abcdef;text-align:center">
+          <sui-icon name="braille"></sui-icon>techshare
+        </h2>
+        <Form ref="formValidate" :model="loginModel" :rules="ruleValidate">
+          <FormItem label="email" prop="email">
+            <Input v-model="loginModel.email" placeholder="Enter your email"></Input>
+          </FormItem>
+          <FormItem label="password" prop="password">
+            <Input v-model="loginModel.password" placeholder="Enter your password"></Input>
+          </FormItem>
+          <FormItem>
+            <ButtonGroup>
+              <Button type="primary" to="/papers">cancel</Button>
+              <Button to="/register" style="float:left">signup</Button>
+            </ButtonGroup>
+          </FormItem>
         </Form>
-    </Modal>
-    
+        <div slot="footer">
+          <Button type="primary" @click="handleSubmit('loginModel')" long>login</Button>
+        </div>
+      </Modal>
+    </div>
   </div>
 </template>
 
@@ -30,11 +32,17 @@
 export default {
   name: "loginView",
   data() {
-    return {};
+    return {
+      loginModel: {
+        email: "",
+        password: ""
+      },
+      ruleValidate: {},
+      loginShow: true
+    };
   },
-  methods: {}
+  methods: {
+    handleSubmit: function(loginModel) {}
+  }
 };
 </script>
-
-<style lang="css">
-</style>
