@@ -6,9 +6,11 @@ import userIndex from '../components/userIndex.vue';
 // import MyPatentBoxList from '../components/BOXList/MyPatentBoxList.vue'
 import PaperBoxList from '../components/BOXList/PaperBoxList.vue';
 import PatentBoxList from '../components/BOXList/PatentBoxList.vue';
+import PaperView from '../components/PaperView.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
+import evaluate from '../components/EvaluateView.vue';
 
 export default [{
   path: '/',
@@ -38,5 +40,9 @@ export default [{
 {
   path: '/user',
   component: userIndex,
+},
+{
+  path: '/paperview',
+  component: PaperView,
 },
 ];
