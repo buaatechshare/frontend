@@ -8,5 +8,9 @@
             "language": "vue"
         }
     ],
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "editor.fontFamily": "Operator Mono, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 18,
+    "editor.fontWeight": "400"
 }
