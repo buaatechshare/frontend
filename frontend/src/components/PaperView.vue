@@ -1,7 +1,6 @@
 <style>
 .label {
   color: grey;
-
   font-size: 14px;
   float: left;
   width: 65px;
@@ -20,25 +19,12 @@
 </style>
 <template>
   <div id="index">
-    <Menu mode="horizontal" theme="dark" active-name="1">
-      <MenuItem name="techshare" to="/papers">
-        <sui-icon name="braille"></sui-icon>techshare
-      </MenuItem>
-      <MenuItem style="float:right">
-        <ButtonGroup>
-          <Button :size="buttonSize" type="primary" to="/login">login</Button>
-          <Button :size="buttonSize" to="/register">signup</Button>
-        </ButtonGroup>
-      </MenuItem>
-      <MenuItem>
-        <sui-input placeholder="Search..." icon="search"/>
-      </MenuItem>
-    </Menu>
+    <defaultIndex></defaultIndex>
     <div style="margin-left:200px;margin-right:400px">
       <sui-container fluid>
         <br>
         <!--标题-->
-        <h2 color="blue" is="sui-header">慢性疲劳综合征的中医药研究概述</h2>
+        <h2 style="color:#006ddb" is="sui-header">慢性疲劳综合征的中医药研究概述</h2>
         <!--来源 收藏 阅读量-->
         <p style="color:grey;font-size:12px">
           来自 维普
@@ -210,8 +196,9 @@
   </div>
 </template>
 <script>
+import defaultIndex from "../components/defaultIndex.vue";
 export default {
-  name: "defaultindex",
+  name: "paperview",
   data() {
     return {
       active: "资料来源",
@@ -228,6 +215,8 @@ export default {
       this.active = name;
     }
   },
-  components: {}
+  components: {
+    defaultIndex
+  }
 };
 </script>
