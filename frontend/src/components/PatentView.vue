@@ -3,7 +3,12 @@
   color: grey;
   font-size: 14px;
   float: left;
-  width: 65px;
+  width: 66px;
+}
+.tablelabel {
+  color: grey;
+  font-size: 12px;
+  width: 80px;
 }
 .papercontent {
   color: grey;
@@ -11,17 +16,10 @@
   float: left;
   width: 800px;
 }
-.splitlabel {
+.tablecontent {
   color: grey;
   font-size: 12px;
-  float: left;
-  width: 100px;
-}
-.splitcontent {
-  color: grey;
-  font-size: 12px;
-  float: left;
-  width: 330px;
+  width: 353px;
 }
 .comment {
   margin-top: 10px;
@@ -45,93 +43,53 @@
           <Divider type="vertical" dashed/>阅读量 5
         </p>
         <!--专利信息-->
-        <div>
-          <!--申请号与申请日-->
-          <Row>
-            <Col span="12">
-              <p class="splitlabel">申请号：</p>
-              <p class="splitcontent">CN201721535512.3</p>
-            </Col>
-            <Col span="12">
-              <p class="splitlabel">申请日：</p>
-              <p class="splitcontent">2017-11-16</p>
-            </Col>
-          </Row>
-          <!--公开号与公开日-->
-          <Row>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">公开号：</p>
-              <p class="splitcontent">CN208439405U</p>
-            </Col>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">公开日：</p>
-              <p class="splitcontent">2019-01-29</p>
-            </Col>
-          </Row>
-          <!--公开号与公开日-->
-          <Row>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">授权公开号：</p>
-              <p class="splitcontent">CN208439405U</p>
-            </Col>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">授权公开日：</p>
-              <p class="splitcontent">2019-01-29</p>
-            </Col>
-          </Row>
-          <!--申请人与申请地-->
-          <Row>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">申请人：</p>
-              <p class="splitcontent">周守祥</p>
-            </Col>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">申请地：</p>
-              <p class="splitcontent">402191 重庆市永川区朱沱镇四望山村凉水井ewewewew村民小组35号</p>
-            </Col>
-          </Row>
-          <!--发明人与当前权利人-->
-          <Row>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">发明人：</p>
-              <p class="splitcontent">周守祥</p>
-            </Col>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">当前权利人：</p>
-              <p class="splitcontent">邬剑星</p>
-            </Col>
-          </Row>
-          <!--代理人与代理机构-->
-          <Row>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">专利代理机构：</p>
-              <p class="splitcontent">重庆谢成律师事务所</p>
-            </Col>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">代理人：</p>
-              <p class="splitcontent">邬剑星</p>
-            </Col>
-          </Row>
-          <!--主分类号、分类号-->
-          <Row>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">主分类号：</p>
-              <p class="splitcontent">B63C11/02</p>
-            </Col>
-            <Col span="12" style="margin-top:-5px;">
-              <p class="splitlabel">分类号：</p>
-              <p class="splitcontent">B63C11/02</p>
-            </Col>
-          </Row>
-          <!--优先权-->
-          <Row>
-            <Col span="24" style="margin-top:-5px;">
-            <p class="splitlabel">优先权：</p>
-            <p style="color: grey;font-size: 12px;float: left;width: 800px;">重庆谢成律师事务所</p>
-            </col>
-          </Row>
-        </div>
-        <Divider dashed />
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">申请号：</sui-table-cell>
+          <sui-table-cell class="tablecontent">CN201721535512.3</sui-table-cell>
+          <sui-table-cell class="tablelabel">申请日：</sui-table-cell>
+          <sui-table-cell class="tablecontent">2017-11-16</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">公开号：</sui-table-cell>
+          <sui-table-cell class="tablecontent">CN208439405U</sui-table-cell>
+          <sui-table-cell class="tablelabel">公开日：</sui-table-cell>
+          <sui-table-cell class="tablecontent">2019-01-29</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">授权公开号：</sui-table-cell>
+          <sui-table-cell class="tablecontent">CN208439405U</sui-table-cell>
+          <sui-table-cell class="tablelabel">授权公开日：</sui-table-cell>
+          <sui-table-cell class="tablecontent">2019-01-29</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">申请人：</sui-table-cell>
+          <sui-table-cell class="tablecontent">周守祥</sui-table-cell>
+          <sui-table-cell class="tablelabel">申请地：</sui-table-cell>
+          <sui-table-cell class="tablecontent">402191 重庆市永川区朱沱镇四望山村凉水井ewewewew村民小组35号</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">发明人：</sui-table-cell>
+          <sui-table-cell class="tablecontent">周守祥</sui-table-cell>
+          <sui-table-cell class="tablelabel">当前权利人：</sui-table-cell>
+          <sui-table-cell class="tablecontent">邬剑星</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">专利代理机构：</sui-table-cell>
+          <sui-table-cell class="tablecontent">重庆谢成律师事务所</sui-table-cell>
+          <sui-table-cell class="tablelabel">代理人：</sui-table-cell>
+          <sui-table-cell class="tablecontent">邬剑星</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">主分类号：</sui-table-cell>
+          <sui-table-cell class="tablecontent">B63C11/02</sui-table-cell>
+          <sui-table-cell class="tablelabel">分类号：</sui-table-cell>
+          <sui-table-cell class="tablecontent">B63C11/02</sui-table-cell>
+        </sui-table-row>
+        <sui-table-row>
+          <sui-table-cell class="tablelabel">优先权：</sui-table-cell>
+          <sui-table-cell class="tablecontent">重庆谢成律师事务所</sui-table-cell>
+        </sui-table-row>
+        <Divider dashed/>
         <div style="clear:both"></div>
         <!--摘要-->
         <div>
