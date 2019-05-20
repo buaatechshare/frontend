@@ -10,7 +10,11 @@ import PaperView from '../components/PaperView.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
+<<<<<<< HEAD
 
+=======
+// import evaluate from '../components/EvaluateView.vue';
+>>>>>>> a4be12b295e9529f7a865476948359e623aabf6d
 
 export default [{
   path: '/',
