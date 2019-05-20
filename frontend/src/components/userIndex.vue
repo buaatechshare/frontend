@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <Menu mode="horizontal" theme="light" active-name="1">
+    <Menu mode="horizontal" theme="dark" active-name="1">
       <MenuItem name="patents" to="/patents">
         <sui-icon name="sticky note"></sui-icon>patent
       </MenuItem>
