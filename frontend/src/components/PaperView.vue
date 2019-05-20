@@ -6,7 +6,7 @@
   float: left;
   width: 65px;
 }
-.content {
+.papercontent {
   color: grey;
   font-size: 14px;
   float: left;
@@ -68,7 +68,7 @@
         <div>
           <p class="label">摘要：</p>
           <p
-            class="content"
+            class="papercontent"
           >通过对近年来有关慢性疲劳综合征文献的回顾，总结传统中医药对慢性疲劳综合征病因病机、辨证施治、针灸治疗、抗疲劳的单味中药研究概况。传统中医药近年来对慢性疲劳综合征的研究以整体观为指导同时针对个体特点，多从脏腑、气血津液论治，也可辨证施以针灸治疗，并通过实验研究总结出不少具有抗疲劳的单杀中药。</p>
           <br>
           <!--为了上下间距美观加入换行-->
@@ -78,7 +78,7 @@
         <!--关键词-->
         <div>
           <p class="label">关键词：</p>
-          <p class="content">
+          <p class="papercontent">
             <span>
               <a>慢性疲劳综合征</a>
             </span>，
@@ -95,14 +95,14 @@
         <!--DOI-->
         <div>
           <p class="label">DOI：</p>
-          <p class="content">10.3969/j.issn.1672-0571.2007.01.035</p>
+          <p class="papercontent">10.3969/j.issn.1672-0571.2007.01.035</p>
         </div>
 
         <div style="clear:both"></div>
         <!--被引量-->
         <div>
           <p class="label">被引量：</p>
-          <p class="content">
+          <p class="papercontent">
             <a>12</a>
           </p>
         </div>
