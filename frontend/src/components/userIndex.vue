@@ -1,4 +1,5 @@
 <template>
+  <!-- -->
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
       <MenuItem name="techshare" to="/papers">
@@ -21,9 +22,7 @@
       <MenuItem name="personalInfo">
         <Icon type="md-document"/>个人信息
       </MenuItem>
-      <MenuItem name="collections">
-        <Icon type="md-chatbubbles"/>我的收藏
-      </MenuItem>
+      <MenuItem name="collections"><Icon type="md-chatbubbles"/ to = '/CollectionView' append>我的收藏</MenuItem>
       <MenuItem name="follow">
         <Icon type="md-heart"/>关注的人
       </MenuItem>
