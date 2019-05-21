@@ -34,23 +34,18 @@ export default [{
   {
     path: 'login',
     component: login,
+  }, {
+    path: '/user',
+    component: userIndex,
+  },
+  {
+    path: '/paperview',
+    component: PaperView,
+  },
+  {
+    path: '/patentview',
+    component: PatentView,
   },
   ],
-},
-{
-  path: '/user',
-  component: userIndex,
-},
-{
-  path: '/paperview',
-  component: PaperView,
-},
-{
-  path: '/patentview',
-  component: PatentView,
-},
-{
-  path: '/testview',
-  component: userIndex
 }
 ];
