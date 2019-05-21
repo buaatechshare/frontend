@@ -49,4 +49,8 @@ export default [{
   path: '/patentview',
   component: PatentView,
 },
+{
+  path: '/testview',
+  component: userIndex
+}
 ];
