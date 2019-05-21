@@ -29,7 +29,6 @@
 </style>
 <template>
   <div id="index">
-    <defaultIndex></defaultIndex>
     <div style="margin-left:200px;margin-right:400px">
       <sui-container fluid>
         <br>
@@ -255,8 +254,6 @@ export default {
       this.active = name;
     }
   },
-  components: {
-    defaultIndex
-  }
+  components: {}
 };
 </script>
