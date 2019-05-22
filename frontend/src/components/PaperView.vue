@@ -97,6 +97,7 @@
           <sui-button
             icon="star outline"
             style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
+            @click="test"
             circular
           >收藏</sui-button>
           <sui-button
@@ -196,6 +197,7 @@
 </template>
 <script>
 import defaultIndex from "../components/defaultIndex.vue";
+import axios from "axios";
 export default {
   name: "paperview",
   data() {
@@ -212,6 +214,17 @@ export default {
     },
     select(name) {
       this.active = name;
+    },
+    test() {
+      axios
+        .post("/messages/", {
+          senderID: 11,
+          receiverID: 10,
+          content: "hahaha"
+        })
+        .then(res => {
+          console.log(res);
+        });
     }
   },
   components: {}
