@@ -370,7 +370,7 @@ paths:
             $ref: '#/definitions/userInfo'
         404:
           description: the user not found
-    put:
+    patch:
       summary: update user information
       description: update all information of user
       parameters: 
@@ -392,7 +392,6 @@ paths:
       description: post a new collection of paper
       parameters:
         - $ref: '#/parameters/userID'
-        #? 前端可以知道resourceID吗
         - name: resourceID
           in: query
           required: true
@@ -417,9 +416,10 @@ paths:
           description: user or resource not found
   /collections/papers/{userID}:
     get:
-      description: get all collections of a user
+      description: 给定pagesize，计算出pagenumber，分页返回收藏的论文
       parameters:
         - $ref: '#/parameters/userID'    
+        - $ref: '#/parameters/pageSize'
       responses:
         200: 
           description: OK
@@ -430,9 +430,10 @@ paths:
   
   /collections/patents/{userID}:
     get:
-      description: get all collections of a user
+      description: 给定pagesize，计算出pagenumber，分页返回收藏的专利
       parameters:
-        - $ref: '#/parameters/userID'    
+        - $ref: '#/parameters/userID'  
+        - $ref: '#/parameters/pageSize'  
       responses:
         200: 
           description: OK
@@ -441,21 +442,17 @@ paths:
         404:
           description: the user not found
 
-  #TODO: 之后加上分页机制
-
-  #TODO: 站内消息表加上已读和未读标志
   /messages:
     get:
-      description: get all message with receiver or sender
+      description: 给定receiver，返回receiver的信，同理sender，给定两个时，返回符合的信
       parameters:
-        - name: receiver
+        - name: receiverID
           in: query
           type: string
-          format: email
-        - name: sender
+        - name: senderID
           in: query
           type: string
-          format: email
+        - $ref: '#/parameters/pageSize'
       responses:
         200:
           description: OK
