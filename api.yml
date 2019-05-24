@@ -463,14 +463,12 @@ paths:
     post:
       description: post a message 
       parameters:
-        - name: receiver
+        - name: receiverID
           in: query
           type: string
-          format: email
-        - name: sender
+        - name: senderID
           in: query
           type: string
-          format: email
         - name: content
           in: query
           type: string
@@ -483,10 +481,11 @@ paths:
   
   /follow/{userID}:
     get:
-      description: get the proflist the user follows
+      description: 得到follow专家列表，给定pagesize返回列表
       summary: get the proflist the user follows
       parameters:
         - $ref: '#/parameters/userID'
+        - $ref: '#/parameters/pageSize'
       responses:
         200:
           description: OK
@@ -501,11 +500,10 @@ paths:
       summary: psot a new prof followed by the user
       parameters:
         - $ref: '#/parameters/userID'
-        - name: professor
+        - name: professorID
           in: query
           required: true
           type: string
-          format: email
       responses:
         201: 
           description: created
@@ -518,11 +516,10 @@ paths:
       summary: unfollow the professor
       parameters:
         - $ref: '#/parameters/userID'
-        - name: professor
+        - name: professorID
           in: query
           required: true
           type: string
-          format: email
       responses:
         201:
           description: deleted
@@ -630,6 +627,9 @@ definitions:
     properties:
       author:
         type: "string"
+      authorID:
+        type: "string"
+        description: get the userID of professor if it exists
       paperName:
         type: "string"
       abstract:
