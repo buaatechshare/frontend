@@ -214,6 +214,17 @@ export default {
       this.active = name;
     }
   },
-  components: {}
+  components: {},
+  beforeCreate() {
+    axios
+      .get("/papers")
+      .then(res => {
+        this.papers = res.data.papers;
+        console.log(this.papers);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
 };
 </script>

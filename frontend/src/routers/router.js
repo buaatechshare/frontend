@@ -34,9 +34,6 @@ export default [{
   {
     path: 'login',
     component: login,
-  }, {
-    path: '/user',
-    component: userIndex,
   },
   {
     path: '/paperview',
@@ -48,5 +45,8 @@ export default [{
   },
   ],
 },
-
+{
+  path: '/user/:id',
+  component: userIndex,
+},
 ];
