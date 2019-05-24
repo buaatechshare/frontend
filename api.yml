@@ -600,8 +600,58 @@ paths:
               reason:
                 type: string
                 format: text
-          
-  #TODO: 学术管理接口
+  /application:
+    get:
+      summary: 管理员得到所有未审核的申请
+      description: 管理员得到所有未审核的申请,根据pagesize确定页数
+      parameters: 
+        - $ref: '#/parameters/pageSize'
+      responses:
+        200:
+          description: OK
+          schema:
+            required:
+              - datetime
+              - introduction
+              - constitution
+              - Name
+            properties:
+              datetime:
+                type: string
+                format: datetime
+              introduction:
+                type: string
+                format: text
+              constitution:
+                type: string
+              Name:
+                type: string
+              isPass:
+                type: boolean
+              reason:
+                type: string
+                format: text
+    
+    patch:
+      summary: 管理员审核专家申请
+      description: 管理员审核专家申请
+      parameters: 
+        - name: userID
+          in: query
+          required: true
+          type: string
+        - name: isPass
+          in: query
+          required: true
+          type: string
+        - name: reason
+          in: query
+          required: true
+          type: string
+          format: text
+      responses:
+        200:
+          description: OK
 
 # test    
 parameters:
