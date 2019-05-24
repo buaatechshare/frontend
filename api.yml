@@ -67,11 +67,24 @@ paths:
           description: finished
           schema:
             $ref: '#/definitions/paperlist'
+    #TODO how to post the resource
     post:
       summary: 提交自己的专家论文
       description: 提交自己的论文，包括信息和pdf
       parameters:
         - $ref: '#/parameters/userID'
+      responses:
+        200:
+          description: finished
+    delete:
+      summary: 删除自己的论文
+      description: 删除自己的论文
+      parameters:
+        - $ref: '#/parameters/userID'
+        - name: resourceID
+          in: query
+          required: true
+          type: string
       responses:
         200:
           description: finished
