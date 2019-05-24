@@ -6,8 +6,10 @@ import userIndex from '../components/userIndex.vue';
 // import MyPatentBoxList from '../components/BOXList/MyPatentBoxList.vue'
 import PaperBoxList from '../components/BOXList/PaperBoxList.vue';
 import PatentBoxList from '../components/BOXList/PatentBoxList.vue';
+import SearchResultView from '../components/SearchResultView.vue';
 import PaperView from '../components/PaperView.vue';
 import PatentView from '../components/PatentView.vue';
+import SearchPaperList from '../components/SearchBox/SearchPaperList.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
@@ -34,6 +36,9 @@ export default [{
   {
     path: 'login',
     component: login,
+  }, {
+    path: '/user',
+    component: userIndex,
   },
   {
     path: '/paperview',
@@ -43,10 +48,16 @@ export default [{
     path: '/patentview',
     component: PatentView,
   },
+  {
+    path: '/searchresult',
+    component: SearchResultView,
+    children: [
+      {
+        path: 'searchpaper',
+        component: SearchPaperList,
+      }
+    ],
+  },
   ],
-},
-{
-  path: '/user/:id',
-  component: userIndex,
-},
+}
 ];
