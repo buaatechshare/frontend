@@ -10,12 +10,79 @@ basePath: "/"
 schemes:
 - "http"
 paths:
-  /login:
+  /comment:
+    post:
+      summary: post comment and rate with userID and resourceID
+      description: the comment has only one level combinded with a certain resource
+      parameters:
+        - name: userID
+          description: userID
+          in: query
+          required: true
+          type: string
+        - name: resourceID
+          description: resourceID
+          in: query
+          required: true
+          type: string
+        - name: comment
+          description: comment
+          in: query
+          required: true
+          type: string
+        - name: rate
+          description: rate 5 maximum
+          in: query
+          required: true
+          type: number
+          format: flaot
+      responses:
+        200:
+          description: finished
     get:
+      summary: get comment with the resourceID
+      description: get comment with the resourceID
+      parameters:
+        - name: resourceID
+          description: resourceID
+          in: query
+          required: true
+          type: string
+        - $ref: '#/parameters/pageNumber'
+        - $ref: '#/parameters/pageSize'
+      responses:
+        200: 
+          description: finished
+          schema:
+            $ref: '#/definitions/commentlist'
+
+  /myPaper/{userID}:
+    get:
+      summary: 在专家资源管理界面得到专家自己的paper
+      description: 在专家资源管理界面得到专家自己的paper
+      parameters: 
+        - $ref: '#/paremeters/userID'
+      responses:
+        200: 
+          description: finished
+          schema:
+            $ref: '#/definitions/paperlist'
+    post:
+      summary: 提交自己的专家论文
+      description: 提交自己的论文，包括信息和pdf
+      parameters:
+        - $ref: '#/paremeters/userID'
+      responses:
+        200:
+          description: finished
+        
+  /login:
+    post:
       summary: login with email and password
       description: login with email and password
       parameters: 
-        - name: email
+        - name: username
+          description: this parameter should be named as "username"
           in: query
           type: "string"
           format: email
@@ -53,9 +120,10 @@ paths:
           description: fail to register
   /papers:
     get:
-      summary: get a list of papers
+      summary: get the default recommended papers
       parameters:
-        - $ref: '#/definitions/pages'
+        - $ref: '#/parameters/pageNumber'
+        - $ref: '#/parameters/pageSize'
       responses:
         200:
           description: a list of papers
@@ -64,17 +132,13 @@ paths:
         404:
           description: the papers has not been found
           
-  /papers/{email}:
+  /papers/{userID}:
     get:
-      summary: get a list papers for a certain user
+      summary: get the recommended papers for a certain user
       parameters:
-        - $ref: '#/definitions/pages'
-        - name: email
-          in: path
-          required: true
-          type: string
-          format: email
-          
+        - $ref: '#/parameters/pageNumber'
+        - $ref: '#/parameters/pageSize'
+        - $ref: '#/parameters/userID'
       responses:
         200:
           description: a list of paper for a certain user
@@ -83,9 +147,10 @@ paths:
     
   /patents:
     get:
-      summary: get a list of patents
+      summary: get the default recommended patents
       parameters:
-        - $ref: '#/definitions/pages'
+        - $ref: '#/parameters/pageNumber'
+        - $ref: '#/parameters/pageSize'
       responses:
         200:
           description: a list of patents
@@ -94,23 +159,19 @@ paths:
         404:
           description: the patents have not been found
           
-  /patents/{email}:
+  /patents/{userID}:
     get:
       summary: get a list patents for a certain user
       parameters:
-        - $ref: '#/definitions/pages'
-        - name: email
-          in: path
-          required: true
-          type: string
-          format: email
-          
+        - $ref: '#/parameters/pageNumber'
+        - $ref: '#/parameters/pageSize'
+        - $ref: '#/parameters/userID'
       responses:
         200:
           description: a list of patents for a certain user
           schema:
             $ref: '#/definitions/patentlist'
-
+  #TODO 搜索确定界面之后确定
   /search/papers:
     get:
       description: get searched result
@@ -157,7 +218,7 @@ paths:
           description: a list of professors
           schema:
             $ref: '#/definitions/professorlist'
-  #? 前端可以知道resourceID吗？
+
   /paperDetail/{resourceID}:
     get:
       description: get paper detail
@@ -178,36 +239,40 @@ paths:
             properties:
               DOI:
                 type: "string"
-              author:
-                type: "string"
-              paperName:
-                type: "string"
-              abstract:
-                type: "string"
+              docType:
+                type: string
+              paperTitle:
+                type: string
               originalTitle:
-                type: "string"
+                type: string
               bookTitle:
-                type: "string"
-              #? seperated year and data
+                type: string
               year:
-                type: integer
-              data:
+                type: number
+              date:
                 type: string
                 format: datetime
               publisher:
-                type: "string"
+                type: string
               journal:
-                type: "string"
+                type: string
               conference:
-                type: "string"
+                type: string
               volume:
-                type: "string"
+                type: string
               issue:
-                type: "string"
+                type: string
+              firstPage:
+                type: string
+              lastPage:
+                type: string
               referenceCount:
-                type: integer
+                type: number
               citationCount:
-                type: integer
+                type: number
+              resourceURL:
+                type: string
+                format: url
                 
   /patentDetail/{resourceID}:
     get:
@@ -223,58 +288,56 @@ paths:
         200:
           description: get detail succesfully
           schema:
-            required:
-              - title
-              - rightHolder
             properties:
+              primaryClass:
+                type: string
+              ApplicationNumber:
+                type: number
               title:
-                type: "string"
+                type: string
               country_province:
-                type: "string"
+                type: string
               publicationDate:
                 type: string
                 format: datetime
               authorizedAnnouncementDate:
                 type: string
                 format: datetime
-              #? 分类号为什么是set
-              otherClasses:
+              applicationAddress:
+                type: string
+              currentRightHolder:
+                type: string
+              assignee:
+                type: number
+              keywords:
                 type: array
                 items:
                   type: string
-              applicationAddress:
-                type: "string"
-              rightHolder:
-                type: "string"
-              assignee:
-                type: integer
-              keywords:
-                type: "string"
               filingDate:
                 type: string
                 format: datetime
               publicationNumber:
-                type: integer
+                type: number
               authorizedPublicNumber:
-                type: integer
-                #? 申请人为什么是int
+                type: number
               applicant:
-                type: integer
+                type: string
               inventors:
                 type: array
                 items:
                   type: string
               agent:
                 type: array
-                items:
+                items: 
                   type: string
               priority:
-                type: "string"
+                type: string
               currentState:
-                type: integer
+                type: boolean
               summary:
                 type: string
                 format: text
+  #TODO 关于多级interest的问题
   /interests:
     get:
       summary: get all interest tags from backend
@@ -289,12 +352,12 @@ paths:
                 items:
                   type: string
   
-  /userinfo/{user}:
+  /userinfo/{userID}:
     get:
       summary: get user infomation
       description: get user infomation including email, username, email and password
       parameters: 
-        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/userID'
       responses:
         200:
           description: OK
@@ -302,11 +365,11 @@ paths:
             $ref: '#/definitions/userInfo'
         404:
           description: the user not found
-    put:
+    patch:
       summary: update user information
       description: update all information of user
       parameters: 
-        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/userID'
         - name: password
           in: query
           type: string
@@ -319,12 +382,11 @@ paths:
           description: OK
         404: 
           description: the user not found
-  /collections/{user}:
+  /collections/{userID}:
     post:
-      description: post a new collection of paper
+      description: 上传新的收藏
       parameters:
-        - $ref: '#/parameters/user'
-        #? 前端可以知道resourceID吗
+        - $ref: '#/parameters/userID'
         - name: resourceID
           in: query
           required: true
@@ -337,7 +399,7 @@ paths:
     delete:
       description: delete a collection of paper
       parameters:
-      - $ref: '#/parameters/user'
+      - $ref: '#/parameters/userID'
       - name: resourceID
         in: query
         required: true
@@ -347,11 +409,12 @@ paths:
           description: delete successfully
         404:
           description: user or resource not found
-  /collections/papers/{user}:
+  /collections/papers/{userID}:
     get:
-      description: get all collections of a user
+      description: 得到用户收藏的paper，给定pagesize，不给定pagenumber，自动分页，传回
       parameters:
-        - $ref: '#/parameters/user'    
+        - $ref: '#/parameters/userID'   
+        - $ref: '#/parameters/pageSize' 
       responses:
         200: 
           description: OK
@@ -360,11 +423,12 @@ paths:
         404:
           description: the user not found
   
-  /collections/patents/{user}:
+  /collections/patents/{userID}:
     get:
-      description: get all collections of a user
+      description: 得到用户收藏的专利，给定pagesize，不给定pagenumber，自动分页，传回
       parameters:
-        - $ref: '#/parameters/user'    
+        - $ref: '#/parameters/userID'    
+        - $ref: '#/parameters/pageSize'
       responses:
         200: 
           description: OK
@@ -373,21 +437,16 @@ paths:
         404:
           description: the user not found
 
-  #TODO: 之后加上分页机制
-
-  #TODO: 站内消息表加上已读和未读标志
   /messages:
     get:
-      description: get all message with receiver or sender
+      description: 给定receiver时，传回所有接收的信，给定sender，传回所有发出的信，两个都给定时，传回符合的信
       parameters:
-        - name: receiver
+        - name: receiverID
           in: query
-          type: string
-          format: email
-        - name: sender
+          type: number
+        - name: senderID
           in: query
-          type: string
-          format: email
+          type: number
       responses:
         200:
           description: OK
@@ -398,14 +457,14 @@ paths:
     post:
       description: post a message 
       parameters:
-        - name: receiver
+        - name: receiverID
           in: query
-          type: string
-          format: email
+          required: true
+          type: number
         - name: sender
           in: query
-          type: string
-          format: email
+          required: true
+          type: number
         - name: content
           in: query
           type: string
@@ -416,12 +475,12 @@ paths:
         400:
           description: fail to add the new message
   
-  /follow/{user}:
+  /follow/{userID}:
     get:
       description: get the proflist the user follows
       summary: get the proflist the user follows
       parameters:
-        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/userID'
       responses:
         200:
           description: OK
@@ -435,12 +494,11 @@ paths:
       description: post a new prof followed by the user
       summary: psot a new prof followed by the user
       parameters:
-        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/userID'
         - name: professor
           in: query
           required: true
-          type: string
-          format: email
+          type: number
       responses:
         201: 
           description: created
@@ -452,7 +510,7 @@ paths:
       description: unfollow the professor
       summary: unfollow the professor
       parameters:
-        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/userID'
         - name: professor
           in: query
           required: true
@@ -465,19 +523,31 @@ paths:
           description: invalid request
         404: 
           description: the follower or professor not found
-  
-  #? 待申请的专家信息在哪里？
-  #TODO： applicaition 未完成
-  /application/{user}:
+
+  /application/{userID}:
     post:
       description: post the application to be professor
       parameters:
-        - $ref: '#/parameters/user'
-        - name: content
+        - $ref: '#/parameters/userID'
+        - name: introduction
           in: query
           required: true
           type: string
           format: text
+        - name: constitution
+          in: query
+          required: true
+          type: string
+        - name: Name
+          in: query
+          required: true
+          type: string
+        - name: Field
+          in: query
+          required: true
+          type: array
+          items: 
+            type: string
       responses:
         201:
           description: created
@@ -486,28 +556,54 @@ paths:
         404:
           description: user not found
     get:
-      description: get the application
+      description: get the application using userID
       parameters:
-        - $ref: '#/parameters/user'
+        - $ref: '#/parameters/userID'
       responses:
         201:
           description: get successfully
+          schema:
+            required:
+              - datetime
+              - introduction
+              - constitution
+              - Name
+            properties:
+              datetime:
+                type: string
+                format: datetime
+              introduction:
+                type: string
+                format: text
+              constitution:
+                type: string
+              Name:
+                type: string
+              isPass:
+                type: boolean
+              reason:
+                type: string
+                format: text
           
   #TODO: 学术管理接口
 
-
-
-
-        
-    
-    
+# test    
 parameters:
-  user:
-    name: user
+  userID:
+    name: userID
     in: path
     required: true
-    type: string
-    format: email
+    type: number
+  pageNumber:
+    name: pageNumber
+    in: query
+    required: true
+    type: number
+  pageSize:
+    name: pageSize
+    required: true
+    in: query
+    type: number
 definitions:
   userInfo:
     type: object
@@ -572,13 +668,17 @@ definitions:
       content:
         type: string
         format: text
-  pages:
+  comment:
     type: object
+    required:
+      - name
+      - content
     properties:
-      pagesize:
-        type: integer
-      pageNumber:
-        type: integer
+      name:
+        type: string
+      content:
+        type: string
+        format: text
 
   paperlist:
     type: array
@@ -598,3 +698,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/message'
+  commentlist:
+    type: array
+    items:
+      $ref: '#/definitions/comment'

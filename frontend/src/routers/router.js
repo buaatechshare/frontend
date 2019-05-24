@@ -55,9 +55,9 @@ export default [{
       {
         path: 'searchpaper',
         component: SearchPaperList,
-      }
+      },
     ],
   },
   ],
-}
+},
 ];
