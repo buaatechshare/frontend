@@ -10,6 +10,8 @@ import SearchResultView from '../components/SearchResultView.vue';
 import PaperView from '../components/PaperView.vue';
 import PatentView from '../components/PatentView.vue';
 import SearchPaperList from '../components/SearchBox/SearchPaperList.vue';
+import SearchPatentList from '../components/SearchBox/SearchPatentList.vue';
+import SearchProfList from '../components/SearchBox/SearchProfList.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
@@ -55,9 +57,17 @@ export default [{
       {
         path: 'searchpaper',
         component: SearchPaperList,
-      }
+      },
+      {
+        path: 'searchpatent',
+        component: SearchPatentList,
+      },
+      {
+        path: 'searchprof',
+        component: SearchProfList,
+      },
     ],
   },
   ],
-}
+},
 ];
