@@ -15,6 +15,7 @@ import SearchProfList from '../components/SearchBox/SearchProfList.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
+import registerfinish from '../components/SignedView.vue';
 
 export default [{
   path: '/',
@@ -38,20 +39,17 @@ export default [{
   {
     path: 'login',
     component: login,
-  }, {
-    path: '/user',
-    component: userIndex,
   },
   {
-    path: '/paperview',
+    path: 'paperview',
     component: PaperView,
   },
   {
-    path: '/patentview',
+    path: 'patentview',
     component: PatentView,
   },
   {
-    path: '/searchresult',
+    path: 'searchresult',
     component: SearchResultView,
     children: [
       {
@@ -68,6 +66,16 @@ export default [{
       },
     ],
   },
+  ],
+},
+{
+  path: '/user',
+  component: userIndex,
+  children: [
+    {
+      path: 'registerfinish',
+      component: registerfinish,
+    },
   ],
 },
 ];

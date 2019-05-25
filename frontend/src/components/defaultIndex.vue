@@ -17,12 +17,7 @@
         </ButtonGroup>
       </MenuItem>
       <MenuItem>
-        <sui-input
-          placeholder="Search..."
-          icon="search"
-          @keyup.enter.native="SearchFunction()"
-          @click.native="SearchFunction()"
-        />
+        <Input search placeholder="Search..." @on-search="SearchFunction()"/>
       </MenuItem>
     </Menu>
     <router-view></router-view>
