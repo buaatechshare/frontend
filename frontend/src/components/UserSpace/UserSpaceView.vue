@@ -31,17 +31,17 @@
       <layout>
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
           <Menu active-name="1-2" width="auto">
-            <MenuItem name="personalInfo" to="UserSpaceView">
+            <MenuItem name="personalInfo" :to="{name: 'infoAlterView'}">
               <Icon type="md-document"/>个人信息
             </MenuItem>
             <Submenu name="collections">
               <template slot="title">
                 <Icon type="ios-analytics"/>我的收藏
               </template>
-              <MenuItem name="collectionPapers" to="UserCollectionPaperView">
+              <MenuItem name="collectionPapers" :to="{name: 'UserCollectionPaperView'}">
                 <Icon type="md-heart"/>论文
               </MenuItem>
-              <MenuItem name="collectionPatents" to="UserCollectionPatentView">
+              <MenuItem name="collectionPatents" :to="{name:'UserCollectionPatentView'}">
                 <Icon type="md-heart"/>专利
               </MenuItem>
             </Submenu>
@@ -51,7 +51,7 @@
             <MenuItem name="messageBox">
               <Icon type="md-leaf"/>站内信
             </MenuItem>
-            <MenuItem name="apply" to="/userspace/UserApplyView">
+            <MenuItem name="apply" :to="{name: 'UserApplyView'}">
               <Icon type="md-leaf"/>申请专家认证
             </MenuItem>
           </Menu>

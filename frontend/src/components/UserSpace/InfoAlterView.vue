@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "paperBoxList",
+  name: "infoAlterView",
   data() {
     return {
       name: "Skyvot",

@@ -20,6 +20,7 @@ import UserCollectionPaperView from '../components/UserSpace/UserCollectionPaper
 import UserCollectionPatentView from '../components/UserSpace/UserCollectionPatentView.vue'
 import UserSpaceView from '../components/UserSpace/UserSpaceView.vue'
 import UserApplyView from '../components/UserSpace/UserApplyView.vue'
+import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
 
 export default [
   {
@@ -40,17 +41,26 @@ export default [
         children:
           [
             {
-              path: 'UserCollectionPaperView',
+              name: 'UserCollectionPaperView',
+              path: 'UserCollectionPaper',
               component: UserCollectionPaperView
             },
             {
-              path: 'UserCollectionPatentView',
+              name: 'UserCollectionPatentView',
+              path: 'UserCollectionPatent',
               component: UserCollectionPatentView
             },
             {
-              path: 'UserApplyView',
+              name: 'UserApplyView',
+              path: 'UserApply',
               component: UserApplyView
             },
+            {
+              name: 'infoAlterView',
+              path: 'infoAlter',
+              component: infoAlterView
+
+            }
           ]
       },
       {

@@ -1,10 +1,10 @@
 <template>
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
-      <MenuItem name="techshare" to="/papers">
+      <MenuItem name="techshare" :to="{name: 'Upapers'}">
         <sui-icon name="braille"></sui-icon>techshare
       </MenuItem>
-      <MenuItem name="papers" to="/papers">
+      <MenuItem name="papers" :to="{name: 'Upapers'}">
         <sui-icon name="file"></sui-icon>paper
       </MenuItem>
       <MenuItem name="patents" :to="{name: 'Upatents'}">
