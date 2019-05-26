@@ -8,5 +8,8 @@
             "language": "vue"
         }
     ],
-    "eslint.autoFixOnSave": true
+    "eslint.autoFixOnSave": true,
+    "editor.fontLigatures": true,
+    "editor.fontSize": 20,
+    "editor.fontWeight": "400"
 }

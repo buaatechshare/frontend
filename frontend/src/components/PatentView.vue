@@ -118,20 +118,7 @@
         </div>
 
         <div style="clear:both"></div>
-        <!--DOI-->
-        <div>
-          <p class="label">DOI：</p>
-          <p class="papercontent">10.3969/j.issn.1672-0571.2007.01.035</p>
-        </div>
 
-        <div style="clear:both"></div>
-        <!--被引量-->
-        <div>
-          <p class="label">被引量：</p>
-          <p class="papercontent">
-            <a>12</a>
-          </p>
-        </div>
         <!--三个按钮-->
         <div style="clear:both"></div>
         <div style="margin-top:20px;margin-bottom:20px">

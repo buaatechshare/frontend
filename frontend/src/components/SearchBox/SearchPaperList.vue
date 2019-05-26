@@ -14,6 +14,9 @@
     <searchpaper></searchpaper>
     <searchpaper></searchpaper>
     <!--未和后端数据对接版本-->
+    <div style="text-align:center">
+      <Page :total="100" show-elevator/>
+    </div>
   </div>
 </template>
 <script>
