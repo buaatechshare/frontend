@@ -103,31 +103,38 @@ export default [
     component: defaultIndex,
     children: [
       {
+        name: 'login',
         path: 'login',
         component: login,
       },
       {
         path: 'register',
+        name: 'register',
         component: register,
       },
       {
         path: 'papers',
+        name: 'papers',
         component: PaperBoxList,
       },
       {
         path: 'patents',
+        path: 'patents',
         component: PatentBoxList,
       },
       {
+        name: 'paperview',
         path: 'paperview',
         component: PaperView,
       },
       {
+        name: 'patentview',
         path: 'patentview',
         component: PatentView,
       },
       {
         path: 'searchresult',
+        name: 'searchresult',
         redirect: { name: 'searchpaper' },
         component: SearchResultView,
         children: [
@@ -137,10 +144,12 @@ export default [
             component: SearchPaperList,
           },
           {
+            name: 'searchptent',
             path: 'searchpatent',
             component: SearchPatentList,
           },
           {
+            name: 'searchprof',
             path: 'searchprof',
             component: SearchProfList,
           },

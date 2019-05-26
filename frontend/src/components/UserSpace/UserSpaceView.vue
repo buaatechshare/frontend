@@ -28,39 +28,20 @@
 <template>
   <div class="layout">
     <layout>
-      <header>
-        <Menu mode="horizontal" theme="dark" active-name="1">
-          <MenuItem name="techshare" to="/papers">
-            <sui-icon name="braille"></sui-icon>techshare
-          </MenuItem>
-          <MenuItem name="papers" to="/papers">
-            <sui-icon name="file"></sui-icon>paper
-          </MenuItem>
-          <MenuItem name="patents" to="/patents">
-            <sui-icon name="sticky note"></sui-icon>patent
-          </MenuItem>
-          <MenuItem style="float:right">
-            <sui-icon name="photo"></sui-icon>username
-          </MenuItem>
-          <MenuItem>
-            <sui-input placeholder="Search..." icon="search"/>
-          </MenuItem>
-        </Menu>
-      </header>
       <layout>
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
           <Menu active-name="1-2" width="auto">
-            <MenuItem name="personalInfo" to="/userspace/UserSpaceView">
+            <MenuItem name="personalInfo" to="UserSpaceView">
               <Icon type="md-document"/>个人信息
             </MenuItem>
             <Submenu name="collections">
               <template slot="title">
                 <Icon type="ios-analytics"/>我的收藏
               </template>
-              <MenuItem name="collectionPapers" to="/userspace/UserCollectionPaperView">
+              <MenuItem name="collectionPapers" to="UserCollectionPaperView">
                 <Icon type="md-heart"/>论文
               </MenuItem>
-              <MenuItem name="collectionPatents" to="/userspace/UserCollectionPatentView">
+              <MenuItem name="collectionPatents" to="UserCollectionPatentView">
                 <Icon type="md-heart"/>专利
               </MenuItem>
             </Submenu>
