@@ -7,10 +7,22 @@
 .Tagfont {
   line-height: 30px;
 }
+.chosedtheme {
+  height: 150px;
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+.textlook {
+  color: grey;
+  width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
 </style>
 <template>
   <div style="text-align:center">
-    <div style="margin-top:150px;margin-bottom:50px;">
+    <div style="margin-top:50px;margin-bottom:30px;">
       <Input
         search
         enter-button="Search"
@@ -19,18 +31,105 @@
         @on-search="TagSearch()"
       />
     </div>
-    <div style="color:grey;">请选择感兴趣的主题：</div>
+    <div class="textlook">已选择：</div>
+    <div class="chosedtheme">
+      <Tag
+        type="border"
+        v-if="show"
+        closable
+        @on-close="handleClose(index)"
+        v-for="(theme,index) in themelist"
+        :key="index"
+      >{{theme}}</Tag>
+    </div>
+    <div class="textlook">请选择感兴趣的主题：</div>
     <div>
-      <Tag checkable color="primary" class="Tags">
+      <wordcloud
+        :data="defaultWords"
+        nameKey="name"
+        valueKey="value"
+        :color="myColors"
+        :showTooltip="true"
+        :wordClick="wordClickHandler"
+      ></wordcloud>
+      <!-- <Tag checkable color="primary" class="Tags">
         <div class="Tagfont">标签一</div>
-      </Tag>
+      </Tag>-->
     </div>
   </div>
 </template>
 <script>
+import Vue from "vue";
+import wordcloud from "vue-wordcloud";
+var themelist = [""];
 export default {
+  name: "app",
+  components: {
+    wordcloud
+  },
   methods: {
-    TagSearch() {}
+    TagSearch() {},
+    handleClose(index) {
+      this.show = false;
+    },
+    wordClickHandler(name, value, vm) {
+      themelist.push(name);
+      Vue.set(this.themelist, this.themelist.length, name);
+    }
+  },
+  data() {
+    return {
+      show: true,
+      themelist: [],
+      myColors: ["#1f77b4", "#629fc9", "#94bedb", "#c9e0ef"],
+      defaultWords: [
+        {
+          name: "Cat",
+          value: 26,
+          like: false
+        },
+        {
+          name: "fish",
+          value: 19,
+          like: false
+        },
+        {
+          name: "things",
+          value: 18,
+          like: false
+        },
+        {
+          name: "look",
+          value: 16,
+          like: false
+        },
+        {
+          name: "two",
+          value: 15,
+          like: false
+        },
+        {
+          name: "fun",
+          value: 9,
+          like: false
+        },
+        {
+          name: "know",
+          value: 9,
+          like: false
+        },
+        {
+          name: "good",
+          value: 9,
+          like: false
+        },
+        {
+          name: "play",
+          value: 6,
+          like: false
+        }
+      ]
+    };
   }
 };
 </script>
