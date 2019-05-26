@@ -24,14 +24,17 @@ import UserApplyView from '../components/UserSpace/UserApplyView.vue'
 export default [
   {
     path: '/user/:userID',
-    redirect: 'papers',
+    redirect: { name: 'Upapers' },
+    name: "user",
     component: userIndex,
     children: [
       {
+        name: 'registerfinish',
         path: 'registerfinish',
         component: registerfinish,
       },
       {
+        name: 'userspace',
         path: 'userspace',
         component: UserSpaceView,
         children:
@@ -52,36 +55,43 @@ export default [
       },
       {
         path: 'searchresult',
-        redirect: 'searchpaper',
+        redirect: { name: 'Usearchpaper' },
         component: SearchResultView,
         children: [
           {
+            name: 'Usearchpaper',
             path: 'searchpaper',
             component: SearchPaperList,
           },
           {
+            name: 'Usearchpatent',
             path: 'searchpatent',
             component: SearchPatentList,
           },
           {
+            name: 'Usearchprof',
             path: 'searchprof',
             component: SearchProfList,
           },
         ],
       },
       {
+        name: 'Upapers',
         path: 'papers',
         component: PaperBoxList,
       },
       {
+        name: 'Upatents',
         path: 'patents',
         component: PatentBoxList,
       },
       {
+        name: 'Upaperview',
         path: 'paperview',
         component: PaperView,
       },
       {
+        name: 'Upatentview',
         path: 'patentview',
         component: PatentView,
       },
@@ -118,10 +128,11 @@ export default [
       },
       {
         path: 'searchresult',
-        redirect: 'searchpaper',
+        redirect: { name: 'searchpaper' },
         component: SearchResultView,
         children: [
           {
+            name: 'searchpaper',
             path: 'searchpaper',
             component: SearchPaperList,
           },
