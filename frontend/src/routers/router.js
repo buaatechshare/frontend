@@ -6,9 +6,16 @@ import userIndex from '../components/userIndex.vue';
 // import MyPatentBoxList from '../components/BOXList/MyPatentBoxList.vue'
 import PaperBoxList from '../components/BOXList/PaperBoxList.vue';
 import PatentBoxList from '../components/BOXList/PatentBoxList.vue';
+import SearchResultView from '../components/SearchResultView.vue';
+import PaperView from '../components/PaperView.vue';
+import PatentView from '../components/PatentView.vue';
+import SearchPaperList from '../components/SearchBox/SearchPaperList.vue';
+import SearchPatentList from '../components/SearchBox/SearchPatentList.vue';
+import SearchProfList from '../components/SearchBox/SearchProfList.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
+import registerfinish from '../components/SignedView.vue';
 
 export default [{
   path: '/',
@@ -33,10 +40,42 @@ export default [{
     path: 'login',
     component: login,
   },
+  {
+    path: 'paperview',
+    component: PaperView,
+  },
+  {
+    path: 'patentview',
+    component: PatentView,
+  },
+  {
+    path: 'searchresult',
+    component: SearchResultView,
+    children: [
+      {
+        path: 'searchpaper',
+        component: SearchPaperList,
+      },
+      {
+        path: 'searchpatent',
+        component: SearchPatentList,
+      },
+      {
+        path: 'searchprof',
+        component: SearchProfList,
+      },
+    ],
+  },
   ],
 },
 {
   path: '/user',
   component: userIndex,
+  children: [
+    {
+      path: 'registerfinish',
+      component: registerfinish,
+    },
+  ],
 },
 ];

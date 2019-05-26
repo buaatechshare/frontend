@@ -28,7 +28,12 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button type="primary" @click="handleRegister('signupModel')" long>signup</Button>
+          <Button
+            type="primary"
+            @click="handleRegister('signupModel')"
+            to="/user/registerfinish"
+            long
+          >signup</Button>
         </div>
       </Modal>
     </div>
