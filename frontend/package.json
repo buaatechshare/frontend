@@ -16,7 +16,8 @@
     "semantic-ui-image": "^2.3.1",
     "semantic-ui-vue": "^0.8.1",
     "vue": "^2.6.6",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "vue-wordcloud": "^1.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",
