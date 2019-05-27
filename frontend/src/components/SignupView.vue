@@ -28,12 +28,7 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button
-            type="primary"
-            @click="handleRegister('signupModel')"
-            to="/user/registerfinish"
-            long
-          >signup</Button>
+          <Button type="primary" @click="handleRegister('signupModel')" long>signup</Button>
         </div>
       </Modal>
     </div>
@@ -56,7 +51,9 @@ export default {
     };
   },
   methods: {
-    handleRegister: function(signupModel) {}
+    handleRegister: function(signupModel) {
+      this.$router.push({ name: "registerfinish", params: { userID: "123" } });
+    }
   }
 };
 </script>
