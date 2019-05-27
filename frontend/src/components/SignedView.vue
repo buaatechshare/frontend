@@ -44,38 +44,31 @@
     </div>
     <div class="textlook">请选择感兴趣的主题：</div>
     <div>
-      <!-- <wordcloud
+      <wordcloud
         :data="defaultWords"
         nameKey="name"
         valueKey="value"
         :color="myColors"
         :showTooltip="false"
         :wordClick="wordClickHandler"
+        :rotate="{from:0, to:0, numOfOrientation:1}"
         spiral="rectangular"
-      ></wordcloud>-->
-      <!-- <Tag checkable color="primary" class="Tags">
+      ></wordcloud>
+      <Tag checkable color="primary" class="Tags">
         <div class="Tagfont">标签一</div>
-      </Tag>-->
-      <div>
-        <VueWordCloud
-          :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
-          :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
-          font-family="Roboto"
-        />
-      </div>
+      </Tag>
     </div>
   </div>
 </template>
 <script>
-import Vue from "vue";
-import VueWordCloud from "vuewordcloud";
+import wordcloud from "vue-wordcloud";
 
 var themelist = [""];
 
 export default {
   name: "app",
   components: {
-    VueWordCloud
+    wordcloud
   },
   methods: {
     TagSearch() {},
