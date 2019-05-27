@@ -21,6 +21,7 @@
             <template slot="title">
               <Icon type="ios-compass-outline" size="20"/>搜索目标
             </template>
+            <!--TODO to的路由有问题 -->
             <MenuItem name="1-1" to="/searchresult/searchpaper">论文</MenuItem>
             <MenuItem name="1-2" to="/searchresult/searchpatent">专利</MenuItem>
             <MenuItem name="1-3" to="/searchresult/searchprof">专家</MenuItem>

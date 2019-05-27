@@ -15,59 +15,156 @@ import SearchProfList from '../components/SearchBox/SearchProfList.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
+import registerfinish from '../components/SignedView.vue';
+import UserCollectionPaperView from '../components/UserSpace/UserCollectionPaperView.vue'
+import UserCollectionPatentView from '../components/UserSpace/UserCollectionPatentView.vue'
+import UserSpaceView from '../components/UserSpace/UserSpaceView.vue'
+import UserApplyView from '../components/UserSpace/UserApplyView.vue'
+import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
 
-export default [{
-  path: '/',
-  component: defaultIndex,
-  children: [{
-    // 当 /user/:id/profile 匹配成功，
-    // UserProfile 会被渲染在 User 的 <router-view> 中
-    path: 'papers',
-    component: PaperBoxList,
-  },
+export default [
   {
-    // 当 /user/:id/posts 匹配成功
-    // UserPosts 会被渲染在 User 的 <router-view> 中
-    path: 'patents',
-    component: PatentBoxList,
-  },
-  {
-    path: 'register',
-    component: register,
-  },
-  {
-    path: 'login',
-    component: login,
-  }, {
-    path: '/user',
+    path: '/user/:userID',
+    redirect: { name: 'Upapers' },
+    name: "user",
     component: userIndex,
-  },
-  {
-    path: '/paperview',
-    component: PaperView,
-  },
-  {
-    path: '/patentview',
-    component: PatentView,
-  },
-  {
-    path: '/searchresult',
-    component: SearchResultView,
     children: [
       {
-        path: 'searchpaper',
-        component: SearchPaperList,
+        name: 'registerfinish',
+        path: 'registerfinish',
+        component: registerfinish,
       },
       {
-        path: 'searchpatent',
-        component: SearchPatentList,
+        name: 'userspace',
+        path: 'userspace',
+        component: UserSpaceView,
+        children:
+          [
+            {
+              name: 'UserCollectionPaperView',
+              path: 'UserCollectionPaper',
+              component: UserCollectionPaperView
+            },
+            {
+              name: 'UserCollectionPatentView',
+              path: 'UserCollectionPatent',
+              component: UserCollectionPatentView
+            },
+            {
+              name: 'UserApplyView',
+              path: 'UserApply',
+              component: UserApplyView
+            },
+            {
+              name: 'infoAlterView',
+              path: 'infoAlter',
+              component: infoAlterView
+
+            }
+          ]
       },
       {
-        path: 'searchprof',
-        component: SearchProfList,
+        path: 'searchresult',
+        redirect: { name: 'Usearchpaper' },
+        component: SearchResultView,
+        children: [
+          {
+            name: 'Usearchpaper',
+            path: 'searchpaper',
+            component: SearchPaperList,
+          },
+          {
+            name: 'Usearchpatent',
+            path: 'searchpatent',
+            component: SearchPatentList,
+          },
+          {
+            name: 'Usearchprof',
+            path: 'searchprof',
+            component: SearchProfList,
+          },
+        ],
+      },
+      {
+        name: 'Upapers',
+        path: 'papers',
+        component: PaperBoxList,
+      },
+      {
+        name: 'Upatents',
+        path: 'patents',
+        component: PatentBoxList,
+      },
+      {
+        name: 'Upaperview',
+        path: 'paperview',
+        component: PaperView,
+      },
+      {
+        name: 'Upatentview',
+        path: 'patentview',
+        component: PatentView,
       },
     ],
   },
-  ],
-},
-];
+  {
+    path: '/',
+    redirect: '/papers',
+    component: defaultIndex,
+    children: [
+      {
+        name: 'login',
+        path: 'login',
+        component: login,
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: register,
+      },
+      {
+        path: 'papers',
+        name: 'papers',
+        component: PaperBoxList,
+      },
+      {
+        path: 'patents',
+        path: 'patents',
+        component: PatentBoxList,
+      },
+      {
+        name: 'paperview',
+        path: 'paperview',
+        component: PaperView,
+      },
+      {
+        name: 'patentview',
+        path: 'patentview',
+        component: PatentView,
+      },
+      {
+        path: 'searchresult',
+        name: 'searchresult',
+        redirect: { name: 'searchpaper' },
+        component: SearchResultView,
+        children: [
+          {
+            name: 'searchpaper',
+            path: 'searchpaper',
+            component: SearchPaperList,
+          },
+          {
+            name: 'searchptent',
+            path: 'searchpatent',
+            component: SearchPatentList,
+          },
+          {
+            name: 'searchprof',
+            path: 'searchprof',
+            component: SearchProfList,
+          },
+        ],
+      },
+    ],
+  }
+]

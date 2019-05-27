@@ -39,6 +39,7 @@ paths:
       responses:
         200:
           description: finished
+<<<<<<< HEAD
     get:
       summary: get comment with the resourceID
       description: get comment with the resourceID
@@ -62,16 +63,61 @@ paths:
       description: 在专家资源管理界面得到专家自己的paper
       parameters: 
         - $ref: '#/paremeters/userID'
+=======
+    get:
+      summary: get comment with the resourceID
+      description: get comment with the resourceID
+      parameters:
+        - name: resourceID
+          description: resourceID
+          in: query
+          required: true
+          type: string
+        - $ref: '#/parameters/pageNumber'
+        - $ref: '#/parameters/pageSize'
+      responses:
+        200: 
+          description: finished
+          schema:
+            $ref: '#/definitions/commentlist'
+
+  /myPaper/{userID}:
+    get:
+      summary: 在专家资源管理界面得到专家自己的paper
+      description: 在专家资源管理界面得到专家自己的paper
+      parameters: 
+        - $ref: '#/parameters/userID'
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         200: 
           description: finished
           schema:
             $ref: '#/definitions/paperlist'
+<<<<<<< HEAD
+=======
+    #TODO how to post the resource
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
     post:
       summary: 提交自己的专家论文
       description: 提交自己的论文，包括信息和pdf
       parameters:
+<<<<<<< HEAD
         - $ref: '#/paremeters/userID'
+=======
+        - $ref: '#/parameters/userID'
+      responses:
+        200:
+          description: finished
+    delete:
+      summary: 删除自己的论文
+      description: 删除自己的论文
+      parameters:
+        - $ref: '#/parameters/userID'
+        - name: resourceID
+          in: query
+          required: true
+          type: string
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         200:
           description: finished
@@ -134,7 +180,11 @@ paths:
           
   /papers/{userID}:
     get:
+<<<<<<< HEAD
       summary: get the recommended papers for a certain user
+=======
+      summary: 得到特定用户的推荐信息
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       parameters:
         - $ref: '#/parameters/pageNumber'
         - $ref: '#/parameters/pageSize'
@@ -147,7 +197,11 @@ paths:
     
   /patents:
     get:
+<<<<<<< HEAD
       summary: get the default recommended patents
+=======
+      summary: 得到默认推荐专利
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       parameters:
         - $ref: '#/parameters/pageNumber'
         - $ref: '#/parameters/pageSize'
@@ -161,7 +215,7 @@ paths:
           
   /patents/{userID}:
     get:
-      summary: get a list patents for a certain user
+      summary: 得到特定用户的推荐专利
       parameters:
         - $ref: '#/parameters/pageNumber'
         - $ref: '#/parameters/pageSize'
@@ -218,7 +272,10 @@ paths:
           description: a list of professors
           schema:
             $ref: '#/definitions/professorlist'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
   /paperDetail/{resourceID}:
     get:
       description: get paper detail
@@ -232,11 +289,8 @@ paths:
         200:
           description: the full details for a paper
           schema:
-            required:
-              - author
-              - paperName
-              - abstract
             properties:
+<<<<<<< HEAD
               DOI:
                 type: "string"
               docType:
@@ -250,18 +304,53 @@ paths:
               year:
                 type: number
               date:
+=======
+              title:
                 type: string
-                format: datetime
+              author:
+                type: string
+              organization:
+                type: string
+              venue:
+                type: string
+              year:
+                type: integer
+              keywords:
+                type: array
+                items:
+                  type: string
+              fos:
+                description: fields of study
+                type: array
+                items:
+                  type: string
+              n_citation:
+                type: integer
+              references:
+                type: array
+                items:
+                  type: string
+              page_start:
+                type: string
+              page_end:
+                type: string
+              doc_type:
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
+                type: string
               publisher:
                 type: string
+<<<<<<< HEAD
               journal:
                 type: string
               conference:
                 type: string
+=======
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
               volume:
                 type: string
               issue:
                 type: string
+<<<<<<< HEAD
               firstPage:
                 type: string
               lastPage:
@@ -274,6 +363,18 @@ paths:
                 type: string
                 format: url
                 
+=======
+              doi:
+                type: string
+              url:
+                type: array
+                items:
+                  type: string
+              abstract:
+                type: string
+                format: text
+
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
   /patentDetail/{resourceID}:
     get:
       description:  get patent detail
@@ -283,12 +384,13 @@ paths:
           description: resourceID
           in: path
           required: true
-          type: integer
+          type: string
       responses:
         200:
           description: get detail succesfully
           schema:
             properties:
+<<<<<<< HEAD
               primaryClass:
                 type: string
               ApplicationNumber:
@@ -298,11 +400,19 @@ paths:
               country_province:
                 type: string
               publicationDate:
+=======
+              applicationNo:
+                type: string
+              applicationDate:
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
                 type: string
                 format: datetime
-              authorizedAnnouncementDate:
+              publicNo:
+                type: string
+              publicDate:
                 type: string
                 format: datetime
+<<<<<<< HEAD
               applicationAddress:
                 type: string
               currentRightHolder:
@@ -323,21 +433,56 @@ paths:
               applicant:
                 type: string
               inventors:
-                type: array
-                items:
-                  type: string
+=======
+              grantNo:
+                type: string
+              grantDate:
+                type: string
+                format: datetime
+              title:
+                type: string
+              address:
+                type: string
+              country_province:
+                type: string
+              country: 
+                type: string
+              mainClassification:
+                type: string
               agent:
+                type: string
+              appliers:
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
+                type: array
+                items: 
+                  type: string
+              obligee:
+                type: string
+              classificationNo:
                 type: array
                 items: 
                   type: string
               priority:
                 type: string
+<<<<<<< HEAD
               currentState:
                 type: boolean
               summary:
                 type: string
                 format: text
   #TODO 关于多级interest的问题
+=======
+              keywords:
+                type: array
+                items: 
+                  type: string
+              abstract:
+                type: string
+                format: text
+              agency:
+                type: string
+
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
   /interests:
     get:
       summary: get all interest tags from backend
@@ -411,10 +556,17 @@ paths:
           description: user or resource not found
   /collections/papers/{userID}:
     get:
+<<<<<<< HEAD
       description: 得到用户收藏的paper，给定pagesize，不给定pagenumber，自动分页，传回
       parameters:
         - $ref: '#/parameters/userID'   
         - $ref: '#/parameters/pageSize' 
+=======
+      description: 给定pagesize，计算出pagenumber，分页返回收藏的论文
+      parameters:
+        - $ref: '#/parameters/userID'    
+        - $ref: '#/parameters/pageSize'
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         200: 
           description: OK
@@ -425,10 +577,17 @@ paths:
   
   /collections/patents/{userID}:
     get:
+<<<<<<< HEAD
       description: 得到用户收藏的专利，给定pagesize，不给定pagenumber，自动分页，传回
       parameters:
         - $ref: '#/parameters/userID'    
         - $ref: '#/parameters/pageSize'
+=======
+      description: 给定pagesize，计算出pagenumber，分页返回收藏的专利
+      parameters:
+        - $ref: '#/parameters/userID'  
+        - $ref: '#/parameters/pageSize'  
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         200: 
           description: OK
@@ -439,6 +598,7 @@ paths:
 
   /messages:
     get:
+<<<<<<< HEAD
       description: 给定receiver时，传回所有接收的信，给定sender，传回所有发出的信，两个都给定时，传回符合的信
       parameters:
         - name: receiverID
@@ -447,6 +607,17 @@ paths:
         - name: senderID
           in: query
           type: number
+=======
+      description: 给定receiver，返回receiver的信，同理sender，给定两个时，返回符合的信
+      parameters:
+        - name: receiverID
+          in: query
+          type: string
+        - name: senderID
+          in: query
+          type: string
+        - $ref: '#/parameters/pageSize'
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         200:
           description: OK
@@ -459,12 +630,19 @@ paths:
       parameters:
         - name: receiverID
           in: query
+<<<<<<< HEAD
           required: true
           type: number
         - name: sender
           in: query
           required: true
           type: number
+=======
+          type: string
+        - name: senderID
+          in: query
+          type: string
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
         - name: content
           in: query
           type: string
@@ -477,10 +655,14 @@ paths:
   
   /follow/{userID}:
     get:
-      description: get the proflist the user follows
+      description: 得到follow专家列表，给定pagesize返回列表
       summary: get the proflist the user follows
       parameters:
         - $ref: '#/parameters/userID'
+<<<<<<< HEAD
+=======
+        - $ref: '#/parameters/pageSize'
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         200:
           description: OK
@@ -495,10 +677,17 @@ paths:
       summary: psot a new prof followed by the user
       parameters:
         - $ref: '#/parameters/userID'
+<<<<<<< HEAD
         - name: professor
           in: query
           required: true
           type: number
+=======
+        - name: professorID
+          in: query
+          required: true
+          type: string
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         201: 
           description: created
@@ -511,11 +700,14 @@ paths:
       summary: unfollow the professor
       parameters:
         - $ref: '#/parameters/userID'
+<<<<<<< HEAD
         - name: professor
+=======
+        - name: professorID
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
           in: query
           required: true
           type: string
-          format: email
       responses:
         201:
           description: deleted
@@ -542,12 +734,20 @@ paths:
           in: query
           required: true
           type: string
+<<<<<<< HEAD
         - name: Field
           in: query
           required: true
           type: array
           items: 
             type: string
+=======
+        #? how to deal with field
+        - name: Field
+          in: query
+          required: true
+          type: string
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
       responses:
         201:
           description: created
@@ -584,8 +784,63 @@ paths:
               reason:
                 type: string
                 format: text
+<<<<<<< HEAD
           
   #TODO: 学术管理接口
+=======
+  /application:
+    get:
+      summary: 管理员得到所有未审核的申请
+      description: 管理员得到所有未审核的申请,根据pagesize确定页数
+      parameters: 
+        - $ref: '#/parameters/pageSize'
+      responses:
+        200:
+          description: OK
+          schema:
+            required:
+              - datetime
+              - introduction
+              - constitution
+              - Name
+            properties:
+              datetime:
+                type: string
+                format: datetime
+              introduction:
+                type: string
+                format: text
+              constitution:
+                type: string
+              Name:
+                type: string
+              isPass:
+                type: boolean
+              reason:
+                type: string
+                format: text
+    
+    patch:
+      summary: 管理员审核专家申请
+      description: 管理员审核专家申请
+      parameters: 
+        - name: userID
+          in: query
+          required: true
+          type: string
+        - name: isPass
+          in: query
+          required: true
+          type: string
+        - name: reason
+          in: query
+          required: true
+          type: string
+          format: text
+      responses:
+        200:
+          description: OK
+>>>>>>> 693236ae395ab39e54e192c444c052866fb056f7
 
 # test    
 parameters:
@@ -624,6 +879,9 @@ definitions:
     properties:
       author:
         type: "string"
+      authorID:
+        type: "string"
+        description: get the userID of professor if it exists
       paperName:
         type: "string"
       abstract:
