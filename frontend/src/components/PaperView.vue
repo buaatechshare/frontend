@@ -130,62 +130,110 @@
         </div>
 
         <sui-divider hidden/>
-        <!--评分评价-->
-        <div style="margin-bottom:10px">
-          <sui-icon name="bell outline"/>评分
-          <Rate v-model="value"/>
-        </div>
-        <div style="margin-bottom:10px">
-          <sui-icon name="edit outline"/>评论
-        </div>
-        <div>
-          <Input
-            v-model="value6"
-            style="width:865px"
-            type="textarea"
-            :rows="3"
-            :autosize="{maxRows: 3,minRows: 3}"
-            placeholder="Enter something..."
+
+        <!--评论列表-->
+        <sui-comment-group style="width:865px">
+          <h3 is="sui-header" style="width:865px" dividing>评论列表</h3>
+
+          <sui-comment>
+            <sui-comment-avatar src="../assets/profpic.jpg"/>
+            <sui-comment-content>
+              <a is="sui-comment-author">Matt</a>
+              <sui-comment-metadata>
+                <div>Today at 5:42PM</div>
+              </sui-comment-metadata>
+              <sui-comment-text>How artistic!</sui-comment-text>
+              <sui-comment-actions>
+                <sui-comment-action>Reply</sui-comment-action>
+              </sui-comment-actions>
+            </sui-comment-content>
+          </sui-comment>
+
+          <sui-comment>
+            <sui-comment-avatar src="../assets/profpic.jpg"/>
+            <sui-comment-content>
+              <a is="sui-comment-author">Elliot Fu</a>
+              <sui-comment-metadata>
+                <div>Yesterday at 12:30AM</div>
+              </sui-comment-metadata>
+              <sui-comment-text>
+                <p>This has been very useful for my research. Thanks as well!</p>
+              </sui-comment-text>
+              <sui-comment-actions>
+                <sui-comment-action>Reply</sui-comment-action>
+              </sui-comment-actions>
+            </sui-comment-content>
+            <sui-comment-group>
+              <sui-comment>
+                <sui-comment-avatar src="static/images/avatar/small/jenny.jpg"/>
+                <sui-comment-content>
+                  <a is="sui-comment-author">Jenny Hess</a>
+                  <sui-comment-metadata>
+                    <div>Just now</div>
+                  </sui-comment-metadata>
+                  <sui-comment-text>Elliot you are always so right :)</sui-comment-text>
+                  <sui-comment-actions>
+                    <sui-comment-action>Reply</sui-comment-action>
+                  </sui-comment-actions>
+                </sui-comment-content>
+              </sui-comment>
+            </sui-comment-group>
+          </sui-comment>
+
+          <sui-comment>
+            <sui-comment-avatar src="static/images/avatar/small/joe.jpg"/>
+            <sui-comment-content>
+              <a is="sui-comment-author">Joe Henderson</a>
+              <sui-comment-metadata>
+                <div>5 days ago</div>
+              </sui-comment-metadata>
+              <sui-comment-text>Dude, this is awesome. Thanks so much</sui-comment-text>
+              <sui-comment-actions>
+                <sui-comment-action>Reply</sui-comment-action>
+              </sui-comment-actions>
+            </sui-comment-content>
+          </sui-comment>
+        </sui-comment-group>
+        <!--评论按钮-->
+        <div style="width:865px;text-align:right">
+          <sui-button
+            content="发表评论"
+            label-position="left"
+            icon="edit"
+            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
+            @click.native="toggle"
           />
         </div>
-        <div style="width:865px;text-align:right;margin-top:10px;margin-bottom:10px">
-          <sui-button>发表评论</sui-button>
-        </div>
-        <!--评论列表-->
-        <div style="width:865px">
-          <sui-list divided relaxed>
-            <sui-list-item>
-              <div class="comment">
-                <sui-list-icon name="github" size="large" vertical-align="middle"/>zyh
-                <br>
-                <Rate v-model="valueCustomText" disabled></Rate>
+        <!--评分评价-->
+        <sui-modal v-model="open">
+          <sui-modal-header>请写下你的评价</sui-modal-header>
+          <sui-modal-content>
+            <Form style="width:865px" label-width="40px">
+              <div style="margin-bottom:10px">
+                <sui-icon name="bell outline"/>评分
               </div>
-              <sui-list-content>
-                <p>评论内容</p>
-              </sui-list-content>
-            </sui-list-item>
-            <sui-list-item>
-              <div class="comment">
-                <sui-list-icon name="github" size="large" vertical-align="middle"/>dky
-                <br>
-                <Rate v-model="valueCustomText" disabled></Rate>
+              <FormItem style="margin-bottom:10px">
+                <Rate v-model="value"/>
+              </FormItem>
+              <div style="margin-bottom:10px">
+                <sui-icon name="edit outline"/>评论
               </div>
-              <sui-list-content>
-                <p>评论内容</p>
-              </sui-list-content>
-            </sui-list-item>
-            <sui-list-item>
-              <div class="comment">
-                <sui-list-icon name="github" size="large" vertical-align="middle"/>xhz
-                <br>
-                <Rate v-model="valueCustomText" disabled></Rate>
-              </div>
-              <sui-list-content>
-                <p>评论内容</p>
-              </sui-list-content>
-            </sui-list-item>
-          </sui-list>
-        </div>
+              <FormItem>
+                <Input
+                  v-model="value6"
+                  style="width:835px"
+                  type="textarea"
+                  :rows="3"
+                  :autosize="{maxRows: 3,minRows: 3}"
+                  placeholder="请输入你的评价..."
+                />
+              </FormItem>
+            </Form>
+          </sui-modal-content>
+          <sui-modal-actions>
+            <sui-button positive @click.native="toggle">发表评论</sui-button>
+          </sui-modal-actions>
+        </sui-modal>
       </sui-container>
     </div>
     <!--底端留白美观-->
@@ -205,10 +253,13 @@ export default {
       active: "资料来源",
       items: ["资料来源", "全文下载"],
       value: 0,
-      valueCustomText: 3.8
+      open: false
     };
   },
   methods: {
+    toggle() {
+      this.open = !this.open;
+    },
     isActive(name) {
       return this.active === name;
     },

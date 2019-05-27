@@ -25,8 +25,8 @@
     <div style="margin-top:50px;margin-bottom:30px;">
       <Input
         search
-        enter-button="Search"
-        placeholder="Enter something..."
+        enter-button="搜索"
+        placeholder="请输入标签..."
         style="width:500px;margin:0 auto"
         @on-search="TagSearch()"
       />
@@ -35,12 +35,12 @@
     <div class="chosedtheme">
       <Tag
         type="border"
-        v-if="show"
+        v-for="theme in themelist"
+        v-if="theme.themeshow"
         closable
-        @on-close="handleClose(index)"
-        v-for="(theme,index) in themelist"
+        @on-close="handleClose(theme.themeindex)"
         :key="index"
-      >{{theme}}</Tag>
+      >{{theme.themename}}</Tag>
     </div>
     <div class="textlook">请选择感兴趣的主题：</div>
     <div>
@@ -61,22 +61,31 @@
 <script>
 import Vue from "vue";
 import wordcloud from "vue-wordcloud";
-var themelist = [""];
+
 export default {
   name: "app",
   components: {
     wordcloud
   },
+  created() {
+    var themelist = [];
+  },
   methods: {
     TagSearch() {},
     handleClose(index) {
-      this.show = false;
+      themelist[index].themeshow = false;
     },
     wordClickHandler(name, value, vm) {
-      themelist.push(name);
-      Vue.set(this.themelist, this.themelist.length, name);
+      var themeobj = {
+        themename: name,
+        themeshow: true,
+        themeindex: value
+      };
+      Vue.set(this.themelist, this.themelist[value], this.themeobj);
+      alert(this.themeobj);
     }
   },
+
   data() {
     return {
       show: true,
@@ -85,48 +94,39 @@ export default {
       defaultWords: [
         {
           name: "Cat",
-          value: 26,
-          like: false
+          value: 1
         },
         {
           name: "fish",
-          value: 19,
-          like: false
+          value: 2
         },
         {
           name: "things",
-          value: 18,
-          like: false
+          value: 3
         },
         {
           name: "look",
-          value: 16,
-          like: false
+          value: 4
         },
         {
           name: "two",
-          value: 15,
-          like: false
+          value: 5
         },
         {
           name: "fun",
-          value: 9,
-          like: false
+          value: 6
         },
         {
           name: "know",
-          value: 9,
-          like: false
+          value: 7
         },
         {
           name: "good",
-          value: 9,
-          like: false
+          value: 8
         },
         {
           name: "play",
-          value: 6,
-          like: false
+          value: 9
         }
       ]
     };
