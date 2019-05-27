@@ -44,35 +44,45 @@
     </div>
     <div class="textlook">请选择感兴趣的主题：</div>
     <div>
-      <wordcloud
+      <!-- <wordcloud
         :data="defaultWords"
         nameKey="name"
         valueKey="value"
         :color="myColors"
-        :showTooltip="true"
+        :showTooltip="false"
         :wordClick="wordClickHandler"
-      ></wordcloud>
+        spiral="rectangular"
+      ></wordcloud>-->
       <!-- <Tag checkable color="primary" class="Tags">
         <div class="Tagfont">标签一</div>
       </Tag>-->
+      <div>
+        <VueWordCloud
+          :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
+          :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
+          font-family="Roboto"
+        />
+      </div>
     </div>
   </div>
 </template>
 <script>
 import Vue from "vue";
-import wordcloud from "vue-wordcloud";
+import VueWordCloud from "vuewordcloud";
+
 var themelist = [""];
+
 export default {
   name: "app",
   components: {
-    wordcloud
+    VueWordCloud
   },
   methods: {
     TagSearch() {},
     handleClose(index) {
       this.show = false;
     },
-    wordClickHandler(name, value, vm) {
+    wordClickHandler(name, value, like, vm) {
       Vue.set(this.themelist, this.themelist.length, name);
     }
   },
@@ -84,48 +94,39 @@ export default {
       defaultWords: [
         {
           name: "Cat",
-          value: 26,
-          like: false
+          value: 26
         },
         {
           name: "fish",
-          value: 19,
-          like: false
+          value: 19
         },
         {
           name: "things",
-          value: 18,
-          like: false
+          value: 18
         },
         {
           name: "look",
-          value: 16,
-          like: false
+          value: 16
         },
         {
           name: "two",
-          value: 15,
-          like: false
+          value: 15
         },
         {
           name: "fun",
-          value: 9,
-          like: false
+          value: 9
         },
         {
           name: "know",
-          value: 9,
-          like: false
+          value: 9
         },
         {
           name: "good",
-          value: 9,
-          like: false
+          value: 9
         },
         {
           name: "play",
-          value: 6,
-          like: false
+          value: 6
         }
       ]
     };
