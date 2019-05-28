@@ -1,6 +1,6 @@
 <template>
-  <div class="ui container horizontal">
-    <div class="ui horizontal divider"></div>
+  <div>
+    <br>
     <Input v-model="name" style="width: 400px">
       <span slot="prepend">Name:</span>
     </Input>
@@ -8,7 +8,6 @@
     <Input v-model="email" style="width: 400px">
       <span slot="prepend">Email:</span>
     </Input>
-    <div class="ui horizontal divider"></div>
   </div>
 </template>
 

@@ -1,10 +1,6 @@
 <template>
-  <div class="ui container horizontal">
-    <div class="ui horizontal divider"></div>
-    <sui-card-group :items-per-row="1">
-      <CollectionPatentBox v-for="(patent, index) in patents" v-bind:patent="patent" :key="index"/>
-    </sui-card-group>
-    <div class="ui horizontal divider"></div>
+  <div>
+    <CollectionPatentBox v-for="(patent, index) in patents" v-bind:patent="patent" :key="index"/>
     <Page :total="100" show-elevator style="margin-bottom:100px"/>
   </div>
 </template>
