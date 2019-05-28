@@ -23,6 +23,7 @@ import UserApplyView from '../components/UserSpace/UserApplyView.vue'
 import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
 import UserFollowView from '../components/UserSpace/UserFollowView.vue'
 import UserMessageView from '../components/UserSpace/UserMessageView.vue'
+import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 
 export default [
   {
@@ -71,6 +72,11 @@ export default [
               name: 'UserMessageView',
               path: 'UserMessage',
               component: UserMessageView
+            },
+            {
+              name: 'UserSendMessage',
+              path: 'SendMessage',
+              component: UserSendMessage
             }
           ]
       },

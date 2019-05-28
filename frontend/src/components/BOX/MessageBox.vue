@@ -1,25 +1,35 @@
+<style>
+.searchpapertitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.searchpapercontent {
+  font-size: 13px;
+  color: grey;
+  margin-bottom: 3px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+</style>
 <template>
-  <sui-card>
-    <sui-card-content>
-      <sui-icon name="male"></sui-icon>
-      {{message.senderName}}
-      <sui-card-meta slot="right">
-        <sui-icon name="bell outline"></sui-icon>
-      </sui-card-meta>
-    </sui-card-content>
-    <sui-card-content>
-      <div class="event">
-        <div class="content">
-          <div class="summary">{{message.content}}</div>
-        </div>
+  <Row>
+    <Card dis-hover style="border:0px">
+      <div class="searchpapertitle">
+        <a>{{message.senderName}}</a>
       </div>
-    </sui-card-content>
-    <sui-card-content extra>
-      <p>
-        <Button @click="handleRender">回复</Button>
-      </p>
-    </sui-card-content>
-  </sui-card>
+      <br>
+      <div class="searchpapercontent">{{message.content}}</div>
+      <br>
+      <div style="margin-top:5px;margin-bottom:5px">
+        <sui-button size="mini" style="margin-right:5px" @click="handleRender" circular>回复</sui-button>
+      </div>
+      <Divider style="margin-bottom:0px"/>
+    </Card>
+  </Row>
 </template>
 
 <script>
@@ -37,7 +47,7 @@ export default {
             props: {
               value: this.value,
               autofocus: true,
-              placeholder: "Please enter your reply..."
+              placeholder: "请输入回复"
             },
             on: {
               input: val => {

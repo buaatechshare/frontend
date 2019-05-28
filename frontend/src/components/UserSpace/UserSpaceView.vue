@@ -34,9 +34,18 @@
           <MenuItem name="follow" :to="{name:'UserFollowView'}">
             <Icon type="md-heart"/>关注的人
           </MenuItem>
-          <MenuItem name="messageBox" :to="{name:'UserMessageView'}">
-            <Icon type="md-leaf"/>站内信
-          </MenuItem>
+
+          <Submenu name="messages">
+            <template slot="title">
+              <Icon type="ios-analytics"/>站内信
+            </template>
+            <MenuItem name="collectionPapers" :to="{name: 'UserSendMessage'}">
+              <Icon type="md-heart"/>写信
+            </MenuItem>
+            <MenuItem name="collectionPatents" :to="{name:'UserMessageView'}">
+              <Icon type="md-heart"/>收信
+            </MenuItem>
+          </Submenu>
           <MenuItem name="apply" :to="{name: 'UserApplyView'}">
             <Icon type="md-leaf"/>申请专家认证
           </MenuItem>
