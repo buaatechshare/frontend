@@ -1,47 +1,37 @@
 <template>
-  <!-- -->
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
-      <MenuItem name="techshare" to="/papers">
+      <MenuItem name="techshare" :to="{name: 'Upapers'}">
         <sui-icon name="braille"></sui-icon>techshare
       </MenuItem>
-      <MenuItem name="papers" to="/papers">
+      <MenuItem name="papers" :to="{name: 'Upapers'}">
         <sui-icon name="file"></sui-icon>paper
       </MenuItem>
-      <MenuItem name="patents" to="/patents">
+      <MenuItem name="patents" :to="{name: 'Upatents'}">
         <sui-icon name="sticky note"></sui-icon>patent
       </MenuItem>
-      <MenuItem style="float:right">
-        <sui-icon name="photo"></sui-icon>username
+      <MenuItem name="userspace" style="float:right" :to="{name: 'userspace'}">
+        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large"></Avatar>
       </MenuItem>
       <MenuItem>
-        <sui-input placeholder="Search..." icon="search"/>
+        <Input search placeholder="Search..." @on-search="SearchFunction()"/>
       </MenuItem>
     </Menu>
-    <Menu :theme="theme3" active-name="1">
-      <MenuItem name="personalInfo">
-        <Icon type="md-document"/>个人信息
-      </MenuItem>
-      <MenuItem name="collections"><Icon type="md-chatbubbles"/ to = '/CollectionView' append>我的收藏</MenuItem>
-      <MenuItem name="follow">
-        <Icon type="md-heart"/>关注的人
-      </MenuItem>
-      <MenuItem name="messageBox">
-        <Icon type="md-leaf"/>站内信
-      </MenuItem>
-      <MenuItem name="apply">
-        <Icon type="md-leaf"/>申请专家认证
-      </MenuItem>
-    </Menu>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
-  name: "defaultindex",
+  name: "userIndex",
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    SearchFunction() {
+      this.$router.push({ path: "./searchresult" });
+      // 未添加数据传递功能
+    }
+  },
   components: {}
 };
 </script>

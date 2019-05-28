@@ -51,7 +51,9 @@ export default {
     };
   },
   methods: {
-    handleRegister: function(signupModel) {}
+    handleRegister: function(signupModel) {
+      this.$router.push({ name: "registerfinish", params: { userID: "123" } });
+    }
   }
 };
 </script>

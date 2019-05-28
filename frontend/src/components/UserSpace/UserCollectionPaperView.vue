@@ -2,7 +2,7 @@
   <div class="ui container horizontal">
     <div class="ui horizontal divider"></div>
     <sui-card-group :items-per-row="1">
-      <MessageBox v-for="(message, index) in messages" v-bind:message="message" :key="index"/>
+      <CollectionPaperBox v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"/>
     </sui-card-group>
     <div class="ui horizontal divider"></div>
     <Page :total="100" show-elevator style="margin-bottom:100px"/>
@@ -10,24 +10,24 @@
 </template>
 
 <script>
-import MessageBox from "../BOX/MessageBox";
+import CollectionPaperBox from "./CollectionPaperBox";
 import axios from "axios";
 export default {
-  name: "MessageBoxList",
+  name: "paperBoxList",
   components: {
-    MessageBox
+    CollectionPaperBox
   },
   data() {
     return {
-      messages: []
+      papers: []
     };
   },
   beforeCreate() {
     axios
-      .get("/messages")
+      .get("/papers")
       .then(res => {
-        this.messages = res.data.messages;
-        console.log(this.messages);
+        this.papers = res.data.papers;
+        console.log(this.papers);
       })
       .catch(err => {
         console.error(err);

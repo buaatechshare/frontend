@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "loginView",
   data() {
@@ -42,7 +43,26 @@ export default {
     };
   },
   methods: {
-    handleSubmit: function(loginModel) {}
+    handleSubmit: function(loginModel) {
+      axios
+        .post("/login", loginModel)
+        .then(res => {
+          console.log(res);
+          console.log(loginModel);
+          if (res.status == 200) {
+            this.$Message.info("登录成功！");
+            this.$router.push({
+              name: "user",
+              params: { userID: "123333" }
+            });
+          } else {
+            this.$Message.info("登录账号或者密码错误！");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   }
 };
 </script>

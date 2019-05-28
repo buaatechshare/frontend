@@ -6,46 +6,193 @@ import userIndex from '../components/userIndex.vue';
 // import MyPatentBoxList from '../components/BOXList/MyPatentBoxList.vue'
 import PaperBoxList from '../components/BOXList/PaperBoxList.vue';
 import PatentBoxList from '../components/BOXList/PatentBoxList.vue';
+import SearchResultView from '../components/SearchResultView.vue';
 import PaperView from '../components/PaperView.vue';
 import PatentView from '../components/PatentView.vue';
+import ProfView from '../components/ProfView.vue';
+import SearchPaperList from '../components/SearchBox/SearchPaperList.vue';
+import SearchPatentList from '../components/SearchBox/SearchPatentList.vue';
+import SearchProfList from '../components/SearchBox/SearchProfList.vue';
 // import ProfBoxList from '../components/BOXList/ProfBoxList.vue'
 import register from '../components/SignupView.vue';
 import login from '../components/LoginView.vue';
+import registerfinish from '../components/SignedView.vue';
+import UserCollectionPaperView from '../components/UserSpace/UserCollectionPaperView.vue'
+import UserCollectionPatentView from '../components/UserSpace/UserCollectionPatentView.vue'
+import UserSpaceView from '../components/UserSpace/UserSpaceView.vue'
+import UserApplyView from '../components/UserSpace/UserApplyView.vue'
+import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
+import UserFollowView from '../components/UserSpace/UserFollowView.vue'
+import UserMessageView from '../components/UserSpace/UserMessageView.vue'
+import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 
-export default [{
-  path: '/',
-  component: defaultIndex,
-  children: [{
-    // 当 /user/:id/profile 匹配成功，
-    // UserProfile 会被渲染在 User 的 <router-view> 中
-    path: 'papers',
-    component: PaperBoxList,
-  },
+export default [
   {
-    // 当 /user/:id/posts 匹配成功
-    // UserPosts 会被渲染在 User 的 <router-view> 中
-    path: 'patents',
-    component: PatentBoxList,
-  },
-  {
-    path: 'register',
-    component: register,
-  },
-  {
-    path: 'login',
-    component: login,
-  }, {
-    path: '/user',
+    path: '/user/:userID',
+    redirect: { name: 'Upapers' },
+    name: "user",
     component: userIndex,
+    children: [
+      {
+        name: 'registerfinish',
+        path: 'registerfinish',
+        component: registerfinish,
+      },
+      {
+        name: 'userspace',
+        path: 'userspace',
+        component: UserSpaceView,
+        children:
+          [
+            {
+              name: 'UserCollectionPaperView',
+              path: 'UserCollectionPaper',
+              component: UserCollectionPaperView
+            },
+            {
+              name: 'UserCollectionPatentView',
+              path: 'UserCollectionPatent',
+              component: UserCollectionPatentView
+            },
+            {
+              name: 'UserApplyView',
+              path: 'UserApply',
+              component: UserApplyView
+            },
+            {
+              name: 'infoAlterView',
+              path: 'infoAlter',
+              component: infoAlterView
+            },
+            {
+              name: 'UserFollowView',
+              path: 'UserFollow',
+              component: UserFollowView
+            },
+            {
+              name: 'UserMessageView',
+              path: 'UserMessage',
+              component: UserMessageView
+            },
+            {
+              name: 'UserSendMessage',
+              path: 'SendMessage',
+              component: UserSendMessage
+            }
+          ]
+      },
+      {
+        path: 'searchresult',
+        redirect: { name: 'Usearchpaper' },
+        component: SearchResultView,
+        children: [
+          {
+            name: 'Usearchpaper',
+            path: 'searchpaper',
+            component: SearchPaperList,
+          },
+          {
+            name: 'Usearchpatent',
+            path: 'searchpatent',
+            component: SearchPatentList,
+          },
+          {
+            name: 'Usearchprof',
+            path: 'searchprof',
+            component: SearchProfList,
+          },
+        ],
+      },
+      {
+        name: 'Upapers',
+        path: 'papers',
+        component: PaperBoxList,
+      },
+      {
+        name: 'Upatents',
+        path: 'patents',
+        component: PatentBoxList,
+      },
+      {
+        name: 'Upaperview',
+        path: 'paperview',
+        component: PaperView,
+      },
+      {
+        name: 'Upatentview',
+        path: 'patentview',
+        component: PatentView,
+      },
+      {
+        name: 'Uprofview',
+        path: 'profview',
+        component: ProfView,
+      },
+    ],
   },
   {
-    path: '/paperview',
-    component: PaperView,
-  },
-  {
-    path: '/patentview',
-    component: PatentView,
-  },
-  ],
-}
-];
+    path: '/',
+    redirect: '/papers',
+    component: defaultIndex,
+    children: [
+      {
+        name: 'login',
+        path: 'login',
+        component: login,
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: register,
+      },
+      {
+        path: 'papers',
+        name: 'papers',
+        component: PaperBoxList,
+      },
+      {
+        path: 'patents',
+        path: 'patents',
+        component: PatentBoxList,
+      },
+      {
+        name: 'paperview',
+        path: 'paperview',
+        component: PaperView,
+      },
+      {
+        name: 'patentview',
+        path: 'patentview',
+        component: PatentView,
+      },
+      {
+        name: 'profview',
+        path: 'profview',
+        component: ProfView,
+      },
+      {
+        path: 'searchresult',
+        name: 'searchresult',
+        redirect: { name: 'searchpaper' },
+        component: SearchResultView,
+        children: [
+          {
+            name: 'searchpaper',
+            path: 'searchpaper',
+            component: SearchPaperList,
+          },
+          {
+            name: 'searchptent',
+            path: 'searchpatent',
+            component: SearchPatentList,
+          },
+          {
+            name: 'searchprof',
+            path: 'searchprof',
+            component: SearchProfList,
+          },
+        ],
+      },
+    ],
+  }
+]

@@ -17,7 +17,7 @@
         </ButtonGroup>
       </MenuItem>
       <MenuItem>
-        <sui-input placeholder="Search..." icon="search"/>
+        <Input search placeholder="Search..." @on-search="SearchFunction()"/>
       </MenuItem>
     </Menu>
     <router-view></router-view>
@@ -29,7 +29,12 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    SearchFunction() {
+      this.$router.push({ path: "./searchresult" });
+      // 未添加数据传递功能
+    }
+  },
   components: {}
 };
 </script>

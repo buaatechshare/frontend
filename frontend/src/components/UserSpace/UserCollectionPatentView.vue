@@ -2,7 +2,7 @@
   <div class="ui container horizontal">
     <div class="ui horizontal divider"></div>
     <sui-card-group :items-per-row="1">
-      <MessageBox v-for="(message, index) in messages" v-bind:message="message" :key="index"/>
+      <CollectionPatentBox v-for="(patent, index) in patents" v-bind:patent="patent" :key="index"/>
     </sui-card-group>
     <div class="ui horizontal divider"></div>
     <Page :total="100" show-elevator style="margin-bottom:100px"/>
@@ -10,24 +10,24 @@
 </template>
 
 <script>
-import MessageBox from "../BOX/MessageBox";
+import CollectionPatentBox from "./CollectionPatentBox";
 import axios from "axios";
 export default {
-  name: "MessageBoxList",
+  name: "patentBoxList",
   components: {
-    MessageBox
+    CollectionPatentBox
   },
   data() {
     return {
-      messages: []
+      patents: []
     };
   },
   beforeCreate() {
     axios
-      .get("/messages")
+      .get("/patents")
       .then(res => {
-        this.messages = res.data.messages;
-        console.log(this.messages);
+        this.patents = res.data.patents;
+        console.log(this.patents);
       })
       .catch(err => {
         console.error(err);
