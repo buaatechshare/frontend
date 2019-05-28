@@ -16,7 +16,7 @@
           <Button :size="buttonSize" to="/register">signup</Button>
         </ButtonGroup>
       </MenuItem>
-      <MenuItem>
+      <MenuItem style="width: 800px">
         <Input search placeholder="Search..." @on-search="SearchFunction()"/>
       </MenuItem>
     </Menu>
