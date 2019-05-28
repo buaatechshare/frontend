@@ -61,7 +61,7 @@ paths:
       summary: 在专家资源管理界面得到专家自己的paper
       description: 在专家资源管理界面得到专家自己的paper
       parameters: 
-        - $ref: '#/parameters/userID'
+        - $ref: '#/paremeters/userID'
       responses:
         200: 
           description: finished
@@ -133,7 +133,7 @@ paths:
           description: fail to register
   /papers:
     get:
-      summary: get a list of papers
+      summary: get the default recommended papers
       parameters:
         - $ref: '#/parameters/pageNumber'
         - $ref: '#/parameters/pageSize'
@@ -184,7 +184,7 @@ paths:
           description: a list of patents for a certain user
           schema:
             $ref: '#/definitions/patentlist'
-
+  #TODO 搜索确定界面之后确定
   /search/papers:
     get:
       description: get searched result
@@ -342,7 +342,7 @@ paths:
                 type: string
               classificationNo:
                 type: array
-                items:
+                items: 
                   type: string
               priority:
                 type: string
@@ -402,7 +402,7 @@ paths:
           description: the user not found
   /collections/{userID}:
     post:
-      description: post a new collection of paper
+      description: 上传新的收藏
       parameters:
         - $ref: '#/parameters/userID'
         - name: resourceID
