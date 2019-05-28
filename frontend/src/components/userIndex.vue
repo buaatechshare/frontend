@@ -1,7 +1,11 @@
 <template>
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
-      <MenuItem name="techshare" :to="{name: 'Upapers'}">
+      <MenuItem
+        name="techshare"
+        :to="{name: 'Upapers'}"
+        style="width: 230px;text-align:center;font-size:22px"
+      >
         <sui-icon name="braille"></sui-icon>techshare
       </MenuItem>
       <MenuItem name="papers" :to="{name: 'Upapers'}">
