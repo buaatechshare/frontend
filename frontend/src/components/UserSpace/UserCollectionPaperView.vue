@@ -1,4 +1,3 @@
-// 收藏
 <template>
   <div class="ui container horizontal">
     <div class="ui horizontal divider"></div>
