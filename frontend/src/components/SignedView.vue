@@ -44,45 +44,36 @@
     </div>
     <div class="textlook">请选择感兴趣的主题：</div>
     <div>
-      <!-- <wordcloud
+      <wordcloud
         :data="defaultWords"
         nameKey="name"
         valueKey="value"
         :color="myColors"
-        :showTooltip="false"
+        :showTooltip="true"
         :wordClick="wordClickHandler"
-        spiral="rectangular"
-      ></wordcloud>-->
+        :rotate="{from:0, to:0, numOfOrientation:1}"
+      ></wordcloud>
       <!-- <Tag checkable color="primary" class="Tags">
         <div class="Tagfont">标签一</div>
       </Tag>-->
-      <div>
-        <VueWordCloud
-          :words="[['romance', 19], ['horror', 3], ['fantasy', 7], ['adventure', 3]]"
-          :color="([, weight]) => weight > 10 ? 'DeepPink' : weight > 5 ? 'RoyalBlue' : 'Indigo'"
-          font-family="Roboto"
-        />
-      </div>
     </div>
   </div>
 </template>
 <script>
 import Vue from "vue";
-import VueWordCloud from "vuewordcloud";
-
+import wordcloud from "vue-wordcloud";
 var themelist = [""];
-
 export default {
   name: "app",
   components: {
-    VueWordCloud
+    wordcloud
   },
   methods: {
     TagSearch() {},
     handleClose(index) {
       this.show = false;
     },
-    wordClickHandler(name, value, like, vm) {
+    wordClickHandler(name, value, vm) {
       Vue.set(this.themelist, this.themelist.length, name);
     }
   },
@@ -94,39 +85,48 @@ export default {
       defaultWords: [
         {
           name: "Cat",
-          value: 26
+          value: 26,
+          like: false
         },
         {
           name: "fish",
-          value: 19
+          value: 19,
+          like: false
         },
         {
           name: "things",
-          value: 18
+          value: 18,
+          like: false
         },
         {
           name: "look",
-          value: 16
+          value: 16,
+          like: false
         },
         {
           name: "two",
-          value: 15
+          value: 15,
+          like: false
         },
         {
           name: "fun",
-          value: 9
+          value: 9,
+          like: false
         },
         {
           name: "know",
-          value: 9
+          value: 9,
+          like: false
         },
         {
           name: "good",
-          value: 9
+          value: 9,
+          like: false
         },
         {
           name: "play",
-          value: 6
+          value: 6,
+          like: false
         }
       ]
     };

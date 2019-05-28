@@ -244,7 +244,6 @@
   </div>
 </template>
 <script>
-import defaultIndex from "../components/defaultIndex.vue";
 import axios from "axios";
 export default {
   name: "paperview",

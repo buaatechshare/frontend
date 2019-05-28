@@ -9,6 +9,7 @@ import PatentBoxList from '../components/BOXList/PatentBoxList.vue';
 import SearchResultView from '../components/SearchResultView.vue';
 import PaperView from '../components/PaperView.vue';
 import PatentView from '../components/PatentView.vue';
+import ProfView from '../components/ProfView.vue';
 import SearchPaperList from '../components/SearchBox/SearchPaperList.vue';
 import SearchPatentList from '../components/SearchBox/SearchPatentList.vue';
 import SearchProfList from '../components/SearchBox/SearchProfList.vue';
@@ -105,6 +106,11 @@ export default [
         path: 'patentview',
         component: PatentView,
       },
+      {
+        name: 'Uprofview',
+        path: 'profview',
+        component: ProfView,
+      },
     ],
   },
   {
@@ -141,6 +147,11 @@ export default [
         name: 'patentview',
         path: 'patentview',
         component: PatentView,
+      },
+      {
+        name: 'profview',
+        path: 'profview',
+        component: ProfView,
       },
       {
         path: 'searchresult',

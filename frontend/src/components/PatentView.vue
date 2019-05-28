@@ -270,7 +270,6 @@
   </div>
 </template>
 <script>
-import defaultIndex from "../components/defaultIndex.vue";
 export default {
   name: "patentview",
   data() {
