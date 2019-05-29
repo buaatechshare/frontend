@@ -9,10 +9,13 @@
         </h2>
         <Form :model="signupModel" :rules="signupRule">
           <FormItem label="Name" prop="username">
-            <Input v-model="signupModel.username"></Input>
+            <Input v-model="signupModel.name"></Input>
           </FormItem>
           <FormItem label="Email" prop="email">
             <Input v-model="signupModel.email"></Input>
+          </FormItem>
+          <FormItem label="phone" prop="phone">
+            <Input v-model="signupModel.phone"></Input>
           </FormItem>
           <FormItem label="password" prop="password">
             <Input v-model="signupModel.password"></Input>
@@ -28,31 +31,44 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button type="primary" @click="handleRegister('signupModel')" long>signup</Button>
+          <Button type="primary" @click="handleRegister()" long>signup</Button>
         </div>
       </Modal>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "signupView",
   data() {
     return {
       signupModel: {
-        username: "",
+        name: "",
         email: "",
         password: "",
-        passwordDBL: "",
-        phoneNumber: ""
+        phone: ""
       },
       signupRule: {},
       signupShow: true
     };
   },
   methods: {
-    handleRegister: function(signupModel) {
-      this.$router.push({ name: "registerfinish", params: { userID: "123" } });
+    handleRegister: function() {
+      axios
+        .post("/userinfo/", this.signupModel)
+        .then(res => {
+          console.log(res);
+          if (res.status == 201) {
+            this.$router.push({
+              name: "registerfinish",
+              params: { userID: res.data.userID }
+            });
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
     }
   }
 };
