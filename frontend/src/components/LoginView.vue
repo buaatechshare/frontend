@@ -21,7 +21,7 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button type="primary" @click="handleSubmit('loginModel')" long>login</Button>
+          <Button type="primary" @click="handleSubmit(loginModel)" long>login</Button>
         </div>
       </Modal>
     </div>
