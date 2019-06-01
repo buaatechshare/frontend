@@ -49,13 +49,10 @@
         nameKey="name"
         valueKey="value"
         :color="myColors"
-        :showTooltip="true"
+        :showTooltip="false"
         :wordClick="wordClickHandler"
         :rotate="{from:0, to:0, numOfOrientation:1}"
       ></wordcloud>
-      <!-- <Tag checkable color="primary" class="Tags">
-        <div class="Tagfont">标签一</div>
-      </Tag>-->
     </div>
   </div>
 </template>

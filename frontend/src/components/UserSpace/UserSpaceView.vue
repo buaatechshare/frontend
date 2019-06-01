@@ -1,68 +1,62 @@
 <style scoped>
 .layout {
-  border: 1px solid #d7dde4;
-  background: #f5f7f9;
+  border: 0px;
+  background: #ffffff;
   position: relative;
-  border-radius: 4px;
   overflow: hidden;
 }
-.layout-logo {
-  width: 100px;
-  height: 30px;
-  background: #5b6270;
-  border-radius: 3px;
-  float: left;
-  position: relative;
-  top: 15px;
-  left: 20px;
-}
-.layout-nav {
-  width: 420px;
-  margin: 0 auto;
-  margin-right: 20px;
-}
-.layout-footer-center {
-  text-align: center;
+.zcontent {
+  z-index: 999;
 }
 </style>
 <template>
   <div class="layout">
-    <layout>
-      <layout>
-        <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-          <Menu active-name="1-2" width="auto">
-            <MenuItem name="personalInfo" :to="{name: 'infoAlterView'}">
-              <Icon type="md-document"/>个人信息
+    <div class="zcontent">
+      <Sider
+        :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto',background:'white'}"
+        width="230"
+      >
+        <Menu active-name="1-2" width="auto">
+          <MenuItem name="personalInfo" :to="{name: 'infoAlterView'}">
+            <Icon type="md-document"/>个人信息
+          </MenuItem>
+          <Submenu name="collections">
+            <template slot="title">
+              <Icon type="ios-analytics"/>我的收藏
+            </template>
+            <MenuItem name="collectionPapers" :to="{name: 'UserCollectionPaperView'}">
+              <Icon type="md-heart"/>论文
             </MenuItem>
-            <Submenu name="collections">
-              <template slot="title">
-                <Icon type="ios-analytics"/>我的收藏
-              </template>
-              <MenuItem name="collectionPapers" :to="{name: 'UserCollectionPaperView'}">
-                <Icon type="md-heart"/>论文
-              </MenuItem>
-              <MenuItem name="collectionPatents" :to="{name:'UserCollectionPatentView'}">
-                <Icon type="md-heart"/>专利
-              </MenuItem>
-            </Submenu>
-            <MenuItem name="follow">
-              <Icon type="md-heart"/>关注的人
+            <MenuItem name="collectionPatents" :to="{name:'UserCollectionPatentView'}">
+              <Icon type="md-heart"/>专利
             </MenuItem>
-            <MenuItem name="messageBox">
-              <Icon type="md-leaf"/>站内信
+          </Submenu>
+          <MenuItem name="follow" :to="{name:'UserFollowView'}">
+            <Icon type="md-heart"/>关注的人
+          </MenuItem>
+
+          <Submenu name="messages">
+            <template slot="title">
+              <Icon type="ios-analytics"/>站内信
+            </template>
+            <MenuItem name="collectionPapers" :to="{name: 'UserSendMessage'}">
+              <Icon type="md-heart"/>写信
             </MenuItem>
-            <MenuItem name="apply" :to="{name: 'UserApplyView'}">
-              <Icon type="md-leaf"/>申请专家认证
+            <MenuItem name="collectionPatents" :to="{name:'UserMessageView'}">
+              <Icon type="md-heart"/>收信
             </MenuItem>
-          </Menu>
-        </Sider>
-        <layout>
-          <Content :style="{padding: '24px', minHeight: '280px', background: '#fff'}">
-            <router-view></router-view>
-          </Content>
-        </layout>
-      </layout>
-    </layout>
+          </Submenu>
+          <MenuItem name="apply" :to="{name: 'UserApplyView'}">
+            <Icon type="md-leaf"/>申请专家认证
+          </MenuItem>
+        </Menu>
+      </Sider>
+    </div>
+    <Layout :style="{marginLeft: '230px',marginRight:'20px'}">
+      <Content :style="{padding: '0 16px 16px',background:'white'}">
+        <router-view></router-view>
+      </Content>
+    </Layout>
   </div>
 </template>
 <script>

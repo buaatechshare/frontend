@@ -1,25 +1,17 @@
 <template>
-  <div id="patentBoxList">
-    <div class="ui container horizontal">
-      <div class="ui horizontal divider"></div>
-      <div>
-        <sui-card-group :items-per-row="2">
-          <patentBox v-for="(patent, index) in patents" :patent="patent" :key="index"></patentBox>
-        </sui-card-group>
-      </div>
-      <div class="ui horizontal divider"></div>
-      <Page :total="100" show-elevator style="margin-bottom:100px"/>
-    </div>
+  <div>
+    <CollectionPatentBox v-for="(patent, index) in patents" v-bind:patent="patent" :key="index"/>
+    <Page :total="100" show-elevator style="margin-bottom:100px"/>
   </div>
 </template>
 
 <script>
-import patentBox from "../BOX/PatentBox";
+import CollectionPatentBox from "./CollectionPatentBox";
 import axios from "axios";
 export default {
-  name: "papentBoxList",
+  name: "patentBoxList",
   components: {
-    patentBox
+    CollectionPatentBox
   },
   data() {
     return {
@@ -31,6 +23,7 @@ export default {
       .get("/patents")
       .then(res => {
         this.patents = res.data.patents;
+        console.log(this.patents);
       })
       .catch(err => {
         console.error(err);

@@ -1,18 +1,3 @@
 {
-    "editor.formatOnSave": true,
-    "vetur.validation.template": false,
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        {
-            "language": "vue"
-        }
-    ],
-    "editor.fontFamily": "Operator Mono, Consolas, 'Courier New', monospace",
-    "editor.fontLigatures": true,
-    "editor.fontSize": 18,
-    "editor.fontWeight": "400",
-    "eslint.autoFixOnSave": true,
-    "eslint.alwaysShowStatus": true,
-    "eslint.quiet": true
+    "editor.formatOnSave": true
 }

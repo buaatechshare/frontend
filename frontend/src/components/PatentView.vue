@@ -125,98 +125,33 @@
           <sui-button
             icon="star outline"
             style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
           >收藏</sui-button>
           <sui-button
             icon="linkify"
             style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
           >引用</sui-button>
-          <sui-button
-            icon="share"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
-          >分享</sui-button>
+          <sui-button icon="share" style="background-color:#cae4ff;color:#2693ff;margin:0px 5px">分享</sui-button>
         </div>
         <sui-divider hidden/>
-        <!--选项卡-->
+        <!--下载链接-->
         <div style="width:865px">
-          <sui-menu pointing>
-            <a
-              is="sui-menu-item"
-              v-for="item in items"
-              :active="isActive(item)"
-              :key="item"
-              :content="item"
-              @click="select(item)"
-            />
-          </sui-menu>
-          <sui-segment>
-            <docs-wireframe name="paragraph"/>
-          </sui-segment>
+          <Card dis-hover>
+            <p slot="title" style="font-size:17px">全文下载</p>
+            <p v-for="download in url">{{download}}</p>
+          </Card>
         </div>
 
         <sui-divider hidden/>
         <!--评论列表-->
         <sui-comment-group style="width:865px">
           <h3 is="sui-header" style="width:865px" dividing>评论列表</h3>
-
-          <sui-comment>
-            <sui-comment-avatar src="../assets/profpic.jpg"/>
+          <sui-comment v-for="comment in comments" :key="index">
             <sui-comment-content>
-              <a is="sui-comment-author">Matt</a>
+              <a is="sui-comment-author" style="pointer-events:none">{{comment.name}}</a>
               <sui-comment-metadata>
-                <div>Today at 5:42PM</div>
+                <Rate disabled="true" v-model="comment.rate"/>
               </sui-comment-metadata>
-              <sui-comment-text>How artistic!</sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
-            </sui-comment-content>
-          </sui-comment>
-
-          <sui-comment>
-            <sui-comment-avatar src="../assets/profpic.jpg"/>
-            <sui-comment-content>
-              <a is="sui-comment-author">Elliot Fu</a>
-              <sui-comment-metadata>
-                <div>Yesterday at 12:30AM</div>
-              </sui-comment-metadata>
-              <sui-comment-text>
-                <p>This has been very useful for my research. Thanks as well!</p>
-              </sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
-            </sui-comment-content>
-            <sui-comment-group>
-              <sui-comment>
-                <sui-comment-avatar src="static/images/avatar/small/jenny.jpg"/>
-                <sui-comment-content>
-                  <a is="sui-comment-author">Jenny Hess</a>
-                  <sui-comment-metadata>
-                    <div>Just now</div>
-                  </sui-comment-metadata>
-                  <sui-comment-text>Elliot you are always so right :)</sui-comment-text>
-                  <sui-comment-actions>
-                    <sui-comment-action>Reply</sui-comment-action>
-                  </sui-comment-actions>
-                </sui-comment-content>
-              </sui-comment>
-            </sui-comment-group>
-          </sui-comment>
-
-          <sui-comment>
-            <sui-comment-avatar src="static/images/avatar/small/joe.jpg"/>
-            <sui-comment-content>
-              <a is="sui-comment-author">Joe Henderson</a>
-              <sui-comment-metadata>
-                <div>5 days ago</div>
-              </sui-comment-metadata>
-              <sui-comment-text>Dude, this is awesome. Thanks so much</sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
+              <sui-comment-text>{{comment.content}}</sui-comment-text>
             </sui-comment-content>
           </sui-comment>
         </sui-comment-group>
@@ -239,14 +174,14 @@
                 <sui-icon name="bell outline"/>评分
               </div>
               <FormItem style="margin-bottom:10px">
-                <Rate v-model="value"/>
+                <Rate v-model="commentModel.rate"/>
               </FormItem>
               <div style="margin-bottom:10px">
                 <sui-icon name="edit outline"/>评论
               </div>
               <FormItem>
                 <Input
-                  v-model="value6"
+                  v-model="commentModel.content"
                   style="width:835px"
                   type="textarea"
                   :rows="3"
@@ -257,7 +192,7 @@
             </Form>
           </sui-modal-content>
           <sui-modal-actions>
-            <sui-button positive @click.native="toggle">发表评论</sui-button>
+            <sui-button positive @click="submit">发表评论</sui-button>
           </sui-modal-actions>
         </sui-modal>
       </sui-container>
@@ -274,23 +209,80 @@ export default {
   name: "patentview",
   data() {
     return {
-      active: "资料来源",
-      items: ["资料来源", "全文下载"],
       value: 0,
-      open: false
+      open: false,
+      iscollect: false,
+      patentdetail: [],
+      url: [],
+      comments: [],
+      commentModel: {
+        comment: "",
+        rate: 0,
+        userID: this.$route.params.userID,
+        resourceID: "12333"
+      }
     };
   },
   methods: {
+    submit() {
+      if (this.commentModel.rate == 0 && this.commentModel.comment == "") {
+        this.$Message.info("评论不能为空！");
+        return;
+      }
+      axios.post("/comment", this.commentModel).then(res => {
+        if (res.status == 200) {
+          this.$Message.info("评论成功！");
+          this.open = !this.open;
+        } else {
+          this.$Message.info("评论失败！");
+        }
+      });
+    },
     toggle() {
       this.open = !this.open;
     },
-    isActive(name) {
-      return this.active === name;
-    },
-    select(name) {
-      this.active = name;
+    collectpaper() {
+      this.iscollect = !this.iscollect;
+      if (this.iscollect) {
+        axios.post("/collections/{}", {
+          params: {
+            userID: this.$route.params.userID
+          },
+          data: {
+            userID: this.$route.params.userID,
+            resourceID: "12333"
+          }
+        });
+      } else {
+        axios.delete("/collections/{}", {
+          params: {
+            userID: this.$route.params.userID
+          },
+          data: {
+            userID: this.$route.params.userID,
+            resourceID: "12333"
+          }
+        });
+      }
     }
   },
-  components: {}
+  components: {},
+  created() {
+    axios
+      .all([
+        axios.get("/patentDetail/{}", { params: { resourceID: 111 } }),
+        axios.get("/comment", { params: { resourceID: 111 } })
+      ])
+      .then(
+        axios.spread((PD, CO) => {
+          this.patentdetail = PD.data.patentDetail;
+          this.keywords = this.patentdetail.keywords;
+          this.fos = this.patentdetail.fos;
+          this.references = this.patentdetail.references;
+          this.url = this.patentdetail.url;
+          this.comments = CO.data.comments;
+        })
+      );
+  }
 };
 </script>

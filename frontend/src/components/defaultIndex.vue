@@ -1,7 +1,7 @@
 <template>
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
-      <MenuItem name="techshare" to="/papers">
+      <MenuItem name="techshare" to="/papers" style="width: 230px;text-align:center;font-size:22px">
         <sui-icon name="braille"></sui-icon>techshare
       </MenuItem>
       <MenuItem name="papers" to="/papers">
@@ -16,7 +16,7 @@
           <Button :size="buttonSize" to="/register">signup</Button>
         </ButtonGroup>
       </MenuItem>
-      <MenuItem>
+      <MenuItem style="width: 800px">
         <Input search placeholder="Search..." @on-search="SearchFunction()"/>
       </MenuItem>
     </Menu>

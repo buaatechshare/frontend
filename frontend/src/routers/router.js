@@ -22,6 +22,9 @@ import UserCollectionPatentView from '../components/UserSpace/UserCollectionPate
 import UserSpaceView from '../components/UserSpace/UserSpaceView.vue'
 import UserApplyView from '../components/UserSpace/UserApplyView.vue'
 import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
+import UserFollowView from '../components/UserSpace/UserFollowView.vue'
+import UserMessageView from '../components/UserSpace/UserMessageView.vue'
+import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 
 export default [
   {
@@ -60,7 +63,21 @@ export default [
               name: 'infoAlterView',
               path: 'infoAlter',
               component: infoAlterView
-
+            },
+            {
+              name: 'UserFollowView',
+              path: 'UserFollow',
+              component: UserFollowView
+            },
+            {
+              name: 'UserMessageView',
+              path: 'UserMessage',
+              component: UserMessageView
+            },
+            {
+              name: 'UserSendMessage',
+              path: 'SendMessage',
+              component: UserSendMessage
             }
           ]
       },
