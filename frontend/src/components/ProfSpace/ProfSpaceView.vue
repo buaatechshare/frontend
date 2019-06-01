@@ -46,8 +46,13 @@
               <Icon type="md-heart"/>收信
             </MenuItem>
           </Submenu>
-          <MenuItem name="apply" :to="{name: 'PManageView'}">
+
+          <MenuItem name="manage" :to="{name: 'PManageView'}">
             <Icon type="md-leaf"/>成果管理
+          </MenuItem>
+
+          <MenuItem name="upload" :to="{name: 'ProfUploadView'}">
+            <Icon type="md-leaf"/>上传成果
           </MenuItem>
         </Menu>
       </Sider>
