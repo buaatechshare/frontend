@@ -6,16 +6,27 @@
 .profname {
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .profcons {
   font-size: 17px;
   color: grey;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  width:500px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
 }
-.proffield {
+.profpos {
   font-size: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+.profnum{
+  margin-top: 10px;
+  color: grey;
 }
 </style>
 <template>
@@ -27,14 +38,16 @@
           <img class="prof" src="../assets/profpic.jpg">
         </div>
         <div style="float:left;margin-top:40px">
-          <div class="profname">欧进萍</div>
-          <div class="profcons">哈尔滨工业大学土木工程学院</div>
-          <div class="proffield">研究领域：土木工程</div>
+          <div class="profname">Jiawei Han</div>
+          <div class="profcons">“Department of Computer Science, University of Illinois at Urbana-Champaign</div>
+          <div class="profpos">职位：professor</div>
+          <div class="proffield">研究领域：data mining</div>
+          <div class="profnum">出版量:1217,被引量:191526,搜索量:175</div>
+
         </div>
         <div style="float:right;margin-top:40px">
           <sui-button
             style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
             content="关注"
             icon="bell outline"
           />
@@ -58,7 +71,6 @@
           <docs-wireframe name="paragraph"/>
         </sui-segment>
       </div>
-
       <sui-divider hidden/>
     </div>
     <!--底端留白美观-->

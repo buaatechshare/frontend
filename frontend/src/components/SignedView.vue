@@ -49,21 +49,10 @@
         nameKey="name"
         valueKey="value"
         :color="myColors"
-        :showTooltip="true"
+        :showTooltip="false"
         :wordClick="wordClickHandler"
         :rotate="{from:0, to:0, numOfOrientation:1}"
-<<<<<<< HEAD
       ></wordcloud>
-      <!-- <Tag checkable color="primary" class="Tags">
-        <div class="Tagfont">标签一</div>
-      </Tag>-->
-=======
-        spiral="rectangular"
-      ></wordcloud>
-      <Tag checkable color="primary" class="Tags">
-        <div class="Tagfont">标签一</div>
-      </Tag>
->>>>>>> 59ac0b25b45b3e44aac9c9e4ee101b3a1c133269
     </div>
   </div>
 </template>
