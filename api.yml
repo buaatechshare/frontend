@@ -108,10 +108,25 @@ paths:
       parameters:
         - $ref: '#/parameters/userID'
         - name: title
+          required: true
+          in: query
+          type: string
         - name: author
+          required: true
+          in: query
+          type: string
         - name: keywords
+          required: true
+          in: query
+          type: string
         - name: publisher
+          required: true
+          in: query
+          type: string
         - name: abstract
+          required: true
+          in: query
+          type: string
           
       responses:
         200:
@@ -143,6 +158,9 @@ paths:
           in: query
           type: string
           format: password
+        - name: isAdmin
+          in: query
+          type: boolean
       responses:
         200: 
           description: finished
