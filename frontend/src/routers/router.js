@@ -25,6 +25,8 @@ import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
 import UserFollowView from '../components/UserSpace/UserFollowView.vue'
 import UserMessageView from '../components/UserSpace/UserMessageView.vue'
 import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
+import ProfSpaceView from '../components/ProfSpace/ProfSpaceView.vue'
+import ProfManageView from '../components/ProfSpace/ProfResourceAdmin.vue'
 
 export default [{
     path: '/user/:userID',
@@ -78,6 +80,53 @@ export default [{
             name: 'UserSendMessage',
             path: 'SendMessage',
             component: UserSendMessage
+          }
+        ]
+      },
+      {
+        name: 'profspace',
+        path: 'profspace',
+        component: ProfSpaceView,
+        props: true,
+        children: [{
+            name: 'PUserCollectionPaperView',
+            path: 'UserCollectionPaper',
+            component: UserCollectionPaperView
+          },
+          {
+            name: 'PUserCollectionPatentView',
+            path: 'UserCollectionPatent',
+            component: UserCollectionPatentView
+          },
+          {
+            name: 'PUserApplyView',
+            path: 'UserApply',
+            component: UserApplyView
+          },
+          {
+            name: 'PinfoAlterView',
+            path: 'infoAlter',
+            component: infoAlterView
+          },
+          {
+            name: 'PUserFollowView',
+            path: 'UserFollow',
+            component: UserFollowView
+          },
+          {
+            name: 'PUserMessageView',
+            path: 'UserMessage',
+            component: UserMessageView
+          },
+          {
+            name: 'PUserSendMessage',
+            path: 'SendMessage',
+            component: UserSendMessage
+          },
+          {
+            name: 'PManageView',
+            path: 'ProfManageView',
+            component: ProfManageView
           }
         ]
       },
