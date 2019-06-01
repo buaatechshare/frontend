@@ -26,18 +26,19 @@ export default {
     };
   },
     //todo: click to submit changes. But currently no match interface.
-  beforeCreate() {
+  created() {
     axios
       .get("/userinfo/{}",{
         params:{
-          'userID':123
+          'userID':this.$route.params.userID
         }
       })
       .then(res => {
         console.log("yes");
+        //console.log(this.$route.params.userID);
         this.userinfoModel.name = res.data.username;
         this.userinfoModel.email = res.data.email;
-        console.log(this.name);
+        console.log(this.userinfoModel.name);
       })
       .catch(err => {
         console.error(err);

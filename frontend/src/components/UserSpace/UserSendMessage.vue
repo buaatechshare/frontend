@@ -1,56 +1,102 @@
 <template>
-  <div class="ui container horizontal">
-    <div class="ui horizontal divider"></div>
-    <Input v-model="messageModel.receiverID">
-      <span slot="prepend">收信人</span>
-    </Input>
-    <br>
-    <Input v-model="messageModel.content" type="textarea" :rows="8" placeholder="请输入正文"/>
-    <br>
-    <br>
-    <Button type="primary" @click="send(messageModel)">发送</Button>
-    <!--<Modal v-model="modal1" title="提示" @on-ok="ok">
+  <div style="margin-top:30px">
+    <Form v-model="message">
+      <FormItem>
+        <Select
+          prefix="ios-contact"
+          v-model="message.receiverName"
+          filterable
+          remote
+          :remote-method="searchUser"
+          :loading="loading"
+        >
+          <Option v-for="(user, index) in users" :value="user.name" :key="index">{{user.name}}</Option>
+        </Select>
+      </FormItem>
+      <FormItem>
+        <Input v-model="message.content" type="textarea" :rows="8" placeholder="请输入正文"/>
+      </FormItem>
+      <FormItem>
+        <Button type="primary" @click="send">发送</Button>
+      </FormItem>
+    </Form>
+
+    <!--<Modal title="提示" @on-ok="ok">
       <br>
       <p>信件已发送。</p>
-      <br>
+      <p>
+        <br>
+      </p>
     </Modal>-->
-    <div class="ui horizontal divider"></div>
   </div>
 </template>
 <script>
 import axios from "axios";
 export default {
+  name: "UserSendMessage",
   data() {
     return {
-      messageModel: {
+      message: {
+        receiverName: "",
         receiverID: "",
-        content: "",
-        senderID: "123123" // need to get this.
+        senderID: this.$route.params.userID,
+        content: ""
       },
-      //modal1: false
+      users: [],
+      loading: false
     };
   },
+  created(){
+    //console.log("wryyyyyyyy!");
+    //console.log(this.message);
+    //console.log(this.$route.params.receiverName);
+    //console.log(this.message.receiverName);
+    this.message.receiverName = this.$route.params.receiverName;
+    
+  },
   methods: {
-    send: function(messageModel) {
+    send() {
+      for (var user in this.users) {
+        if (user.name == this.message.receiverName) {
+          this.message.receiverID = user.userID;
+          break;
+        }
+      }
+      console.log(this.message);
       axios
-        .post("/messages", messageModel)
+        .post("/messages/", this.message)
         .then(res => {
           console.log(res);
-          console.log(messageModel.receiverID);
-          console.log(messageModel.content);
-          console.log("wryyyyyyyyyyyyyyyyy!!!!!");
-          if(res.status == 201) {
-            this.$Message.info("信件已发送");
-            this.$router.go(0);
-          }
-          else {
-            this.$Message.info("信件发送失败");
-          }
         })
         .catch(err => {
           console.error(err);
         });
     },
+    ok() {
+      this.$Message.info("message sent successfully.");
+      this.$router.go(0);
+    },
+    searchUser(query) {
+      console.log(this.message.receiverName);
+      if (query != "") {
+        this.loading = true;
+        axios
+          .get("/search/users/", this.message.receiverName)
+          .then(res => {
+            console.log(res);
+            this.users = res.data.user;
+          })
+          .catch(err => {
+            console.error(err);
+          });
+        // setTimeout(() => {
+        //   this.loading = false;
+        // }, 200);
+        this.loading = false;
+      } else {
+        this.users = [];
+      }
+    }
   }
 };
 </script>

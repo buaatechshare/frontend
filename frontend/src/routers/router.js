@@ -26,14 +26,15 @@ import UserFollowView from '../components/UserSpace/UserFollowView.vue'
 import UserMessageView from '../components/UserSpace/UserMessageView.vue'
 import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 
-export default [
-  {
+export default [{
     path: '/user/:userID',
-    redirect: { name: 'Upapers' },
+    redirect: {
+      name: 'Upapers'
+    },
     name: "user",
+    props: true,
     component: userIndex,
-    children: [
-      {
+    children: [{
         name: 'registerfinish',
         path: 'registerfinish',
         component: registerfinish,
@@ -42,51 +43,51 @@ export default [
         name: 'userspace',
         path: 'userspace',
         component: UserSpaceView,
-        children:
-          [
-            {
-              name: 'UserCollectionPaperView',
-              path: 'UserCollectionPaper',
-              component: UserCollectionPaperView
-            },
-            {
-              name: 'UserCollectionPatentView',
-              path: 'UserCollectionPatent',
-              component: UserCollectionPatentView
-            },
-            {
-              name: 'UserApplyView',
-              path: 'UserApply',
-              component: UserApplyView
-            },
-            {
-              name: 'infoAlterView',
-              path: 'infoAlter',
-              component: infoAlterView
-            },
-            {
-              name: 'UserFollowView',
-              path: 'UserFollow',
-              component: UserFollowView
-            },
-            {
-              name: 'UserMessageView',
-              path: 'UserMessage',
-              component: UserMessageView
-            },
-            {
-              name: 'UserSendMessage',
-              path: 'SendMessage',
-              component: UserSendMessage
-            }
-          ]
+        props: true,
+        children: [{
+            name: 'UserCollectionPaperView',
+            path: 'UserCollectionPaper',
+            component: UserCollectionPaperView
+          },
+          {
+            name: 'UserCollectionPatentView',
+            path: 'UserCollectionPatent',
+            component: UserCollectionPatentView
+          },
+          {
+            name: 'UserApplyView',
+            path: 'UserApply',
+            component: UserApplyView
+          },
+          {
+            name: 'infoAlterView',
+            path: 'infoAlter',
+            component: infoAlterView
+          },
+          {
+            name: 'UserFollowView',
+            path: 'UserFollow',
+            component: UserFollowView
+          },
+          {
+            name: 'UserMessageView',
+            path: 'UserMessage',
+            component: UserMessageView
+          },
+          {
+            name: 'UserSendMessage',
+            path: 'SendMessage',
+            component: UserSendMessage
+          }
+        ]
       },
       {
         path: 'searchresult',
-        redirect: { name: 'Usearchpaper' },
+        redirect: {
+          name: 'Usearchpaper'
+        },
         component: SearchResultView,
-        children: [
-          {
+        children: [{
             name: 'Usearchpaper',
             path: 'searchpaper',
             component: SearchPaperList,
@@ -134,8 +135,7 @@ export default [
     path: '/',
     redirect: '/papers',
     component: defaultIndex,
-    children: [
-      {
+    children: [{
         name: 'login',
         path: 'login',
         component: login,
@@ -173,10 +173,11 @@ export default [
       {
         path: 'searchresult',
         name: 'searchresult',
-        redirect: { name: 'searchpaper' },
+        redirect: {
+          name: 'searchpaper'
+        },
         component: SearchResultView,
-        children: [
-          {
+        children: [{
             name: 'searchpaper',
             path: 'searchpaper',
             component: SearchPaperList,

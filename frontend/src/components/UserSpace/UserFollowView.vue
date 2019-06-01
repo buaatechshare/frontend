@@ -22,7 +22,7 @@ export default {
     axios
       .get("/follow/{}",{
         params:{
-          'userID':123
+          'userID':this.$route.params.userID
         }
       })
       .then(res => {
