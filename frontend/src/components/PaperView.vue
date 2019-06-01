@@ -3,7 +3,7 @@
   color: grey;
   font-size: 14px;
   float: left;
-  width: 80px;
+  width: 100px;
 }
 .papercontent {
   color: grey;
@@ -19,7 +19,7 @@
 </style>
 <template>
   <div id="index">
-    <div style="margin-left:200px;margin-right:400px">
+    <div style="margin-left:200px;margin-right:200px">
       <sui-container fluid>
         <br>
         <!--标题-->
