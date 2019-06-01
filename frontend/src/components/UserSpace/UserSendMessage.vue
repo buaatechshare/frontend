@@ -21,13 +21,13 @@
       </FormItem>
     </Form>
 
-    <Modal title="提示" @on-ok="ok">
+    <!--<Modal title="提示" @on-ok="ok">
       <br>
       <p>信件已发送。</p>
       <p>
         <br>
       </p>
-    </Modal>
+    </Modal>-->
   </div>
 </template>
 <script>
@@ -46,6 +46,14 @@ export default {
       loading: false
     };
   },
+  created(){
+    //console.log("wryyyyyyyy!");
+    //console.log(this.message);
+    //console.log(this.$route.params.receiverName);
+    //console.log(this.message.receiverName);
+    this.message.receiverName = this.$route.params.receiverName;
+    
+  },
   methods: {
     send() {
       for (var user in this.users) {
@@ -59,6 +67,14 @@ export default {
         .post("/messages/", this.message)
         .then(res => {
           console.log(res);
+          if(res.status == 201)
+          {
+            this.$Message.info("message sent successfully.");
+            this.$router.go(0);
+          }
+          else{
+            this.$Message.info("send message failed.");
+          }
         })
         .catch(err => {
           console.error(err);

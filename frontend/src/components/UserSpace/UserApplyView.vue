@@ -18,16 +18,34 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "userApplyView",
   data() {
     return {
       application: {
-        name: "",
         content: "",
+        name: "",
         institution: ""
       }
     };
+  },
+  beforeCreate() {
+    axios
+      .get("/userinfo/{}", {
+        params: {
+          userID: this.$route.params.userID
+        }
+      })
+      .then(res => {
+        //console.log("yes");
+        //console.log(this.$route.params.userID);
+        this.application.name = res.data.username;
+        console.log(this.applyModel.name);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 };
 </script>
