@@ -1,9 +1,9 @@
 <style>
-.label {
+.paperlabel {
   color: grey;
   font-size: 14px;
   float: left;
-  width: 65px;
+  width: 80px;
 }
 .papercontent {
   color: grey;
@@ -23,38 +23,34 @@
       <sui-container fluid>
         <br>
         <!--标题-->
-        <h2 style="color:#006ddb" is="sui-header">慢性疲劳综合征的中医药研究概述</h2>
+        <h2 style="color:#006ddb" is="sui-header">{{paperdetail.title}}</h2>
         <!--来源 收藏 阅读量-->
-        <p style="color:grey;font-size:12px">
-          来自 维普
+        <div style="color:grey;font-size:16px">
+          <div
+            style="float:left"
+            v-if="paperdetail.venue !== undefined"
+          >{{paperdetail.venue}}-{{paperdetail.volume}}</div>
           <Divider type="vertical"/>
-          <sui-icon name="heart outline"/>收藏
-          <Divider type="vertical" dashed/>阅读量 5
-        </p>
+          <Icon v-if="iscollect==false" type="ios-heart-outline" @click="collectpaper"/>
+          <Icon v-if="iscollect==true" type="ios-heart" @click="collectpaper"/>收藏
+        </div>
+        <br>
         <!--作者-->
         <div>
-          <p class="label">作者：</p>
+          <p class="paperlabel">作者：</p>
           <p style="color:grey;font-size:14px;float:left">
-            <span>
-              <a>王开娜</a>
-            </span>，
-            <span>
-              <a>李永峰</a>
-            </span>，
-            <span>
-              <a>王静怡（指导）</a>
+            <!-- authors->author->author.name -->
+            <span v-for="author in paperdetail.author" style="margin-right:5px">
+              <a>{{author}}</a>
             </span>
-            <!-- 单独放span用于加链接 -->
           </p>
         </div>
 
         <div style="clear:both"></div>
         <!--摘要-->
         <div>
-          <p class="label">摘要：</p>
-          <p
-            class="papercontent"
-          >通过对近年来有关慢性疲劳综合征文献的回顾，总结传统中医药对慢性疲劳综合征病因病机、辨证施治、针灸治疗、抗疲劳的单味中药研究概况。传统中医药近年来对慢性疲劳综合征的研究以整体观为指导同时针对个体特点，多从脏腑、气血津液论治，也可辨证施以针灸治疗，并通过实验研究总结出不少具有抗疲劳的单杀中药。</p>
+          <p class="paperlabel">摘要：</p>
+          <p class="papercontent">{{paperdetail.abstract}}</p>
           <br>
           <!--为了上下间距美观加入换行-->
         </div>
@@ -62,71 +58,65 @@
         <div style="clear:both"></div>
         <!--关键词-->
         <div>
-          <p class="label">关键词：</p>
+          <p class="paperlabel">关键词：</p>
           <p class="papercontent">
-            <span>
-              <a>慢性疲劳综合征</a>
-            </span>，
-            <span>
-              <a>中医药</a>
-            </span>，
-            <span>
-              <a>辩证施治</a>
+            <span v-for="keyword in keywords" style="margin-right:5px">
+              <a>{{keyword}}</a>
             </span>
           </p>
         </div>
-
+        <div style="clear:both"></div>
+        <!--field-->
+        <div>
+          <p class="paperlabel">学习领域：</p>
+          <p class="papercontent">
+            <span v-for="field in fos" style="margin-right:10px">{{field}}</span>
+          </p>
+        </div>
         <div style="clear:both"></div>
         <!--DOI-->
         <div>
-          <p class="label">DOI：</p>
-          <p class="papercontent">10.3969/j.issn.1672-0571.2007.01.035</p>
+          <p class="paperlabel">DOI：</p>
+          <p class="papercontent">{{paperdetail.doi}}</p>
+        </div>
+        <div style="clear:both"></div>
+
+        <!--year-->
+        <div>
+          <p class="paperlabel">出版年份：</p>
+          <p class="papercontent">{{paperdetail.year}}</p>
         </div>
 
         <div style="clear:both"></div>
         <!--被引量-->
         <div>
-          <p class="label">被引量：</p>
-          <p class="papercontent">
-            <a>12</a>
-          </p>
+          <p class="paperlabel">被引量：</p>
+          <p class="papercontent">{{paperdetail.n_citation}}</p>
         </div>
-        <!--三个按钮-->
         <div style="clear:both"></div>
-        <div style="margin-top:20px;margin-bottom:20px">
-          <sui-button
-            icon="star outline"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            @click="test"
-            circular
-          >收藏</sui-button>
-          <sui-button
-            icon="linkify"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
-          >引用</sui-button>
-          <sui-button
-            icon="share"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
-          >分享</sui-button>
+        <!--引用-->
+        <div>
+          <div class="paperlabel">引用：</div>
+          <div class="papercontent">
+            <div v-for="reference in references">{{reference}}</div>
+          </div>
         </div>
+        <div style="clear:both"></div>
+        <p></p>
+        <!--出版-->
+        <div>
+          <p class="paperlabel">出版社：</p>
+          <p class="papercontent">{{paperdetail.publisher}}</p>
+        </div>
+        <div style="clear:both"></div>
+
         <sui-divider hidden/>
-        <!--选项卡-->
+        <!--下载链接-->
         <div style="width:865px">
-          <sui-menu pointing>
-            <a
-              is="sui-menu-item"
-              v-for="item in items"
-              :active="isActive(item)"
-              :key="item"
-              :content="item"
-              @click="select(item)"
-            />
-          </sui-menu>
-          <sui-segment>
-            <docs-wireframe name="paragraph"/>
-          </sui-segment>
+          <Card dis-hover>
+            <p slot="title" style="font-size:17px">全文下载</p>
+            <p v-for="download in url">{{download}}</p>
+          </Card>
         </div>
 
         <sui-divider hidden/>
@@ -134,63 +124,13 @@
         <!--评论列表-->
         <sui-comment-group style="width:865px">
           <h3 is="sui-header" style="width:865px" dividing>评论列表</h3>
-
-          <sui-comment>
-            <sui-comment-avatar src="../assets/profpic.jpg"/>
+          <sui-comment v-for="comment in comments" :key="index">
             <sui-comment-content>
-              <a is="sui-comment-author">Matt</a>
+              <a is="sui-comment-author" style="pointer-events:none">{{comment.name}}</a>
               <sui-comment-metadata>
-                <div>Today at 5:42PM</div>
+                <Rate disabled="true" v-model="comment.rate"/>
               </sui-comment-metadata>
-              <sui-comment-text>How artistic!</sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
-            </sui-comment-content>
-          </sui-comment>
-
-          <sui-comment>
-            <sui-comment-avatar src="../assets/profpic.jpg"/>
-            <sui-comment-content>
-              <a is="sui-comment-author">Elliot Fu</a>
-              <sui-comment-metadata>
-                <div>Yesterday at 12:30AM</div>
-              </sui-comment-metadata>
-              <sui-comment-text>
-                <p>This has been very useful for my research. Thanks as well!</p>
-              </sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
-            </sui-comment-content>
-            <sui-comment-group>
-              <sui-comment>
-                <sui-comment-avatar src="static/images/avatar/small/jenny.jpg"/>
-                <sui-comment-content>
-                  <a is="sui-comment-author">Jenny Hess</a>
-                  <sui-comment-metadata>
-                    <div>Just now</div>
-                  </sui-comment-metadata>
-                  <sui-comment-text>Elliot you are always so right :)</sui-comment-text>
-                  <sui-comment-actions>
-                    <sui-comment-action>Reply</sui-comment-action>
-                  </sui-comment-actions>
-                </sui-comment-content>
-              </sui-comment>
-            </sui-comment-group>
-          </sui-comment>
-
-          <sui-comment>
-            <sui-comment-avatar src="static/images/avatar/small/joe.jpg"/>
-            <sui-comment-content>
-              <a is="sui-comment-author">Joe Henderson</a>
-              <sui-comment-metadata>
-                <div>5 days ago</div>
-              </sui-comment-metadata>
-              <sui-comment-text>Dude, this is awesome. Thanks so much</sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
+              <sui-comment-text>{{comment.content}}</sui-comment-text>
             </sui-comment-content>
           </sui-comment>
         </sui-comment-group>
@@ -213,14 +153,14 @@
                 <sui-icon name="bell outline"/>评分
               </div>
               <FormItem style="margin-bottom:10px">
-                <Rate v-model="value"/>
+                <Rate v-model="commentModel.rate"/>
               </FormItem>
               <div style="margin-bottom:10px">
                 <sui-icon name="edit outline"/>评论
               </div>
               <FormItem>
                 <Input
-                  v-model="value6"
+                  v-model="commentModel.content"
                   style="width:835px"
                   type="textarea"
                   :rows="3"
@@ -231,7 +171,7 @@
             </Form>
           </sui-modal-content>
           <sui-modal-actions>
-            <sui-button positive @click.native="toggle">发表评论</sui-button>
+            <sui-button positive @click="submit">发表评论</sui-button>
           </sui-modal-actions>
         </sui-modal>
       </sui-container>
@@ -244,51 +184,89 @@
   </div>
 </template>
 <script>
-import defaultIndex from "../components/defaultIndex.vue";
 import axios from "axios";
+import qs from "qs";
 export default {
   name: "paperview",
   data() {
     return {
-      active: "资料来源",
-      items: ["资料来源", "全文下载"],
       value: 0,
-      open: false
+      open: false,
+      iscollect: false,
+      paperdetail: [],
+      keywords: [],
+      fos: [],
+      references: [],
+      url: [],
+      comments: [],
+      commentModel: {
+        comment: "",
+        rate: 0,
+        userID: this.$route.params.userID,
+        resourceID: "12333"
+      }
     };
   },
   methods: {
+    submit() {
+      if (this.commentModel.rate == 0 && this.commentModel.comment == "") {
+        this.$Message.info("评论不能为空！");
+        return;
+      }
+      axios.post("/comment", this.commentModel).then(res => {
+        if (res.status == 200) {
+          this.$Message.info("评论成功！");
+          this.open = !this.open;
+        } else {
+          this.$Message.info("评论失败！");
+        }
+      });
+    },
     toggle() {
       this.open = !this.open;
     },
-    isActive(name) {
-      return this.active === name;
-    },
-    select(name) {
-      this.active = name;
-    },
-    test() {
-      axios
-        .post("/messages/", {
-          senderID: 11,
-          receiverID: 10,
-          content: "hahaha"
-        })
-        .then(res => {
-          console.log(res);
+    collectpaper() {
+      this.iscollect = !this.iscollect;
+      if (this.iscollect) {
+        axios.post("/collections/{}", {
+          params: {
+            userID: this.$route.params.userID
+          },
+          data: {
+            userID: this.$route.params.userID,
+            resourceID: "12333"
+          }
         });
+      } else {
+        axios.delete("/collections/{}", {
+          params: {
+            userID: this.$route.params.userID
+          },
+          data: {
+            userID: this.$route.params.userID,
+            resourceID: "12333"
+          }
+        });
+      }
     }
   },
   components: {},
-  beforeCreate() {
+  created() {
     axios
-      .get("/papers")
-      .then(res => {
-        this.papers = res.data.papers;
-        console.log(this.papers);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+      .all([
+        axios.get("/paperDetail/{}", { params: { resourceID: 111 } }),
+        axios.get("/comment", { params: { resourceID: 111 } })
+      ])
+      .then(
+        axios.spread((PD, CO) => {
+          this.paperdetail = PD.data.paperDetail;
+          this.keywords = this.paperdetail.keywords;
+          this.fos = this.paperdetail.fos;
+          this.references = this.paperdetail.references;
+          this.url = this.paperdetail.url;
+          this.comments = CO.data.comments;
+        })
+      );
   }
 };
 </script>

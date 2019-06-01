@@ -8,7 +8,7 @@
         </h2>
         <Form ref="formValidate" :model="loginModel" :rules="ruleValidate">
           <FormItem label="email" prop="email">
-            <Input v-model="loginModel.email" placeholder="Enter your email"></Input>
+            <Input v-model="loginModel.username" placeholder="Enter your email"></Input>
           </FormItem>
           <FormItem label="password" prop="password">
             <Input v-model="loginModel.password" placeholder="Enter your password"></Input>
@@ -21,7 +21,7 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button type="primary" @click="handleSubmit('loginModel')" long>login</Button>
+          <Button type="primary" @click="handleSubmit()" long>login</Button>
         </div>
       </Modal>
     </div>
@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       loginModel: {
-        email: "",
+        username: "",
         password: ""
       },
       ruleValidate: {},
@@ -43,12 +43,11 @@ export default {
     };
   },
   methods: {
-    handleSubmit: function(loginModel) {
+    handleSubmit: function() {
       axios
-        .post("/login", loginModel)
+        .post("/login/", this.loginModel)
         .then(res => {
           console.log(res);
-          console.log(loginModel);
           if (res.status == 200) {
             this.$Message.info("登录成功！");
             this.$router.push({

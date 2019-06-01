@@ -9,6 +9,7 @@ import PatentBoxList from '../components/BOXList/PatentBoxList.vue';
 import SearchResultView from '../components/SearchResultView.vue';
 import PaperView from '../components/PaperView.vue';
 import PatentView from '../components/PatentView.vue';
+import ProfView from '../components/ProfView.vue';
 import SearchPaperList from '../components/SearchBox/SearchPaperList.vue';
 import SearchPatentList from '../components/SearchBox/SearchPatentList.vue';
 import SearchProfList from '../components/SearchBox/SearchProfList.vue';
@@ -21,6 +22,9 @@ import UserCollectionPatentView from '../components/UserSpace/UserCollectionPate
 import UserSpaceView from '../components/UserSpace/UserSpaceView.vue'
 import UserApplyView from '../components/UserSpace/UserApplyView.vue'
 import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
+import UserFollowView from '../components/UserSpace/UserFollowView.vue'
+import UserMessageView from '../components/UserSpace/UserMessageView.vue'
+import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 
 export default [
   {
@@ -59,7 +63,21 @@ export default [
               name: 'infoAlterView',
               path: 'infoAlter',
               component: infoAlterView
-
+            },
+            {
+              name: 'UserFollowView',
+              path: 'UserFollow',
+              component: UserFollowView
+            },
+            {
+              name: 'UserMessageView',
+              path: 'UserMessage',
+              component: UserMessageView
+            },
+            {
+              name: 'UserSendMessage',
+              path: 'SendMessage',
+              component: UserSendMessage
             }
           ]
       },
@@ -105,6 +123,11 @@ export default [
         path: 'patentview',
         component: PatentView,
       },
+      {
+        name: 'Uprofview',
+        path: 'profview',
+        component: ProfView,
+      },
     ],
   },
   {
@@ -141,6 +164,11 @@ export default [
         name: 'patentview',
         path: 'patentview',
         component: PatentView,
+      },
+      {
+        name: 'profview',
+        path: 'profview',
+        component: ProfView,
       },
       {
         path: 'searchresult',

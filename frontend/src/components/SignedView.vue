@@ -52,19 +52,14 @@
         :showTooltip="false"
         :wordClick="wordClickHandler"
         :rotate="{from:0, to:0, numOfOrientation:1}"
-        spiral="rectangular"
       ></wordcloud>
-      <Tag checkable color="primary" class="Tags">
-        <div class="Tagfont">标签一</div>
-      </Tag>
     </div>
   </div>
 </template>
 <script>
+import Vue from "vue";
 import wordcloud from "vue-wordcloud";
-
 var themelist = [""];
-
 export default {
   name: "app",
   components: {
@@ -75,7 +70,7 @@ export default {
     handleClose(index) {
       this.show = false;
     },
-    wordClickHandler(name, value, like, vm) {
+    wordClickHandler(name, value, vm) {
       Vue.set(this.themelist, this.themelist.length, name);
     }
   },
@@ -87,39 +82,48 @@ export default {
       defaultWords: [
         {
           name: "Cat",
-          value: 26
+          value: 26,
+          like: false
         },
         {
           name: "fish",
-          value: 19
+          value: 19,
+          like: false
         },
         {
           name: "things",
-          value: 18
+          value: 18,
+          like: false
         },
         {
           name: "look",
-          value: 16
+          value: 16,
+          like: false
         },
         {
           name: "two",
-          value: 15
+          value: 15,
+          like: false
         },
         {
           name: "fun",
-          value: 9
+          value: 9,
+          like: false
         },
         {
           name: "know",
-          value: 9
+          value: 9,
+          like: false
         },
         {
           name: "good",
-          value: 9
+          value: 9,
+          like: false
         },
         {
           name: "play",
-          value: 6
+          value: 6,
+          like: false
         }
       ]
     };
