@@ -1,5 +1,5 @@
 <template>
-  <sui-card class="raised">
+  <sui-card @click="jump(patent)" class="raised">
     <sui-card-content>
       <sui-icon name="male"></sui-icon>
       {{patent.rightHolder}}
@@ -28,6 +28,16 @@
 <script>
 export default {
   name: "patentBox",
+  methods: {
+    jump: function(patent){
+      if(this.$route.params.userID){
+        this.$router.push({name:'Upatentview',params:{resourceID:patent.resourceID}});
+      }
+      else{
+        this.$router.push({name:'patentview',params:{resourceID:patent.resourceID}});
+      }
+    }
+  },
   props: ["patent"]
 };
 </script>

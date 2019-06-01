@@ -28,7 +28,6 @@ export default {
         email: "",
         reason: ""
       }
-      
     };
   },
   beforeCreate(){
