@@ -67,6 +67,14 @@ export default {
         .post("/messages/", this.message)
         .then(res => {
           console.log(res);
+          if(res.status == 201)
+          {
+            this.$Message.info("message sent successfully.");
+            this.$router.go(0);
+          }
+          else{
+            this.$Message.info("send message failed.");
+          }
         })
         .catch(err => {
           console.error(err);
