@@ -2,8 +2,8 @@
   <div id="signupView">
     <!--signup view-->
     <img src="../assets/bg.jpg" style="width:100% ">
-    <div style="margin-top:100px">
-      <Modal v-model="signupShow" style="width:540" :closable="false" :mask-closable="false">
+    <div>
+      <Modal v-model="signupShow" style="width:800px" :closable="false" :mask-closable="false">
         <h2 style="margin:10px;color:#abcdef;text-align:center">
           <sui-icon name="braille"></sui-icon>techshare
         </h2>
