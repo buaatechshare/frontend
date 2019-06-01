@@ -61,7 +61,7 @@ paths:
       summary: 在专家资源管理界面得到专家自己的paper
       description: 在专家资源管理界面得到专家自己的paper
       parameters: 
-        - $ref: '#/paremeters/userID'
+        - $ref: '#/parameters/userID'
       responses:
         200: 
           description: finished
@@ -73,6 +73,46 @@ paths:
       description: 提交自己的论文，包括信息和pdf
       parameters:
         - $ref: '#/parameters/userID'
+        #TODO paperResource
+          
+      responses:
+        200:
+          description: finished
+    delete:
+      summary: 删除自己的论文
+      description: 删除自己的论文
+      parameters:
+        - $ref: '#/parameters/userID'
+        - name: resourceID
+          in: query
+          required: true
+          type: string
+      responses:
+        200:
+          description: finished
+  /myPatent/{userID}:
+    get:
+      summary: 在专家资源管理界面得到专家自己的patent
+      description: 在专家资源管理界面得到专家自己的patent
+      parameters: 
+        - $ref: '#/parameters/userID'
+      responses:
+        200: 
+          description: finished
+          schema:
+            $ref: '#/definitions/patentlist'
+    #TODO how to post the resource
+    post:
+      summary: 提交自己的专家论文
+      description: 提交自己的论文，包括信息和pdf
+      parameters:
+        - $ref: '#/parameters/userID'
+        - name: title
+        - name: author
+        - name: keywords
+        - name: publisher
+        - name: abstract
+          
       responses:
         200:
           description: finished
@@ -131,21 +171,8 @@ paths:
           description: register successfully
         500:
           description: fail to register
-  /papers:
-    get:
-      summary: get the default recommended papers
-      parameters:
-        - $ref: '#/parameters/pageNumber'
-        - $ref: '#/parameters/pageSize'
-      responses:
-        200:
-          description: a list of papers
-          schema:
-            $ref: '#/definitions/paperlist'
-        404:
-          description: the papers has not been found
           
-  /papers/{userID}:
+  /papersRec/{userID}:
     get:
       summary: 得到特定用户的推荐信息
       parameters:
@@ -157,22 +184,7 @@ paths:
           description: a list of paper for a certain user
           schema:
             $ref: '#/definitions/paperlist'
-    
-  /patents:
-    get:
-      summary: 得到默认推荐专利
-      parameters:
-        - $ref: '#/parameters/pageNumber'
-        - $ref: '#/parameters/pageSize'
-      responses:
-        200:
-          description: a list of patents
-          schema:
-            $ref: '#/definitions/patentlist'
-        404:
-          description: the patents have not been found
-          
-  /patents/{userID}:
+  /patentsRec/{userID}:
     get:
       summary: 得到特定用户的推荐专利
       parameters:
@@ -190,6 +202,10 @@ paths:
       description: get searched result
       summary: get searched result
       parameters:
+        - name: byTime
+          in: query
+          type: boolean
+          description: "true->by time, false->default"
         - name: keywords
           in: query
           type: "string"
@@ -206,10 +222,14 @@ paths:
       description: get searched result
       summary: get searched result
       parameters: 
-       - name: keywords
-         in: query
-         type: "string"
-         description: searching information
+        - name: byTime
+          in: query
+          type: boolean
+          description: "true->by time, false->default"
+        - name: keywords
+          in: query
+          type: "string"
+          description: searching information
       responses:
         200:
           description: a list of patents
@@ -652,6 +672,94 @@ paths:
       responses:
         200:
           description: OK
+  /field:
+    get:
+      description: 根据领域查询关键词，最多500个
+      summary: 根据领域查询关键词，最多500个
+      parameters: 
+        - name: keywords
+          required: true
+          in: query
+          type: string
+      responses: 
+        200:
+          description: OK
+          schema:
+            properties:
+              tag:
+                type: array
+                items: 
+                  type: string
+  /field/{userID}:
+    post:
+      description: 上传用户感兴趣的领域
+      summary: 上传用户感兴趣的领域
+      parameters: 
+        - $ref: '#/parameters/userID'
+        - name: tags
+          required: true
+          in: query
+          type: array
+          items: 
+            type: string
+      responses:
+        201:
+          description: "OK"
+  /receiver/{userName}:
+    get: 
+      description: 根据名字查询用户
+      summary: 根据名字查询用户
+      parameters:
+        - name: userName
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: "OK"
+          schema:
+            required:
+              - userNames
+            properties:
+              userNames:
+                type: array
+                items:
+                  type: string
+            
+  /resourceApply:
+    get:
+      description: 管理员得到待审核资源列表
+      summary: 管理员得到待审核资源列表
+      responses:
+        200:
+          description: "ok"
+          schema:
+            $ref: '#/definitions/applicationlist' 
+                  
+    post: 
+      description: 管理员确认待审核的资源通过
+      summary: 管理员确认待审核资源列表通过
+      parameters:
+        - name: userID
+          type: string
+          required: true
+          in: query
+        - name: introduction
+          required: true
+          in: query
+          type: string
+          format: text
+        - name: institution
+          required: true
+          in: query
+          type: string
+        - name: name
+          required: true
+          in: query
+          type: string
+      responses:
+        200:
+          description: "ok"
 
 # test    
 parameters:
@@ -748,6 +856,25 @@ definitions:
       content:
         type: string
         format: text
+      rate:
+        type: integer
+  application:
+    type: object
+    required:
+      - userID
+      - introduction
+      - institution
+      - name
+    properties:
+      userID:
+        type: string
+      introduction:
+        type: string
+        format: text
+      institution:
+        type: string
+      name:
+        type: string
 
   paperlist:
     type: array
@@ -771,3 +898,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/comment'
+  applicationlist:
+    type: array
+    items:
+      $ref: '#/definitions/application'

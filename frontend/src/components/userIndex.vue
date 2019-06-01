@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     SearchFunction() {
-      this.$router.push({ path: "./searchresult" });
+      this.$router.push({ name: "Usearchpaper" });
       // 未添加数据传递功能
     }
   },

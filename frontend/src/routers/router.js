@@ -82,6 +82,7 @@ export default [{
         ]
       },
       {
+        name: 'Usearchresult',
         path: 'searchresult',
         redirect: {
           name: 'Usearchpaper'

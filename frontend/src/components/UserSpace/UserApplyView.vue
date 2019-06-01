@@ -1,30 +1,32 @@
 <template>
-  <div class="ui container horizontal">
-    <div class="ui horizontal divider"></div>
-    <Input v-model="name" style="width: 400px">
-      <span slot="prepend">Name:</span>
-    </Input>
-    <br>
-    <Input v-model="email" style="width: 400px">
-      <span slot="prepend">Email:</span>
-    </Input>
-    <br>
-    <p>申请理由</p>
-    <Input v-model="reason" type="textarea" :rows="4" placeholder="nothing to show here"/>
-    <p></p>
-    <Button type="primary">提交</Button>
-    <div class="ui horizontal divider"></div>
+  <div style="margin-top:30px">
+    <Form :model="application" :label-width="80">
+      <FormItem label="姓名">
+        <Input v-model="application.name"/>
+      </FormItem>
+      <FormItem label="机构">
+        <Input v-model="application.institution"/>
+      </FormItem>
+      <FormItem label="申请内容">
+        <Input v-model="application.content" type="textarea" :rows="8"/>
+      </FormItem>
+      <FormItem>
+        <Button type="primary" @click="send">申请</Button>
+      </FormItem>
+    </Form>
   </div>
 </template>
 
 <script>
 export default {
-  name: "paperBoxList",
+  name: "userApplyView",
   data() {
     return {
-      name: "Skyvot",
-      email: "test@buaa.edu.cn",
-      reason: "nothing to show here."
+      application: {
+        name: "",
+        content: "",
+        institution: ""
+      }
     };
   }
 };
