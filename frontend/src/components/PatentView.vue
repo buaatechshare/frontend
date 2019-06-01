@@ -3,12 +3,12 @@
   color: grey;
   font-size: 14px;
   float: left;
-  width: 66px;
+  width: 100px;
 }
 .tablelabel {
   color: grey;
   font-size: 12px;
-  width: 80px;
+  width: 100px;
 }
 .papercontent {
   color: grey;
@@ -19,7 +19,7 @@
 .tablecontent {
   color: grey;
   font-size: 12px;
-  width: 353px;
+  width: 350px;
 }
 .comment {
   margin-top: 10px;
@@ -29,7 +29,7 @@
 </style>
 <template>
   <div id="index">
-    <div style="margin-left:200px;margin-right:400px">
+    <div style="margin-left:200px;margin-right:200px">
       <sui-container fluid>
         <br>
         <!--标题-->
