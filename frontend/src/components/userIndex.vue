@@ -1,11 +1,15 @@
 <template>
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
+<<<<<<< HEAD
       <MenuItem
         name="techshare"
         :to="{name: 'Upapers'}"
         style="width: 230px;text-align:center;font-size:22px"
       >
+=======
+      <MenuItem name="techshare" :to="{name: 'Upapers'}" style="width: 230px;text-align:center;font-size:22px">
+>>>>>>> 746661d6bb78ec6425f3a284fa17943dd81176b0
         <sui-icon name="braille"></sui-icon>techshare
       </MenuItem>
       <MenuItem name="papers" :to="{name: 'Upapers'}">

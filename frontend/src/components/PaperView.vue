@@ -31,8 +31,14 @@
             v-if="paperdetail.venue !== undefined"
           >{{paperdetail.venue}}-{{paperdetail.volume}}</div>
           <Divider type="vertical"/>
-          <Icon v-if="iscollect==false" type="ios-heart-outline" @click="collectpaper"/>
-          <Icon v-if="iscollect==true" type="ios-heart" @click="collectpaper"/>收藏
+          <Icon v-if="iscollect==false" type="ios-heart-outline" size="22" @click="collectpaper"/>
+          <Icon
+            v-if="iscollect==true"
+            type="ios-heart"
+            size="22"
+            style="color:#c60000"
+            @click="collectpaper"
+          />收藏
         </div>
         <br>
         <!--作者-->
@@ -185,7 +191,6 @@
 </template>
 <script>
 import axios from "axios";
-import qs from "qs";
 export default {
   name: "paperview",
   data() {
@@ -259,7 +264,7 @@ export default {
       ])
       .then(
         axios.spread((PD, CO) => {
-          this.paperdetail = PD.data.paperDetail;
+          this.paperdetail = PD.data;
           this.keywords = this.paperdetail.keywords;
           this.fos = this.paperdetail.fos;
           this.references = this.paperdetail.references;

@@ -79,10 +79,19 @@ paths:
           type: string
         - name: author
           required: true
+<<<<<<< HEAD
           type: string
         - name: DOI
           required: true
           type: string
+=======
+          type: author
+        - name: DOI
+          required: true
+          type: array
+          items: 
+            type: string
+>>>>>>> 746661d6bb78ec6425f3a284fa17943dd81176b0
         - name: abstract
           required: true
           type: string
