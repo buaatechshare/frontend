@@ -25,7 +25,7 @@
       <div class="searchpapercontent">{{message.content}}</div>
       <br>
       <div style="margin-top:5px;margin-bottom:5px">
-        <sui-button size="mini" style="margin-right:5px" @click="handleRender" circular>回复</sui-button>
+        <sui-button size="mini" style="margin-right:5px" @click="handleRender(message)" circular>回复</sui-button>
       </div>
       <Divider style="margin-bottom:0px"/>
     </Card>
@@ -40,9 +40,13 @@ export default {
   },
   props: ["message"],
   methods: {
-    handleRender() {
-      this.$Modal.confirm({
+    handleRender: function(message) {
+      //console.log("mudamudamuda!");
+      //console.log(message.senderName)
+      this.$router.push({name:'UserSendMessage',params: {receiverName: message.senderName}})
+      /*this.$Modal.confirm({
         render: h => {
+          
           return h("Input", {
             props: {
               value: this.value,
@@ -56,7 +60,7 @@ export default {
             }
           });
         }
-      });
+      });*/
     }
   }
 };
