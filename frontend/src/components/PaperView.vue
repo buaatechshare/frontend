@@ -264,7 +264,7 @@ export default {
       ])
       .then(
         axios.spread((PD, CO) => {
-          this.paperdetail = PD.data.paperDetail;
+          this.paperdetail = PD.data;
           this.keywords = this.paperdetail.keywords;
           this.fos = this.paperdetail.fos;
           this.references = this.paperdetail.references;

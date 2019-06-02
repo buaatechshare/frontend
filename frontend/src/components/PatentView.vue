@@ -251,7 +251,7 @@ export default {
       .then(
         axios.spread((PD, CO) => {
           console.log(PD);
-          this.patentdetail = PD.data.patentDetail;
+          this.patentdetail = PD.data;
           this.keywords = this.patentdetail.keywords;
           this.appliers = this.patentdetail.appliers;
           this.classificationNo = this.patentdetail.classificationNo;

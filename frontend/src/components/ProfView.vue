@@ -13,7 +13,7 @@
   color: grey;
   margin-bottom: 10px;
   overflow: hidden;
-  width:500px;
+  width: 500px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
@@ -24,7 +24,7 @@
   font-size: 16px;
   margin-bottom: 10px;
 }
-.profnum{
+.profnum {
   margin-top: 10px;
   color: grey;
 }
@@ -38,12 +38,16 @@
           <img class="prof" src="../assets/profpic.jpg">
         </div>
         <div style="float:left;margin-top:40px">
-          <div class="profname">Jiawei Han</div>
-          <div class="profcons">“Department of Computer Science, University of Illinois at Urbana-Champaign</div>
-          <div class="profpos">职位：professor</div>
-          <div class="proffield">研究领域：data mining</div>
-          <div class="profnum">出版量:1217,被引量:191526,搜索量:175</div>
-
+          <div class="profname">{{profdetail.name}}</div>
+          <div
+            class="profcons"
+          >“Department of Computer Science, University of Illinois at Urbana-Champaign</div>
+          <div class="profpos">职位：{{profdetail.position}}</div>
+          <div class="proffield">
+            研究领域：
+            <span v-for="interest in interests" style="margin-right:5px">{{interest}}</span>
+          </div>
+          <div class="profnum">出版量:{{profdetail.n_pubs}},被引量:{{profdetail.n_citation}},搜索量:175</div>
         </div>
         <div style="float:right;margin-top:40px">
           <sui-button
@@ -81,13 +85,31 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "profview",
   data() {
     return {
       active: "相关论文",
-      items: ["相关论文", "相关专利"]
+      items: ["相关论文", "相关专利"],
+      profdetail: [],
+      interests: []
     };
+  },
+  beforeCreate() {
+    axios
+      .get("/professor/{}", {
+        params: {
+          userID: 111
+        }
+      })
+      .then(res => {
+        this.profdetail = res.data;
+        this.interests = this.profdetail.interests;
+      })
+      .catch(err => {
+        console.error(err);
+      });
   },
   methods: {
     isActive(name) {

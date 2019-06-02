@@ -28,7 +28,8 @@
         enter-button="搜索标签"
         placeholder="请输入感兴趣的..."
         style="width:500px;margin:0 auto"
-        @on-search="TagSearch()"
+        @on-search="foundTag()"
+        v-model="receiverTag"
       />
     </div>
     <div class="textlook">已选择：</div>
@@ -41,7 +42,7 @@
     <div class="textlook">请选择感兴趣的主题：</div>
     <div>
       <wordcloud
-        :data="Tags"
+        :data="interestTags"
         nameKey="name"
         valueKey="value"
         :color="myColors"
@@ -63,7 +64,6 @@ export default {
     wordcloud
   },
   methods: {
-    TagSearch() {},
     handleClose(index) {
       this.show = false;
     },
@@ -71,8 +71,8 @@ export default {
       Vue.set(this.themelist, this.themelist.length, name);
     },
     sendinterests() {
-      axios
-        .post(url, {
+      axios//mock上接口有问题
+        .post("/interests", {
           params: {
             userID: this.$route.params.userID
           },
@@ -88,33 +88,41 @@ export default {
           console.error(err);
         });
       this.themelist = [];
-    }
+    },
+    foundTag() {
+      console.log(this.receiverTag);
+      axios
+        .get("/interests",{
+          params:{
+            keywords:this.receiverTag
+          }
+        })
+        .then(res => {
+          this.defaultWords = res.data.tags;
+          console.log(res.data.tags);
+          for (var i = 0; i < this.defaultWords.length; i++) {
+            this.interestTags.push({
+              value: Math.ceil(Math.random() * 20),
+              name: this.defaultWords[i]
+            });
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    
   },
+
   data() {
     return {
       show: true,
       themelist: [],
       myColors: ["#1f77b4", "#629fc9", "#94bedb", "#c9e0ef"],
       defaultWords: [],
-      Tags: []
+      interestTags: [],
+      receiverTag: ""
     };
-  },
-  beforeCreate() {
-    axios
-      .get("/interests")
-      .then(res => {
-        this.defaultWords = res.data.tags;
-        for (var i = 0; i < this.defaultWords.length; i++) {
-          this.Tags.push({
-            value: Math.ceil(Math.random() * 20),
-            name: this.defaultWords[i]
-          });
-        }
-        console.log(this.defaultWords);
-      })
-      .catch(err => {
-        console.error(err);
-      });
   }
 };
 </script>
