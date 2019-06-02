@@ -74,7 +74,19 @@ paths:
       parameters:
         - $ref: '#/parameters/userID'
         #TODO paperResource
-          
+        - name: title
+          required: true
+          type: string
+        - name: author
+          required: true
+          type: string
+        - name: DOI
+          required: true
+          type: string
+        - name: abstract
+          required: true
+          type: string
+          format: text
       responses:
         200:
           description: finished
@@ -269,6 +281,33 @@ paths:
           description: a list of professors
           schema:
             $ref: '#/definitions/professorlist'
+  /professor/{userID}:
+    get:
+      description: get professor by userID
+      summary: get professor by userID
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: ok
+          schema:
+            n_pubs: 
+              type: integer
+            n_citation:
+              type: integer
+            interests: #tag.t
+              type: array
+              items: 
+                type: string
+            name:
+              type: string
+            position:
+              type: string
+            #? publication只有一个？
+
   /paperDetail/{resourceID}:
     get:
       description: get paper detail
@@ -393,20 +432,6 @@ paths:
                 format: text
               agency:
                 type: string
-
-  /interests:
-    get:
-      summary: get all interest tags from backend
-      description: get all interest tags from backend
-      responses:
-        200:
-          description: OK
-          schema:
-            properties:
-              tags:
-                type: array
-                items:
-                  type: string
   
   /userinfo/{userID}:
     get:

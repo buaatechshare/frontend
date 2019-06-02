@@ -15,7 +15,7 @@
         <sui-icon name="sticky note"></sui-icon>patent
       </MenuItem>
       <MenuItem name="userspace" style="float:right" :to="{name: 'userspace'}">
-        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large"></Avatar>
+        <sui-icon name="user circle outline" size="big"></sui-icon>
       </MenuItem>
       <MenuItem style="width: 800px">
         <Input search placeholder="Search..." @on-search="SearchFunction()"/>
