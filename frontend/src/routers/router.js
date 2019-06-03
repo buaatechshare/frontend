@@ -28,6 +28,7 @@ import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 import ProfSpaceView from '../components/ProfSpace/ProfSpaceView.vue'
 import ProfManageView from '../components/ProfSpace/ProfResourceAdmin.vue'
 import ProfUploadView from '../components/ProfSpace/ProfUploadView.vue'
+import PUserMessageView from '../components/ProfSpace/ProfMessageView.vue'
 
 export default [{
     path: '/user/:userID',
@@ -117,7 +118,7 @@ export default [{
           {
             name: 'PUserMessageView',
             path: 'UserMessage',
-            component: UserMessageView
+            component: PUserMessageView
           },
           {
             name: 'PUserSendMessage',
