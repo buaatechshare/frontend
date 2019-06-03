@@ -36,9 +36,8 @@ export default {
     SearchFunction() {
       this.$router.push({
         name: "Usearchpaper",
-        params: { keywords: this.keywords }
+        query: { keywords: this.keywords }
       });
-      // 未添加数据传递功能
     }
   }
 };

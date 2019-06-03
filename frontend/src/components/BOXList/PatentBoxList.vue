@@ -28,7 +28,7 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/patents")
+      .get("/patents/")
       .then(res => {
         this.patents = res.data.patents;
       })

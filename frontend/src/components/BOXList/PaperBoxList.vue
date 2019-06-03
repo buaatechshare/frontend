@@ -5,6 +5,7 @@
       <PaperBox v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"/>
     </sui-card-group>
     <div class="ui horizontal divider"></div>
+    <div style="text-align:center">
     <Page
       :total="pageTotal"
       :current="pageNum"
@@ -13,6 +14,7 @@
       show-elevator
       style="margin-bottom:100px"
     />
+    </div>
   </div>
 </template>
 
@@ -32,7 +34,7 @@ export default {
     },
     getPaperMessages() {
       axios
-        .post("/messages", this.pageNum)
+        .post("/messages/", this.pageNum)
         .then(res => {
           this.papers = res.data.papers;
         })
@@ -51,7 +53,7 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/papers")
+      .get("/papers/")
       .then(res => {
         this.papers = res.data.papers;
         console.log(this.papers);

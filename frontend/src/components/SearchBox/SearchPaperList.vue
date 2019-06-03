@@ -10,7 +10,13 @@
     <!-- <div class="searchnum">找到63条相关结果</div> -->
     <searchpaper v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"></searchpaper>
     <div style="text-align:center">
-      <Page :total="100" show-elevator/>
+      <Page
+        :total="pageTotal"
+        :current="pageNum"
+        :page-size="pageSize"
+        @on-change="handlePage"
+        show-elevator
+      />
     </div>
   </div>
 </template>
@@ -24,12 +30,37 @@ export default {
   data() {
     return {
       keywords: "",
-      papers: []
+      papers: [],
+      pageTotal: 100,
+      pageNum: 1,
+      pageSize: 0
     };
   },
+  methods: {
+    handlePage(value) {
+      this.pageNum = value;
+      this.getPaperMessages();
+      console.log(this.pageNum);
+    },
+    getPaperMessages() {
+      this.keywords = this.$route.query.keywords;
+      axios
+        .get("/search/papers/", {
+          params: {
+            keywords: this.keywords,
+            byTime: false
+          }
+        })
+        .then(res => {
+          this.papers = res.data.results;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  },
   created() {
-    this.keywords = this.$route.params.keywords;
-    console.log(this.keywords);
+    this.keywords = this.$route.query.keywords;
     axios
       .get("/search/papers/", {
         params: {
@@ -38,12 +69,14 @@ export default {
         }
       })
       .then(res => {
-        console.log(res);
         this.papers = res.data.results;
       })
       .catch(err => {
         console.error(err);
       });
-  }
+  },
+  watch: {
+    "$route":"getPaperMessages"
+  },
 };
 </script>
