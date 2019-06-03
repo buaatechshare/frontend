@@ -39,11 +39,6 @@ export default {
       });
     }
   },
-  components: {},
-  provide() {
-    return {
-      keywords: this.keywords
-    };
-  }
+  components: {}
 };
 </script>

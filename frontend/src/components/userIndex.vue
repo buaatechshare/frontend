@@ -40,10 +40,6 @@ export default {
       });
       // 未添加数据传递功能
     }
-  },
-  components: {},
-  provide: {
-    keywords: this.keywords
   }
 };
 </script>

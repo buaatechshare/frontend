@@ -73,6 +73,10 @@
 <script>
 export default {
   name: "SearchResultView",
-  methods: {}
+  data() {
+    return {
+      keywords: this.$route.params.keywords
+    };
+  }
 };
 </script>
