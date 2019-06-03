@@ -5,7 +5,14 @@
       <PaperBox v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"/>
     </sui-card-group>
     <div class="ui horizontal divider"></div>
-    <Page :total="100" show-elevator style="margin-bottom:100px"/>
+    <Page
+      :total="pageTotal"
+      :current="pageNum"
+      :page-size="pageSize"
+      @on-change="handlePage"
+      show-elevator
+      style="margin-bottom:100px"
+    />
   </div>
 </template>
 
@@ -17,9 +24,29 @@ export default {
   components: {
     PaperBox
   },
+  methods: {
+    handlePage(value) {
+      this.pageNum = value;
+      this.getPaperMessages();
+      console.log(this.pageNum);
+    },
+    getPaperMessages() {
+      axios
+        .post("/messages", this.pageNum)
+        .then(res => {
+          this.papers = res.data.papers;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  },
   data() {
     return {
-      papers: []
+      papers: [],
+      pageTotal: 100,
+      pageNum: 1,
+      pageSize: 0
     };
   },
   beforeCreate() {
