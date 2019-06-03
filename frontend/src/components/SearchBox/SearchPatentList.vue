@@ -29,8 +29,8 @@ export default {
     };
   },
   created() {
-    this.keywords = this.$route.query.keywords;
     console.log(this);
+    this.keywords = this.$route.query.keywords;
     axios
       .get("/search/patents/", {
         params: {

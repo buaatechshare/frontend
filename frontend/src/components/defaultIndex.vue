@@ -35,7 +35,7 @@ export default {
     SearchFunction() {
       this.$router.push({
         name: "searchresult",
-        params: { keywords: this.keywords }
+        query: { keywords: this.keywords }
       });
     }
   },

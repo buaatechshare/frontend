@@ -86,11 +86,16 @@ export default {
   name: "SearchResultView",
   data() {
     return {
-      keywords: this.$route.params.keywords
+      keywords: this.$route.query.keywords
     };
   },
-  created() {
-    console.log(this);
+  methods: {
+    Datachange() {
+      this.keywords = this.$route.query.keywords;
+    }
+  },
+  watch: {
+    $route: "Datachange"
   }
 };
 </script>

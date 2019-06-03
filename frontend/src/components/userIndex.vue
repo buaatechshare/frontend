@@ -38,7 +38,6 @@ export default {
         name: "Usearchresult",
         query: { keywords: this.keywords }
       });
-      // 未添加数据传递功能
     }
   }
 };
