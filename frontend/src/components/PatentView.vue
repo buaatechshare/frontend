@@ -3,12 +3,12 @@
   color: grey;
   font-size: 14px;
   float: left;
-  width: 66px;
+  width: 100px;
 }
 .tablelabel {
   color: grey;
-  font-size: 12px;
-  width: 80px;
+  font-size: 13px;
+  width: 100px;
 }
 .papercontent {
   color: grey;
@@ -18,8 +18,8 @@
 }
 .tablecontent {
   color: grey;
-  font-size: 12px;
-  width: 353px;
+  font-size: 13px;
+  width: 350px;
 }
 .comment {
   margin-top: 10px;
@@ -29,73 +29,75 @@
 </style>
 <template>
   <div id="index">
-    <div style="margin-left:200px;margin-right:400px">
+    <div style="margin-left:200px;margin-right:200px">
       <sui-container fluid>
         <br>
         <!--标题-->
-        <h2 style="color:#006ddb" is="sui-header">蛙人助推器</h2>
+        <h2 style="color:#006ddb" is="sui-header">{{patentdetail.title}}</h2>
         <!--来源 收藏 阅读量-->
-        <p style="color:grey;font-size:12px">
-          来自 维普
-          <Divider type="vertical"/>
-          <sui-icon name="heart outline"/>收藏
-          <Divider type="vertical" dashed/>阅读量 5
+        <p style="color:grey;font-size:16px">
+          <Icon v-if="iscollect==false" type="ios-heart-outline" size="22" @click="collectpaper"/>
+          <Icon
+            v-if="iscollect==true"
+            type="ios-heart"
+            size="22"
+            style="color:#c60000"
+            @click="collectpaper"
+          />收藏
         </p>
         <!--专利信息-->
         <sui-table-row>
           <sui-table-cell class="tablelabel">申请号：</sui-table-cell>
-          <sui-table-cell class="tablecontent">CN201721535512.3</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.applicationNo}}</sui-table-cell>
           <sui-table-cell class="tablelabel">申请日：</sui-table-cell>
-          <sui-table-cell class="tablecontent">2017-11-16</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.applicationDate}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">公开号：</sui-table-cell>
-          <sui-table-cell class="tablecontent">CN208439405U</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.publicNo}}</sui-table-cell>
           <sui-table-cell class="tablelabel">公开日：</sui-table-cell>
-          <sui-table-cell class="tablecontent">2019-01-29</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.publicDate}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">授权公开号：</sui-table-cell>
-          <sui-table-cell class="tablecontent">CN208439405U</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.grantNo}}</sui-table-cell>
           <sui-table-cell class="tablelabel">授权公开日：</sui-table-cell>
-          <sui-table-cell class="tablecontent">2019-01-29</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.grantDate}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">申请人：</sui-table-cell>
-          <sui-table-cell class="tablecontent">周守祥</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.appliers}}</sui-table-cell>
           <sui-table-cell class="tablelabel">申请地：</sui-table-cell>
-          <sui-table-cell class="tablecontent">402191 重庆市永川区朱沱镇四望山村凉水井ewewewew村民小组35号</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.address}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">发明人：</sui-table-cell>
-          <sui-table-cell class="tablecontent">周守祥</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.inventors}}</sui-table-cell>
           <sui-table-cell class="tablelabel">当前权利人：</sui-table-cell>
-          <sui-table-cell class="tablecontent">邬剑星</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.obligee}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">专利代理机构：</sui-table-cell>
-          <sui-table-cell class="tablecontent">重庆谢成律师事务所</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.agency}}</sui-table-cell>
           <sui-table-cell class="tablelabel">代理人：</sui-table-cell>
-          <sui-table-cell class="tablecontent">邬剑星</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.agent}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">主分类号：</sui-table-cell>
-          <sui-table-cell class="tablecontent">B63C11/02</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.mainClassification}}</sui-table-cell>
           <sui-table-cell class="tablelabel">分类号：</sui-table-cell>
-          <sui-table-cell class="tablecontent">B63C11/02</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.classificationNo}}</sui-table-cell>
         </sui-table-row>
         <sui-table-row>
           <sui-table-cell class="tablelabel">优先权：</sui-table-cell>
-          <sui-table-cell class="tablecontent">重庆谢成律师事务所</sui-table-cell>
+          <sui-table-cell class="tablecontent">{{patentdetail.priority}}</sui-table-cell>
         </sui-table-row>
         <Divider dashed/>
         <div style="clear:both"></div>
         <!--摘要-->
         <div>
           <p class="label">摘要：</p>
-          <p
-            class="papercontent"
-          >通过对近年来有关慢性疲劳综合征文献的回顾，总结传统中医药对慢性疲劳综合征病因病机、辨证施治、针灸治疗、抗疲劳的单味中药研究概况。传统中医药近年来对慢性疲劳综合征的研究以整体观为指导同时针对个体特点，多从脏腑、气血津液论治，也可辨证施以针灸治疗，并通过实验研究总结出不少具有抗疲劳的单杀中药。</p>
+          <p class="papercontent">{{patentdetail.abstract}}</p>
           <br>
           <!--为了上下间距美观加入换行-->
         </div>
@@ -105,118 +107,24 @@
         <div>
           <p class="label">关键词：</p>
           <p class="papercontent">
-            <span>
-              <a>慢性疲劳综合征</a>
-            </span>，
-            <span>
-              <a>中医药</a>
-            </span>，
-            <span>
-              <a>辩证施治</a>
+            <span v-for="keyword in keywords" style="margin-right:5px">
+              <a>{{keyword}}</a>
             </span>
           </p>
         </div>
 
         <div style="clear:both"></div>
 
-        <!--三个按钮-->
-        <div style="clear:both"></div>
-        <div style="margin-top:20px;margin-bottom:20px">
-          <sui-button
-            icon="star outline"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
-          >收藏</sui-button>
-          <sui-button
-            icon="linkify"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
-          >引用</sui-button>
-          <sui-button
-            icon="share"
-            style="background-color:#cae4ff;color:#2693ff;margin:0px 5px"
-            circular
-          >分享</sui-button>
-        </div>
-        <sui-divider hidden/>
-        <!--选项卡-->
-        <div style="width:865px">
-          <sui-menu pointing>
-            <a
-              is="sui-menu-item"
-              v-for="item in items"
-              :active="isActive(item)"
-              :key="item"
-              :content="item"
-              @click="select(item)"
-            />
-          </sui-menu>
-          <sui-segment>
-            <docs-wireframe name="paragraph"/>
-          </sui-segment>
-        </div>
-
-        <sui-divider hidden/>
         <!--评论列表-->
         <sui-comment-group style="width:865px">
           <h3 is="sui-header" style="width:865px" dividing>评论列表</h3>
-
-          <sui-comment>
-            <sui-comment-avatar src="../assets/profpic.jpg"/>
+          <sui-comment v-for="comment in comments" :key="index">
             <sui-comment-content>
-              <a is="sui-comment-author">Matt</a>
+              <a is="sui-comment-author" style="pointer-events:none">{{comment.name}}</a>
               <sui-comment-metadata>
-                <div>Today at 5:42PM</div>
+                <Rate disabled="true" v-model="comment.rate"/>
               </sui-comment-metadata>
-              <sui-comment-text>How artistic!</sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
-            </sui-comment-content>
-          </sui-comment>
-
-          <sui-comment>
-            <sui-comment-avatar src="../assets/profpic.jpg"/>
-            <sui-comment-content>
-              <a is="sui-comment-author">Elliot Fu</a>
-              <sui-comment-metadata>
-                <div>Yesterday at 12:30AM</div>
-              </sui-comment-metadata>
-              <sui-comment-text>
-                <p>This has been very useful for my research. Thanks as well!</p>
-              </sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
-            </sui-comment-content>
-            <sui-comment-group>
-              <sui-comment>
-                <sui-comment-avatar src="static/images/avatar/small/jenny.jpg"/>
-                <sui-comment-content>
-                  <a is="sui-comment-author">Jenny Hess</a>
-                  <sui-comment-metadata>
-                    <div>Just now</div>
-                  </sui-comment-metadata>
-                  <sui-comment-text>Elliot you are always so right :)</sui-comment-text>
-                  <sui-comment-actions>
-                    <sui-comment-action>Reply</sui-comment-action>
-                  </sui-comment-actions>
-                </sui-comment-content>
-              </sui-comment>
-            </sui-comment-group>
-          </sui-comment>
-
-          <sui-comment>
-            <sui-comment-avatar src="static/images/avatar/small/joe.jpg"/>
-            <sui-comment-content>
-              <a is="sui-comment-author">Joe Henderson</a>
-              <sui-comment-metadata>
-                <div>5 days ago</div>
-              </sui-comment-metadata>
-              <sui-comment-text>Dude, this is awesome. Thanks so much</sui-comment-text>
-              <sui-comment-actions>
-                <sui-comment-action>Reply</sui-comment-action>
-              </sui-comment-actions>
+              <sui-comment-text>{{comment.content}}</sui-comment-text>
             </sui-comment-content>
           </sui-comment>
         </sui-comment-group>
@@ -239,14 +147,14 @@
                 <sui-icon name="bell outline"/>评分
               </div>
               <FormItem style="margin-bottom:10px">
-                <Rate v-model="value"/>
+                <Rate v-model="commentModel.rate"/>
               </FormItem>
               <div style="margin-bottom:10px">
                 <sui-icon name="edit outline"/>评论
               </div>
               <FormItem>
                 <Input
-                  v-model="value6"
+                  v-model="commentModel.content"
                   style="width:835px"
                   type="textarea"
                   :rows="3"
@@ -257,7 +165,7 @@
             </Form>
           </sui-modal-content>
           <sui-modal-actions>
-            <sui-button positive @click.native="toggle">发表评论</sui-button>
+            <sui-button positive @click="submit">发表评论</sui-button>
           </sui-modal-actions>
         </sui-modal>
       </sui-container>
@@ -270,27 +178,86 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "patentview",
   data() {
     return {
-      active: "资料来源",
-      items: ["资料来源", "全文下载"],
       value: 0,
-      open: false
+      open: false,
+      iscollect: false,
+      patentdetail: [],
+      comments: [],
+      appliers: [],
+      classificationNo: [],
+      commentModel: {
+        comment: "",
+        rate: 0,
+        userID: this.$route.params.userID,
+        resourceID: "12333"
+      }
     };
   },
   methods: {
+    submit() {
+      if (this.commentModel.rate == 0 && this.commentModel.comment == "") {
+        this.$Message.info("评论不能为空！");
+        return;
+      }
+      axios.post("/comment", this.commentModel).then(res => {
+        if (res.status == 200) {
+          this.$Message.info("评论成功！");
+          this.open = !this.open;
+        } else {
+          this.$Message.info("评论失败！");
+        }
+      });
+    },
     toggle() {
       this.open = !this.open;
     },
-    isActive(name) {
-      return this.active === name;
-    },
-    select(name) {
-      this.active = name;
+    collectpaper() {
+      this.iscollect = !this.iscollect;
+      if (this.iscollect) {
+        axios.post("/collections/{}", {
+          params: {
+            userID: this.$route.params.userID
+          },
+          data: {
+            userID: this.$route.params.userID,
+            resourceID: "12333"
+          }
+        });
+      } else {
+        axios.delete("/collections/{}", {
+          params: {
+            userID: this.$route.params.userID
+          },
+          data: {
+            userID: this.$route.params.userID,
+            resourceID: "12333"
+          }
+        });
+      }
     }
   },
-  components: {}
+  components: {},
+  created() {
+    axios
+      .all([
+        axios.get("/patentDetail/{}", { params: { resourceID: 111 } }),
+        axios.get("/comment", { params: { resourceID: 111 } })
+      ])
+      .then(
+        axios.spread((PD, CO) => {
+          console.log(PD);
+          this.patentdetail = PD.data;
+          this.keywords = this.patentdetail.keywords;
+          this.appliers = this.patentdetail.appliers;
+          this.classificationNo = this.patentdetail.classificationNo;
+          this.comments = CO.data.comments;
+        })
+      );
+  }
 };
 </script>

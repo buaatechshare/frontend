@@ -25,68 +25,158 @@ import infoAlterView from '../components/UserSpace/InfoAlterView.vue'
 import UserFollowView from '../components/UserSpace/UserFollowView.vue'
 import UserMessageView from '../components/UserSpace/UserMessageView.vue'
 import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
+import ProfSpaceView from '../components/ProfSpace/ProfSpaceView.vue'
+import ProfManageView from '../components/ProfSpace/ProfResourceAdmin.vue'
+import ProfUploadView from '../components/ProfSpace/ProfUploadView.vue'
+import AdminSpaceView from '../components/AdminView.vue';
+import AdminApplyListView from '../components/AdminSpace/ApplyList.vue';
+import AdminSourceListView from '../components/AdminSpace/SourceList.vue';
+import AdminApplyView from '../components/AdminSpace/ApplyView.vue';
+import AdminSourceView from '../components/AdminSpace/SourceView.vue';
 
-export default [
-  {
+export default [{
     path: '/user/:userID',
-    redirect: { name: 'Upapers' },
+    redirect: {
+      name: 'Upapers'
+    },
     name: "user",
+    props: true,
     component: userIndex,
-    children: [
-      {
+    children: [{
         name: 'registerfinish',
         path: 'registerfinish',
         component: registerfinish,
       },
       {
-        name: 'userspace',
-        path: 'userspace',
-        component: UserSpaceView,
-        children:
-          [
-            {
-              name: 'UserCollectionPaperView',
-              path: 'UserCollectionPaper',
-              component: UserCollectionPaperView
-            },
-            {
-              name: 'UserCollectionPatentView',
-              path: 'UserCollectionPatent',
-              component: UserCollectionPatentView
-            },
-            {
-              name: 'UserApplyView',
-              path: 'UserApply',
-              component: UserApplyView
-            },
-            {
-              name: 'infoAlterView',
-              path: 'infoAlter',
-              component: infoAlterView
-            },
-            {
-              name: 'UserFollowView',
-              path: 'UserFollow',
-              component: UserFollowView
-            },
-            {
-              name: 'UserMessageView',
-              path: 'UserMessage',
-              component: UserMessageView
-            },
-            {
-              name: 'UserSendMessage',
-              path: 'SendMessage',
-              component: UserSendMessage
-            }
-          ]
+        name:'adminspace',
+        path:'adminspace',
+        component:AdminSpaceView,
+        children:[{
+          name:'adminapplylistview',
+          path:'adminapplylist',
+          component:AdminApplyListView
+        },
+        {
+          name:'adminsourcelistview',
+          path:'adminsourcelist',
+          component:AdminSourceListView
+        },
+        {
+          name:'adminapplyview',
+          path:'adminapply',
+          component:AdminSourceView
+        },
+        {
+          name:'adminsourceview',
+          path:'adminsource',
+          component:AdminSourceView
+        }]
       },
       {
-        path: 'searchresult',
-        redirect: { name: 'Usearchpaper' },
-        component: SearchResultView,
-        children: [
+        name: 'userspace',
+        path: 'userspace',
+        redirect: {
+          name: 'infoAlterView'
+        },
+        component: UserSpaceView,
+        props: true,
+        children: [{
+            name: 'UserCollectionPaperView',
+            path: 'UserCollectionPaper',
+            component: UserCollectionPaperView
+          },
           {
+            name: 'UserCollectionPatentView',
+            path: 'UserCollectionPatent',
+            component: UserCollectionPatentView
+          },
+          {
+            name: 'UserApplyView',
+            path: 'UserApply',
+            component: UserApplyView
+          },
+          {
+            name: 'infoAlterView',
+            path: 'infoAlter',
+            component: infoAlterView
+          },
+          {
+            name: 'UserFollowView',
+            path: 'UserFollow',
+            component: UserFollowView
+          },
+          {
+            name: 'UserMessageView',
+            path: 'UserMessage',
+            component: UserMessageView
+          },
+          {
+            name: 'UserSendMessage',
+            path: 'SendMessage',
+            component: UserSendMessage
+          }
+        ]
+      },
+      {
+        name: 'profspace',
+        path: 'profspace',
+        component: ProfSpaceView,
+        props: true,
+        children: [{
+            name: 'PUserCollectionPaperView',
+            path: 'UserCollectionPaper',
+            component: UserCollectionPaperView
+          },
+          {
+            name: 'PUserCollectionPatentView',
+            path: 'UserCollectionPatent',
+            component: UserCollectionPatentView
+          },
+          {
+            name: 'PUserApplyView',
+            path: 'UserApply',
+            component: UserApplyView
+          },
+          {
+            name: 'PinfoAlterView',
+            path: 'infoAlter',
+            component: infoAlterView
+          },
+          {
+            name: 'PUserFollowView',
+            path: 'UserFollow',
+            component: UserFollowView
+          },
+          {
+            name: 'PUserMessageView',
+            path: 'UserMessage',
+            component: UserMessageView
+          },
+          {
+            name: 'PUserSendMessage',
+            path: 'SendMessage',
+            component: UserSendMessage
+          },
+          {
+            name: 'PManageView',
+            path: 'ProfManageView',
+            component: ProfManageView
+          },
+          {
+            name: 'ProfUploadView',
+            path: 'ProfUploadView',
+            component: ProfUploadView
+          }
+        ]
+      },
+      {
+        name: 'Usearchresult',
+        path: 'searchresult',
+        redirect: {
+          name: 'Usearchpaper'
+        },
+        component: SearchResultView,
+        children: [{
             name: 'Usearchpaper',
             path: 'searchpaper',
             component: SearchPaperList,
@@ -134,8 +224,7 @@ export default [
     path: '/',
     redirect: '/papers',
     component: defaultIndex,
-    children: [
-      {
+    children: [{
         name: 'login',
         path: 'login',
         component: login,
@@ -173,10 +262,11 @@ export default [
       {
         path: 'searchresult',
         name: 'searchresult',
-        redirect: { name: 'searchpaper' },
+        redirect: {
+          name: 'searchpaper'
+        },
         component: SearchResultView,
-        children: [
-          {
+        children: [{
             name: 'searchpaper',
             path: 'searchpaper',
             component: SearchPaperList,

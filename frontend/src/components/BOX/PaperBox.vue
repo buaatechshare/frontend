@@ -1,5 +1,5 @@
 <template>
-  <sui-card>
+  <sui-card @click="jump(paper)">
     <sui-card-content>
       <sui-icon name="male"></sui-icon>
       {{paper.author}}
@@ -30,6 +30,26 @@ export default {
   name: "paperBox",
   data() {
     return {};
+  },
+  methods: {
+    jump: function() {
+      //this.$Message.info("Yes!!!!");
+      if (this.$route.params.userID) {
+        //console.log("yes");
+        //console.log(paper.resourceID);
+        this.$router.push({
+          name: "Upaperview",
+          params: { resourceID: this.paper.resourceID }
+        });
+      } else {
+        //console.log("yes");
+        //console.log(paper.resourceID);
+        this.$router.push({
+          name: "paperview",
+          params: { resourceID: this.paper.resourceID }
+        });
+      }
+    }
   },
   props: ["paper"]
 };
