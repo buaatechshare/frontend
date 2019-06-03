@@ -4,9 +4,9 @@
   margin-bottom: 10px;
 }
 .searchpapercontent {
-  font-size: 30px;
+  font-size: 13px;
   color: grey;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -19,13 +19,15 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpapertitle">
-        <a>{{message.senderID.name}}</a>
+        <a>{{message.senderName}}</a>
       </div>
+      <br>
       <div class="searchpapercontent">{{message.content}}</div>
+      <br>
       <div style="margin-top:5px;margin-bottom:5px">
         <sui-button size="mini" style="margin-right:5px" @click="handleRender(message)" circular>回复</sui-button>
       </div>
-      <Divider style="margin-bottom:0px; width:800px"/>
+      <Divider style="margin-bottom:0px"/>
     </Card>
   </Row>
 </template>
@@ -41,7 +43,7 @@ export default {
     handleRender: function(message) {
       //console.log("mudamudamuda!");
       //console.log(message.senderName)
-      this.$router.push({name:'UserSendMessage',params: {receiverName: message.senderID.name, receiverID: message.senderID.userID}})
+      this.$router.push({name:'PUserSendMessage',params: {receiverName: message.senderName}})
       /*this.$Modal.confirm({
         render: h => {
           

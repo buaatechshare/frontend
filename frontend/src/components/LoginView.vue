@@ -76,7 +76,9 @@ export default {
         if (valid) {
           this.loginModel.username = this.loginRule.username;
           this.loginModel.password = this.loginRule.password;
-          if (this.loginRule.isAdmin == "admin") this.loginModel.isAdmin = true;
+          if (this.loginRule.isadmin == "admin") this.loginModel.isAdmin = true;
+          console.log(this.loginRule);
+          console.log("this is what you did");
           console.log(this.loginModel);
           axios
             .post("/login/", this.loginModel)
