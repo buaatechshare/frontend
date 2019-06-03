@@ -6,12 +6,18 @@
         <h2 style="margin:10px;color:#abcdef;text-align:center">
           <sui-icon name="braille"></sui-icon>techshare
         </h2>
-        <Form ref="loginModel" :model="loginModel" :rules="ruleValidate">
+        <Form ref="loginRule" :model="loginRule" :rules="ruleValidate" label-position="top">
           <FormItem label="邮箱" prop="username">
-            <Input v-model="loginModel.username"></Input>
+            <Input v-model="loginRule.username"></Input>
           </FormItem>
           <FormItem label="密码" prop="password">
-            <Input type="password" v-model="loginModel.password"></Input>
+            <Input type="password" v-model="loginRule.password"></Input>
+          </FormItem>
+          <FormItem label="身份选择">
+            <RadioGroup v-model="loginRule.isadmin">
+              <Radio label="user">用户登录</Radio>
+              <Radio label="admin">管理员登录</Radio>
+            </RadioGroup>
           </FormItem>
           <FormItem>
             <ButtonGroup>
@@ -21,7 +27,7 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button type="primary" @click="handleSubmit('loginModel')" long>登录</Button>
+          <Button type="primary" @click="handleSubmit('loginRule')" long>登录</Button>
         </div>
       </Modal>
     </div>
@@ -34,9 +40,15 @@ export default {
   name: "loginView",
   data() {
     return {
+      loginRule: {
+        username: "",
+        password: "",
+        isadmin: "user"
+      },
       loginModel: {
         username: "",
-        password: ""
+        password: "",
+        isadmin: false
       },
       ruleValidate: {
         username: [
@@ -62,6 +74,10 @@ export default {
     handleSubmit: function(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
+          this.loginModel.username = this.loginRule.username;
+          this.loginModel.password = this.loginRule.password;
+          if (this.loginRule.isadmin == "admin") this.loginModel.isadmin = true;
+          console.log(this.loginRule);
           axios
             .post("/login/", this.loginModel)
             .then(res => {

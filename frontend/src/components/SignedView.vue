@@ -73,12 +73,9 @@ export default {
     sendinterests() {
       axios//mock上接口有问题
         .post("/interests", {
-          params: {
-            userID: this.$route.params.userID
-          },
           data: {
             userID: this.$route.params.userID,
-            interests: this.themelist
+            field: this.themelist
           }
         })
         .then(res => {
