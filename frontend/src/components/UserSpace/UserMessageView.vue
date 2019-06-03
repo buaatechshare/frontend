@@ -26,7 +26,8 @@ export default {
     axios
       .get("/messages/")
       .then(res => {
-        this.messages = res.data.messages;
+        console.log(res);
+        this.messages = res.data.results;
         console.log(this.messages);
       })
       .catch(err => {

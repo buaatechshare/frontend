@@ -48,7 +48,7 @@ export default {
       loginModel: {
         username: "",
         password: "",
-        isadmin: false
+        isAdmin: false
       },
       ruleValidate: {
         username: [
@@ -76,8 +76,10 @@ export default {
         if (valid) {
           this.loginModel.username = this.loginRule.username;
           this.loginModel.password = this.loginRule.password;
-          if (this.loginRule.isadmin == "admin") this.loginModel.isadmin = true;
+          if (this.loginRule.isadmin == "admin") this.loginModel.isAdmin = true;
           console.log(this.loginRule);
+          console.log("this is what you did");
+          console.log(this.loginModel);
           axios
             .post("/login/", this.loginModel)
             .then(res => {
@@ -86,7 +88,7 @@ export default {
                 this.$Message.info("登录成功！");
                 this.$router.push({
                   name: "user",
-                  params: { userID: "123333" }
+                  params: { userID: res.data.userID }
                 });
               } else {
                 this.$Message.info("登录账号或者密码错误！");

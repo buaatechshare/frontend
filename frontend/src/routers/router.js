@@ -34,6 +34,7 @@ import AdminApplyListView from '../components/AdminSpace/ApplyList.vue';
 import AdminSourceListView from '../components/AdminSpace/SourceList.vue';
 import AdminApplyView from '../components/AdminSpace/ApplyView.vue';
 import AdminSourceView from '../components/AdminSpace/SourceView.vue';
+import TestView from '../components/UserSpace/TestView.vue';
 
 export default [{
     path: '/user/:userID',
@@ -112,7 +113,12 @@ export default [{
             name: 'UserSendMessage',
             path: 'SendMessage',
             component: UserSendMessage
-          }
+          },
+          {
+            name: 'TestView',
+            path: 'TestView',
+            component: TestView
+          },
         ]
       },
       {
