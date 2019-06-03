@@ -24,7 +24,7 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/messages")
+      .get("/messages/")
       .then(res => {
         this.messages = res.data.messages;
         console.log(this.messages);

@@ -52,7 +52,7 @@
         </Menu>
       </Sider>
     </div>
-    <Layout :style="{marginLeft: '0px',marginRight:'20px'}">
+    <Layout :style="{marginLeft: '230px',marginRight:'20px'}">
       <Content :style="{padding: '0 16px 16px',background:'white'}">
         <router-view></router-view>
       </Content>

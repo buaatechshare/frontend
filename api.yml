@@ -698,6 +698,8 @@ definitions:
       abstract:
         type: string
         format: text
+      resourceID:
+        type: "string"
   patent:
     type: object
     required:
@@ -711,6 +713,8 @@ definitions:
       summary:
         type: string
         format: text
+      resourceID:
+        type: "string"
   professor:
     type: object
     required:
