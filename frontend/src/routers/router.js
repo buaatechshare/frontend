@@ -28,6 +28,11 @@ import UserSendMessage from '../components/UserSpace/UserSendMessage.vue'
 import ProfSpaceView from '../components/ProfSpace/ProfSpaceView.vue'
 import ProfManageView from '../components/ProfSpace/ProfResourceAdmin.vue'
 import ProfUploadView from '../components/ProfSpace/ProfUploadView.vue'
+import AdminSpaceView from '../components/AdminView.vue';
+import AdminApplyListView from '../components/AdminSpace/ApplyList.vue';
+import AdminSourceListView from '../components/AdminSpace/SourceList.vue';
+import AdminApplyView from '../components/AdminSpace/ApplyView.vue';
+import AdminSourceView from '../components/AdminSpace/SourceView.vue';
 
 export default [{
     path: '/user/:userID',
@@ -41,6 +46,31 @@ export default [{
         name: 'registerfinish',
         path: 'registerfinish',
         component: registerfinish,
+      },
+      {
+        name:'adminspace',
+        path:'adminspace',
+        component:AdminSpaceView,
+        children:[{
+          name:'adminapplylistview',
+          path:'adminapplylist',
+          component:AdminApplyListView
+        },
+        {
+          name:'adminsourcelistview',
+          path:'adminsourcelist',
+          component:AdminSourceListView
+        },
+        {
+          name:'adminapplyview',
+          path:'adminapply',
+          component:AdminSourceView
+        },
+        {
+          name:'adminsourceview',
+          path:'adminsource',
+          component:AdminSourceView
+        }]
       },
       {
         name: 'userspace',
