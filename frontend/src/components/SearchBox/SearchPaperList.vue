@@ -23,12 +23,12 @@ export default {
   },
   data() {
     return {
-      //keywords: "",
+      keywords: "",
       papers: []
     };
   },
-  inject: ["keywords"],
   created() {
+    this.keywords = this.$route.params.keywords;
     console.log(this.keywords);
     axios
       .get("/search/papers/", {
