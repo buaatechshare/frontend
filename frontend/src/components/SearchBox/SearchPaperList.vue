@@ -27,8 +27,9 @@ export default {
       papers: []
     };
   },
+
   created() {
-    this.keywords = this.$route.params.keywords;
+    this.keywords = this.$route.query.keywords;
     console.log(this.keywords);
     axios
       .get("/search/papers/", {

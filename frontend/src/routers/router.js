@@ -48,29 +48,30 @@ export default [{
         component: registerfinish,
       },
       {
-        name:'adminspace',
-        path:'adminspace',
-        component:AdminSpaceView,
-        children:[{
-          name:'adminapplylistview',
-          path:'adminapplylist',
-          component:AdminApplyListView
-        },
-        {
-          name:'adminsourcelistview',
-          path:'adminsourcelist',
-          component:AdminSourceListView
-        },
-        {
-          name:'adminapplyview',
-          path:'adminapply',
-          component:AdminSourceView
-        },
-        {
-          name:'adminsourceview',
-          path:'adminsource',
-          component:AdminSourceView
-        }]
+        name: 'adminspace',
+        path: 'adminspace',
+        component: AdminSpaceView,
+        children: [{
+            name: 'adminapplylistview',
+            path: 'adminapplylist',
+            component: AdminApplyListView
+          },
+          {
+            name: 'adminsourcelistview',
+            path: 'adminsourcelist',
+            component: AdminSourceListView
+          },
+          {
+            name: 'adminapplyview',
+            path: 'adminapply',
+            component: AdminSourceView
+          },
+          {
+            name: 'adminsourceview',
+            path: 'adminsource',
+            component: AdminSourceView
+          }
+        ]
       },
       {
         name: 'userspace',
@@ -175,6 +176,7 @@ export default [{
         redirect: {
           name: 'Usearchpaper'
         },
+        props: true,
         component: SearchResultView,
         children: [{
             name: 'Usearchpaper',
@@ -265,6 +267,7 @@ export default [{
         redirect: {
           name: 'searchpaper'
         },
+        props: true,
         component: SearchResultView,
         children: [{
             name: 'searchpaper',

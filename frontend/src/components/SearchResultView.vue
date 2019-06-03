@@ -21,10 +21,21 @@
             <template slot="title">
               <Icon type="ios-compass-outline" size="20"/>搜索目标
             </template>
-            <!--TODO to的路由有问题 -->
-            <MenuItem name="1-1" to="searchpaper" append>论文</MenuItem>
-            <MenuItem name="1-2" to="searchpatent" append>专利</MenuItem>
-            <MenuItem name="1-3" to="searchprof" append>专家</MenuItem>
+            <MenuItem
+              name="1-1"
+              :to="{ path: 'searchpaper', query: { keywords: this.keywords }}"
+              append
+            >论文</MenuItem>
+            <MenuItem
+              name="1-2"
+              :to="{ path: 'searchpatent', query: { keywords: this.keywords }}"
+              append
+            >专利</MenuItem>
+            <MenuItem
+              name="1-3"
+              :to="{ path: 'searchprof', query: { keywords: this.keywords }}"
+              append
+            >专家</MenuItem>
           </Submenu>
           <Submenu name="2">
             <template slot="title">
@@ -77,6 +88,9 @@ export default {
     return {
       keywords: this.$route.params.keywords
     };
+  },
+  created() {
+    console.log(this);
   }
 };
 </script>
