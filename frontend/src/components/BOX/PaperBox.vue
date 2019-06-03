@@ -1,7 +1,7 @@
 <template>
   <sui-card @click="jump(paper)">
     <sui-card-content>
-      <sui-icon name="male" ></sui-icon>
+      <sui-icon name="male"></sui-icon>
       {{paper.author}}
       <sui-card-meta slot="right">
         <sui-icon name="bell outline"></sui-icon>
@@ -32,17 +32,22 @@ export default {
     return {};
   },
   methods: {
-    jump: function(paper){
+    jump: function() {
       //this.$Message.info("Yes!!!!");
-      if(this.$route.params.userID){
+      if (this.$route.params.userID) {
         //console.log("yes");
         //console.log(paper.resourceID);
-        this.$router.push({name:'Upaperview',params:{resourceID:paper.resourceID}});
-      }
-      else{
+        this.$router.push({
+          name: "Upaperview",
+          params: { resourceID: this.paper.resourceID }
+        });
+      } else {
         //console.log("yes");
         //console.log(paper.resourceID);
-        this.$router.push({name:'paperview',params:{resourceID:paper.resourceID}});
+        this.$router.push({
+          name: "paperview",
+          params: { resourceID: this.paper.resourceID }
+        });
       }
     }
   },

@@ -259,8 +259,12 @@ export default {
   created() {
     axios
       .all([
-        axios.get("/paperDetail/{}", { params: { resourceID: 111 } }),
-        axios.get("/comment", { params: { resourceID: 111 } })
+        axios.get("/paperDetail/", {
+          params: { paperID: this.$route.params.resourceID }
+        }),
+        axios.get("/comment/", {
+          params: { paperID: this.$route.params.resourceID }
+        })
       ])
       .then(
         axios.spread((PD, CO) => {

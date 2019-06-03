@@ -71,5 +71,7 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "SearchResultView"
+};
 </script>

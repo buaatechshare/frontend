@@ -17,8 +17,8 @@
       <MenuItem name="userspace" style="float:right" :to="{name: 'userspace'}">
         <sui-icon name="user circle outline" size="big"></sui-icon>
       </MenuItem>
-      <MenuItem style="width: 800px">
-        <Input search placeholder="Search..." @on-search="SearchFunction()"/>
+      <MenuItem style="width: 40%">
+        <Input search placeholder="Search..." @on-search="SearchFunction()" v-model="keywords"/>
       </MenuItem>
     </Menu>
     <router-view></router-view>
@@ -28,14 +28,22 @@
 export default {
   name: "userIndex",
   data() {
-    return {};
+    return {
+      keywords: ""
+    };
   },
   methods: {
     SearchFunction() {
-      this.$router.push({ name: "Usearchpaper" });
+      this.$router.push({
+        name: "Usearchpaper",
+        params: { keywords: this.keywords }
+      });
       // 未添加数据传递功能
     }
   },
-  components: {}
+  components: {},
+  provide: {
+    keywords: this.keywords
+  }
 };
 </script>

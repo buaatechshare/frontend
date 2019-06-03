@@ -45,6 +45,9 @@ export default [{
       {
         name: 'userspace',
         path: 'userspace',
+        redirect: {
+          name: 'infoAlterView'
+        },
         component: UserSpaceView,
         props: true,
         children: [{

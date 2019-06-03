@@ -16,8 +16,8 @@
           <Button :size="buttonSize" to="/register">signup</Button>
         </ButtonGroup>
       </MenuItem>
-      <MenuItem style="width: 800px">
-        <Input search placeholder="Search..." @on-search="SearchFunction()"/>
+      <MenuItem style="width: 40%">
+        <Input search placeholder="Search..." @on-search="SearchFunction()" v-model="keywords"/>
       </MenuItem>
     </Menu>
     <router-view></router-view>
@@ -27,14 +27,23 @@
 export default {
   name: "defaultindex",
   data() {
-    return {};
+    return {
+      keywords: ""
+    };
   },
   methods: {
     SearchFunction() {
-      this.$router.push({ path: "./searchresult" });
-      // 未添加数据传递功能
+      this.$router.push({
+        name: "searchresult",
+        params: { keywords: this.keywords }
+      });
     }
   },
-  components: {}
+  components: {},
+  provide() {
+    return {
+      keywords: this.keywords
+    };
+  }
 };
 </script>
