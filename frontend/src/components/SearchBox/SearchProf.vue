@@ -8,6 +8,7 @@
 .profinfo {
   float: left;
   margin-top: 10px;
+  margin-bottom: 12px;
 }
 .searchproftitle {
   font-size: 20px;
@@ -17,6 +18,7 @@
   font-size: 13px;
   color: grey;
   margin-bottom: 10px;
+  width: 700px;
 }
 </style>
 <template>
@@ -26,12 +28,12 @@
     </div>
     <div class="profinfo">
       <div class="searchproftitle">
-        <a style="color:black">欧进萍</a>
+        <a @click="jump()">{{professor.name}}</a>
       </div>
-      <div class="searchprofcontent">哈尔滨工业大学土木工程学院</div>
-      <div style="color: black;font-size: 12px;">
+      <div class="searchprofcontent">{{professor.constitution}}</div>
+      <div style="color: black;font-size: 12px; margin-bottom=12px">
         研究领域:
-        <a style="color:black">结构工程</a>
+        <a style="color:black">{{professor.field}}</a>
       </div>
     </div>
     <div style="float:right;margin-top:20px">
@@ -41,5 +43,23 @@
   </Card>
 </template>
 <script>
-export default {};
+export default {
+  name: "searchProf",
+  props: ["professor"],
+  methods: {
+    jump: function() {
+      if (this.$route.params.userID) {
+        this.$router.push({
+          name: "Uprofview",
+          params: { userID: this.professor.userID }
+        });
+      } else {
+        this.$router.push({
+          name: "profview",
+          params: { userID: this.professor.userID }
+        });
+      }
+    }
+  }
+};
 </script>

@@ -75,6 +75,9 @@ export default [{
       {
         name: 'userspace',
         path: 'userspace',
+        redirect: {
+          name: 'infoAlterView'
+        },
         component: UserSpaceView,
         props: true,
         children: [{
@@ -167,6 +170,7 @@ export default [{
         ]
       },
       {
+        name: 'Usearchresult',
         path: 'searchresult',
         redirect: {
           name: 'Usearchpaper'

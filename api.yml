@@ -79,12 +79,10 @@ paths:
           type: string
         - name: author
           required: true
-          type: author
+          type: string
         - name: DOI
           required: true
-          type: array
-          items: 
-            type: string
+          type: string
         - name: abstract
           required: true
           type: string
@@ -434,20 +432,6 @@ paths:
                 format: text
               agency:
                 type: string
-
-  /interests:
-    get:
-      summary: get all interest tags from backend
-      description: get all interest tags from backend
-      responses:
-        200:
-          description: OK
-          schema:
-            properties:
-              tags:
-                type: array
-                items:
-                  type: string
   
   /userinfo/{userID}:
     get:

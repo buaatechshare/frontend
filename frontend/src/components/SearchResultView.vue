@@ -72,7 +72,7 @@
 </template>
 <script>
 export default {
-  methods: {
-  },
+  name: "SearchResultView",
+  methods: {}
 };
 </script>

@@ -1,7 +1,11 @@
 <template>
   <div id="index">
     <Menu mode="horizontal" theme="dark" active-name="1">
-      <MenuItem name="techshare" :to="{name: 'Upapers'}" style="width: 230px;text-align:center;font-size:22px">
+      <MenuItem
+        name="techshare"
+        :to="{name: 'Upapers'}"
+        style="width: 230px;text-align:center;font-size:22px"
+      >
         <sui-icon name="braille"></sui-icon>techshare
       </MenuItem>
       <MenuItem name="papers" :to="{name: 'Upapers'}">
@@ -11,10 +15,10 @@
         <sui-icon name="sticky note"></sui-icon>patent
       </MenuItem>
       <MenuItem name="userspace" style="float:right" :to="{name: 'userspace'}">
-        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size="large"></Avatar>
+        <sui-icon name="user circle outline" size="big"></sui-icon>
       </MenuItem>
-      <MenuItem style="width: 800px">
-        <Input search placeholder="Search..." @on-search="SearchFunction()"/>
+      <MenuItem style="width: 40%">
+        <Input search placeholder="Search..." @on-search="SearchFunction()" v-model="keywords"/>
       </MenuItem>
     </Menu>
     <router-view></router-view>
@@ -24,14 +28,22 @@
 export default {
   name: "userIndex",
   data() {
-    return {};
+    return {
+      keywords: ""
+    };
   },
   methods: {
     SearchFunction() {
-      this.$router.push({ path: "./searchresult" });
+      this.$router.push({
+        name: "Usearchpaper",
+        params: { keywords: this.keywords }
+      });
       // 未添加数据传递功能
     }
   },
-  components: {}
+  components: {},
+  provide: {
+    keywords: this.keywords
+  }
 };
 </script>
