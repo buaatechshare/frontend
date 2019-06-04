@@ -9,14 +9,14 @@
             <Input v-model="paperModel.author" placeholder="Enter something..."></Input>
         </FormItem>
         <FormItem label="DOI">
-            <Input v-model="paperModel.DOI" placeholder="Enter something..."></Input>
+            <Input v-model="paperModel.doi" placeholder="Enter something..."></Input>
         </FormItem>
         <FormItem label="出版机构">
             <Input v-model="paperModel.publisher" placeholder="Enter something..."></Input>
         </FormItem>
-        <FormItem label="关键词">
+        <!--FormItem label="关键词">
             <Input v-model="paperModel.keywords" placeholder="Enter something..."></Input>
-        </FormItem>
+        </FormItem-->
         <FormItem label="论文摘要">
             <Input v-model="paperModel.abstract" type="textarea" :autosize="{minRows: 4,maxRows: 8}" placeholder="Enter something..."></Input>
         </FormItem>
@@ -45,10 +45,10 @@ import axios from "axios";
         data () {
             return {
                 paperModel: {
+                    userID: this.$route.params.userID,
                     title:"",
                     author:"",
-                    DOI:"",
-                    keywords:[],
+                    doi:"",
                     abstract:"",
                     file:""
                 }
@@ -56,29 +56,23 @@ import axios from "axios";
         },
         methods: {
           getFile(event) {
-            this.file = event.target.files[0];
-            console.log(this.file);
+            this.paperModel.file = event.target.files[0];
+            console.log(this.paperModel.file);
           },
           submitForm(event, paperModel) {
             event.preventDefault();
             let formData = new FormData();
+            formData.append('userID', this.paperModel.userID);
             formData.append('title', this.paperModel.title);
-            formData.append('age', this.paperModel.age);
+            formData.append('author', this.paperModel.author);
+            formData.append('doi', this.paperModel.doi);
+            formData.append('abstract', this.paperModel.abstract);
             formData.append('file', this.paperModel.file);
-            console.log("yessssssss.");
-            console.log(paperModel);
-            console.log(formData);
+            //console.log(this.paperModel);
             axios
-            .post('myPaper/{}',{
-                params:{
-                    'userID':this.$route.params.userID
-                    }
-                },
-                formData)
-            .then(function (response) {
-              if (response.status === 200) {
-                console.log(response.data);
-              }
+            .post('/paperCheck/',formData, {headers:{'content-Type':'multipart/form-data'}})
+            .then(res=>{
+                console.log(res);
             })
             }
         }

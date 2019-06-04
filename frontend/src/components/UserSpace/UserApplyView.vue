@@ -2,16 +2,16 @@
   <div style="margin-top:30px">
     <Form :model="application" :label-width="80">
       <FormItem label="姓名">
-        <Input v-model="application.name"/>
+        <Input v-model="application.realName"/>
       </FormItem>
       <FormItem label="机构">
-        <Input v-model="application.institution"/>
+        <Input v-model="application.constitution"/>
       </FormItem>
       <FormItem label="申请内容">
-        <Input v-model="application.content" type="textarea" :rows="8"/>
+        <Input v-model="application.introduction" type="textarea" :rows="8"/>
       </FormItem>
       <FormItem>
-        <Button type="primary" @click="send">申请</Button>
+        <Button type="primary" @click="send()">申请</Button>
       </FormItem>
     </Form>
   </div>
@@ -24,28 +24,29 @@ export default {
   data() {
     return {
       application: {
-        content: "",
-        name: "",
-        institution: ""
+        introduction: "",
+        realName: "",
+        constitution: "",
+        userID: this.$route.params.userID
       }
     };
   },
-  beforeCreate() {
-    axios
-      .get("/userinfo/{}", {
-        params: {
-          userID: this.$route.params.userID
+  methods:{
+    send: function(){
+      axios
+      .post("/application/",this.application)
+      .then(res=>{
+        console.log(res);
+        if(res.status == 201)
+        {
+          this.$Message.info("申请表单提交成功！");
+          this.$route.go(0);
+        }
+        else{
+          this.$Message.info("表单提交失败");
         }
       })
-      .then(res => {
-        //console.log("yes");
-        //console.log(this.$route.params.userID);
-        this.application.name = res.data.username;
-        console.log(this.applyModel.name);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    }
   }
 };
 </script>

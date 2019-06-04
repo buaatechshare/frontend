@@ -20,10 +20,11 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/patents")
+      .get("/collections/"+this.$route.params.userID+"/",{params:{resType:"patent"}})
       .then(res => {
-        this.patents = res.data.patents;
-        console.log(this.patents);
+        console.log(res.data.results);
+        this.papers = res.data.results;
+        //console.log(this.papers);
       })
       .catch(err => {
         console.error(err);
