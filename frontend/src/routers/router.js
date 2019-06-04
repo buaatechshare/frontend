@@ -34,6 +34,9 @@ import AdminApplyListView from '../components/AdminSpace/ApplyList.vue';
 import AdminSourceListView from '../components/AdminSpace/SourceList.vue';
 import AdminApplyView from '../components/AdminSpace/ApplyView.vue';
 import AdminSourceView from '../components/AdminSpace/SourceView.vue';
+import Apply from '../components/AdminSpace/Apply.vue';
+import Source from '../components/AdminSpace/Source.vue';
+
 import TestView from '../components/UserSpace/TestView.vue';
 
 export default [{
@@ -66,13 +69,23 @@ export default [{
           {
             name: 'adminapplyview',
             path: 'adminapply',
-            component: AdminSourceView
+            component: AdminApplyView
           },
           {
             name: 'adminsourceview',
             path: 'adminsource',
             component: AdminSourceView
-          }
+          },
+          {
+            name: 'adminapply',
+            path: 'apply',
+            component: Apply
+          },
+          {
+            name: 'adminsource',
+            path: 'source',
+            component: Source
+          },
         ]
       },
       {

@@ -23,32 +23,5 @@
 import axios from "axios";
 export default {
   name: "userApplyView",
-  data() {
-    return {
-      applyModel: {
-        name: "",
-        email: "",
-        reason: ""
-      }
-    };
-  },
-  beforeCreate() {
-    axios
-      .get("/userinfo/{}", {
-        params: {
-          userID: this.$route.params.userID
-        }
-      })
-      .then(res => {
-        console.log("yes");
-        //console.log(this.$route.params.userID);
-        this.applyModel.name = res.data.username;
-        this.applyModel.email = res.data.email;
-        console.log(this.applyModel.name);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
 };
 </script>

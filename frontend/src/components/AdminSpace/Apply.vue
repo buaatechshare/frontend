@@ -19,16 +19,30 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpapertitle">
-        <a>name</a>
+        <a @click="jump(applyModel)">{{applyModel}}</a>
       </div>
-      <div class="searchpapercontent">email</div>
+      <div class="searchpapercontent">{{email}}</div>
       <div name="searchpaperauthor">
-        <p style="color:black;font-size:12px">reason</p>
+        <p style="color:black;font-size:12px">{{reason}}</p>
       </div>
       <Divider style="margin-bottom:0px"/>
     </Card>
   </Row>
 </template>
 <script>
-export default {};
+export default {
+  name: "searchapplyModel",
+  data() {
+    return {};
+  },
+  props: ["applyModel"],
+  methods: {
+    jump: function() {
+      this.$router.push({
+        name: "adminapply",
+        query: { resourceID: this.paper.id }
+      });
+    }
+  }
+};
 </script>
