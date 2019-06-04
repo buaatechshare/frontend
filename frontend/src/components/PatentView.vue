@@ -36,13 +36,13 @@
         <h2 style="color:#006ddb" is="sui-header">{{patentdetail.title}}</h2>
         <!--来源 收藏 阅读量-->
         <p style="color:grey;font-size:16px">
-          <Icon v-if="iscollect==false" type="ios-heart-outline" size="22" @click="collectpaper"/>
+          <Icon v-if="iscollect==false" type="ios-heart-outline" size="22" @click="collectpatent"/>
           <Icon
             v-if="iscollect==true"
             type="ios-heart"
             size="22"
             style="color:#c60000"
-            @click="collectpaper"
+            @click="collectpatent"
           />收藏
         </p>
         <!--专利信息-->
@@ -194,8 +194,9 @@ export default {
         comment: "",
         rate: 0,
         userID: this.$route.query.userID,
-        resourceID: "12333"
-      }
+        resourceID: this.resourceID
+      },
+      resourceID:this.$route.query.resourceID
     };
   },
   methods: {
@@ -204,7 +205,7 @@ export default {
         this.$Message.info("评论不能为空！");
         return;
       }
-      axios.post("/comment", this.commentModel).then(res => {
+      axios.post("/comment/", this.commentModel).then(res => {
         if (res.status == 200) {
           this.$Message.info("评论成功！");
           this.open = !this.open;
@@ -216,10 +217,10 @@ export default {
     toggle() {
       this.open = !this.open;
     },
-    collectpaper() {
+    collectpatent() {
       this.iscollect = !this.iscollect;
       if (this.iscollect) {
-        axios.post("/collections/{}", {
+        axios.post("/collections/", {
           params: {
             userID: this.$route.params.userID
           },
@@ -229,7 +230,7 @@ export default {
           }
         });
       } else {
-        axios.delete("/collections/{}", {
+        axios.delete("/collections/", {
           params: {
             userID: this.$route.params.userID
           },
@@ -245,8 +246,8 @@ export default {
   created() {
     axios
       .all([
-        axios.get("/patentDetail/{}", { params: { resourceID: 111 } }),
-        axios.get("/comment", { params: { resourceID: 111 } })
+        axios.get("/patentDetail/", { params: { resourceID: this.resourceID } }),
+        axios.get("/comment/", { params: { resourceID: this.resourceID } })
       ])
       .then(
         axios.spread((PD, CO) => {

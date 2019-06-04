@@ -204,22 +204,26 @@ export default {
       references: [],
       url: [],
       comments: [],
+      resourceID: this.$route.query.resourceID,
       commentModel: {
-        comment: "",
+        content: "",
         rate: 0,
-        userID: this.$route.params.userID,
-        resourceID: "12333"
-      }
+        userID: parseInt(this.$route.params.userID),
+        resourceID: this.$route.query.resourceID
+      },
+      
     };
   },
   methods: {
     submit() {
-      if (this.commentModel.rate == 0 && this.commentModel.comment == "") {
+      if (this.commentModel.rate == 0 && this.commentModel.content == "") {
         this.$Message.info("评论不能为空！");
         return;
       }
-      axios.post("/comment", this.commentModel).then(res => {
-        if (res.status == 200) {
+
+      console.log(this.commentModel);
+      axios.post("/comment/", { params: this.commentModel }).then(res => {
+        if (res.status == 201) {
           this.$Message.info("评论成功！");
           this.open = !this.open;
         } else {
@@ -233,23 +237,23 @@ export default {
     collectpaper() {
       this.iscollect = !this.iscollect;
       if (this.iscollect) {
-        axios.post("/collections/{}", {
+        axios.post("/collections/", {
           params: {
             userID: this.$route.params.userID
           },
           data: {
             userID: this.$route.params.userID,
-            resourceID: "12333"
+            resourceID: this.resourceID
           }
         });
       } else {
-        axios.delete("/collections/{}", {
+        axios.delete("/collections/", {
           params: {
             userID: this.$route.params.userID
           },
           data: {
             userID: this.$route.params.userID,
-            resourceID: "12333"
+            resourceID: this.resourceID
           }
         });
       }
@@ -259,11 +263,12 @@ export default {
   created() {
     axios
       .all([
-        axios.get("/paperDetail/", {
-          params: { paperID: this.$route.params.resourceID }
-        }),
+        axios.get("/paperDetail/" + this.$route.query.resourceID + "/"),
+        // , {
+        //   params: { paperID: this.$route.params.resourceID }
+        // }),
         axios.get("/comment/", {
-          params: { paperID: this.$route.params.resourceID }
+          params: { resourceID: this.$route.query.resourceID }
         })
       ])
       .then(

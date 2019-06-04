@@ -43,12 +43,12 @@ export default {
       if (this.$route.params.userID) {
         this.$router.push({
           name: "Upaperview",
-          params: { resourceID: this.paper.id }
+          query: { resourceID: this.paper.id }
         });
       } else {
         this.$router.push({
           name: "paperview",
-          params: { resourceID: this.paper.id }
+          query: { resourceID: this.paper.id }
         });
       }
     }

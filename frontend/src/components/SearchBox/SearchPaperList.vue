@@ -7,7 +7,7 @@
 </style>
 <template>
   <div>
-    <!-- <div class="searchnum">找到63条相关结果</div> -->
+    <div class="searchnum">找到63条相关结果</div>
     <searchpaper v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"></searchpaper>
     <div style="text-align:center">
       <Page
@@ -67,7 +67,8 @@ export default {
       .get("/search/papers/", {
         params: {
           keywords: this.keywords,
-          byTime: false
+          byTime: false,
+          page:this.pageNum
         }
       })
       .then(res => {
