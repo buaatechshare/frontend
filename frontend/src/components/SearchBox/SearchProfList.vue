@@ -8,7 +8,11 @@
 <template>
   <div>
     <div v-for="resultcount in resultcounts" class="searchnum">找到{{resultcount}}条相关结果</div>
-    <searchprof v-for="(professor, index) in professors" v-bind:professor="professor" :key="index"></searchprof>
+    <searchprof
+      v-for="(professor, index) in this.professors"
+      v-bind:professor="professor"
+      :key="index"
+    ></searchprof>
     <!--未和后端数据对接版本-->
     <div style="text-align:center">
       <Page
@@ -56,6 +60,7 @@ export default {
         })
         .then(res => {
           this.professors = res.data.results;
+          this.pageTotal = res.data.count;
           console.log(res);
         })
         .catch(err => {
@@ -75,7 +80,7 @@ export default {
         })
         .then(res => {
           Vue.set(this.resultcounts, 0, res.data.count);
-          this.professors = res.data.professor;
+          this.professors = res.data.results;
           this.pageTotal = res.data.count;
           console.log(res);
         })
@@ -97,7 +102,7 @@ export default {
       .then(res => {
         Vue.set(this.resultcounts, 0, res.data.count);
         console.log(res);
-        this.professors = res.data.professor;
+        this.professors = res.data.results;
         this.pageTotal = res.data.count;
       })
       .catch(err => {
