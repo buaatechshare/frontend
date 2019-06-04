@@ -32,8 +32,8 @@
       </div>
       <div class="searchprofcontent">{{professor.constitution}}</div>
       <div style="color: black;font-size: 12px; margin-bottom=12px">
-        研究领域:
-        <a style="color:black">{{professor.field}}</a>
+        论文:
+        <a style="color:black" v-for="(paper, index) in professor.papers" :key="index">{{paper}}</a>
       </div>
     </div>
     <div style="float:right;margin-top:20px">
