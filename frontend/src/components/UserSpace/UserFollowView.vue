@@ -20,14 +20,10 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/follow/{}",{
-        params:{
-          'userID':this.$route.params.userID
-        }
-      })
+      .get("/follow/"+this.$route.params.userID+"/")
       .then(res => {
-        this.follows = res.data.follows;
-        console.log(this.follows);
+        this.follows = res.data.results;
+        console.log(res.data.results);
       })
       .catch(err => {
         console.error(err);

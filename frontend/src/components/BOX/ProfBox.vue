@@ -26,16 +26,16 @@
     </div>
     <div class="profinfo">
       <div class="searchproftitle">
-        <a style="color:black"> {{prof.name}} </a>
+        <a style="color:black"> {{prof.followID.realName}} </a>
       </div>
-      <div class="searchprofcontent">{{prof.constitution}}</div>
+      <div class="searchprofcontent">{{prof.followID.constitution}}</div>
       <div style="color: black;font-size: 12px;">
-        研究领域:
-        <a style="color:black"> {{prof.field}} </a>
+        简介:
+        <a style="color:black"> {{prof.followID.introduction}} </a>
       </div>
     </div>
     <div style="float:right;margin-top:20px">
-      <sui-button basic content="关注" icon="bell outline"/>
+      <sui-button basic content="已关注" icon="bell outline"/>
     </div>
     <Divider style="margin-bottom:0px"/>
   </Card>
