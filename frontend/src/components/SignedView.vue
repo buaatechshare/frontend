@@ -48,6 +48,7 @@
         :color="myColors"
         :showTooltip="false"
         :wordClick="wordClickHandler"
+        :fontSize="[40,50]"
         :rotate="{from:0, to:0, numOfOrientation:1}"
       ></wordcloud>
     </div>
@@ -114,7 +115,7 @@ export default {
             i++
           ) {
             this.interestTags.push({
-              value: Math.round(Math.random() * 3),
+              value: Math.floor(Math.random() * 3),
               name: this.defaultWords[i].field
             });
           }
