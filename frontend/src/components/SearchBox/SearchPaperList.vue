@@ -7,7 +7,7 @@
 </style>
 <template>
   <div>
-    <!-- <div class="searchnum">找到63条相关结果</div> -->
+    <div class="searchnum">找到{{this.count}}条相关结果</div>
     <searchpaper v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"></searchpaper>
     <div style="text-align:center">
       <Page
@@ -33,7 +33,8 @@ export default {
       papers: [],
       pageTotal: 100,
       pageNum: 1,
-      pageSize: 0
+      pageSize: 0,
+      count: 0
     };
   },
   methods: {
@@ -48,11 +49,13 @@ export default {
         .get("/search/papers/", {
           params: {
             keywords: this.keywords,
-            byTime: false
+            byTime: false,
+            page: this.pageNum
           }
         })
         .then(res => {
           this.papers = res.data.results;
+          this.count = res.data.count;
           console.log(res);
         })
         .catch(err => {
@@ -71,6 +74,7 @@ export default {
       })
       .then(res => {
         this.papers = res.data.results;
+        this.count = res.data.count;
       })
       .catch(err => {
         console.error(err);
