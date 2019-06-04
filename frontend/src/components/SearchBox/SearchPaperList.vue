@@ -53,6 +53,7 @@ export default {
         })
         .then(res => {
           this.papers = res.data.results;
+          console.log(res);
         })
         .catch(err => {
           console.error(err);

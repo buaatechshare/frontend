@@ -19,13 +19,13 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpatenttitle">
-        <a @click="jump(patent)">{{patent._source.Patent.TI}}</a>
+        <a @click="jump(patent)">{{patent._source.TI}}</a>
       </div>
-      <div class="searchpatentcontent">{{patent._source.Patent.AB}}</div>
+      <div class="searchpatentcontent">{{patent._source.AB}}</div>
       <div name="searchpatentauthor">
         <div style="color: black;font-size: 12px;">
           所有人:
-          <a style="color:black">{{patent._source.Patent.FI}}</a>
+          <a style="color:black">{{patent._source.FI}}</a>
         </div>
       </div>
       <Divider style="margin-bottom:0px"/>
@@ -46,7 +46,7 @@ export default {
       } else {
         this.$router.push({
           name: "patentview",
-          query: { resourceID: patent.resourceID }
+          query: { resourceID: patent._id }
         });
       }
     }

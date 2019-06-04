@@ -24,7 +24,7 @@
       <div class="searchpapercontent">{{paper.abstract}}</div>
       <div name="searchpaperauthor">
         <p style="color:black;font-size:12px">
-          <a style="color:black">{{paper.author}}</a>
+          <a style="color:black" v-for="(author, index) in paper.author">{{author.name+" "}}</a>
         </p>
       </div>
       <Divider style="margin-bottom:0px"/>
