@@ -29,7 +29,7 @@ export default {
     };
   },
   created() {
-    this.keywords = this.$route.params.keywords;
+    this.keywords = this.$route.query.keywords;
     axios
       .get("/search/professors", {
         params: {

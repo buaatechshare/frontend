@@ -193,7 +193,7 @@ export default {
       commentModel: {
         comment: "",
         rate: 0,
-        userID: this.$route.params.userID,
+        userID: this.$route.query.userID,
         resourceID: "12333"
       }
     };

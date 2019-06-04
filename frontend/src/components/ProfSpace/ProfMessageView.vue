@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import MessageBox from "../BOX/MessageBox";
+import MessageBox from "../ProfSpace/ProfMessageBox.vue";
 import axios from "axios";
 export default {
   name: "MessageBoxList",
@@ -26,8 +26,7 @@ export default {
     axios
       .get("/messages/")
       .then(res => {
-        console.log(res);
-        this.messages = res.data.results;
+        this.messages = res.data.messages;
         console.log(this.messages);
       })
       .catch(err => {

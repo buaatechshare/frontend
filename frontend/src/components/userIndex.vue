@@ -35,15 +35,10 @@ export default {
   methods: {
     SearchFunction() {
       this.$router.push({
-        name: "Usearchpaper",
-        params: { keywords: this.keywords }
+        name: "Usearchresult",
+        query: { keywords: this.keywords }
       });
-      // 未添加数据传递功能
     }
-  },
-  components: {},
-  provide: {
-    keywords: this.keywords
   }
 };
 </script>

@@ -35,15 +35,10 @@ export default {
     SearchFunction() {
       this.$router.push({
         name: "searchresult",
-        params: { keywords: this.keywords }
+        query: { keywords: this.keywords }
       });
     }
   },
-  components: {},
-  provide() {
-    return {
-      keywords: this.keywords
-    };
-  }
+  components: {}
 };
 </script>

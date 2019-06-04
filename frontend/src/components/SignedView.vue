@@ -72,7 +72,7 @@ export default {
     },
     sendinterests() {
       axios//mock上接口有问题
-        .post("/interests", {
+        .post("/interests/", {
           data: {
             userID: this.$route.params.userID,
             field: this.themelist
@@ -89,7 +89,7 @@ export default {
     foundTag() {
       console.log(this.receiverTag);
       axios
-        .get("/interests",{
+        .get("/interests/",{
           params:{
             keywords:this.receiverTag
           }
