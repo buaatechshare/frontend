@@ -193,10 +193,9 @@ export default {
       commentModel: {
         comment: "",
         rate: 0,
-        userID: this.$route.params.userID,
-        resourceID: this.resourceID,
-      },
-      resourceID: this.$route.query.resourceID
+        userID: this.$route.query.userID,
+        resourceID: "12333"
+      }
     };
   },
   methods: {

@@ -10,7 +10,7 @@
           :remote-method="searchUser"
           :loading="loading"
         >
-          <Option v-for="(user, index) in users" :value="user.name" :key="index">{{user.name}}</Option>
+          <Option v-for="(user, index) in users" :value="user[0]" :key="index">{{user[0]}}</Option>
         </Select>
       </FormItem>
       <FormItem>
@@ -51,17 +51,14 @@ export default {
     //console.log(this.message);
     //console.log(this.$route.params.receiverName);
     //console.log(this.message.receiverName);
-    this.message.receiverName = this.$route.params.receiverName;
-    
+    if(this.$route.params.receiverName && this.$route.params.receiverID){
+      this.message.receiverName = this.$route.params.receiverName;
+      this.message.receiverID = this.$route.params.receiverID;
+    }
   },
   methods: {
     send() {
-      for (var user in this.users) {
-        if (user.name == this.message.receiverName) {
-          this.message.receiverID = user.userID;
-          break;
-        }
-      }
+      this.message.receiverID = this.users[0][1];
       console.log(this.message);
       axios
         .post("/messages/", this.message)
@@ -69,7 +66,7 @@ export default {
           console.log(res);
           if(res.status == 201)
           {
-            this.$Message.info("message sent successfully.");
+            this.$Message.info("发送成功！");
             this.$router.go(0);
           }
           else{
@@ -85,14 +82,13 @@ export default {
       this.$router.go(0);
     },
     searchUser(query) {
-      console.log(this.message.receiverName);
       if (query != "") {
         this.loading = true;
         axios
-          .get("/search/users/", this.message.receiverName)
+          .get("/receiver/"+query+"/")
           .then(res => {
-            console.log(res);
             this.users = res.data.user;
+            console.log(this.users);
           })
           .catch(err => {
             console.error(err);
@@ -103,6 +99,7 @@ export default {
         this.loading = false;
       } else {
         this.users = [];
+        //console.log(this.users);
       }
     }
   }

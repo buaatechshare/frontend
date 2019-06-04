@@ -19,12 +19,12 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpapertitle">
-        <a @click="jump(patent)">{{patent.patentName}}</a>
+        <a>{{paper.paperName}}</a>
       </div>
-      <div class="searchpapercontent">{{patent.summary}}</div>
+      <div class="searchpapercontent">{{paper.abstract}}</div>
       <div name="searchpaperauthor">
         <p style="color:black;font-size:12px">
-          <a style="color:black">{{patent.rightHolder}}</a>
+          <a style="color:black">{{paper.author}}</a>
         </p>
       </div>
       <!--div style="margin-top:5px;margin-bottom:5px">
@@ -32,31 +32,37 @@
         <sui-button icon="linkify" size="mini" style="margin-right:5px" circular>引用</sui-button>
         <sui-button icon="share" size="mini" style="margin-right:5px" circular>分享</sui-button>
       </div-->
+      <div style="margin-top:5px;margin-bottom:5px">
+        <sui-button size="mini" style="margin-right:5px" @click="handleRender(paper)" circular>删除</sui-button>
+      </div>
       <Divider style="margin-bottom:0px"/>
     </Card>
   </Row>
 </template>
 <script>
-import UserCollectionPaperViewVue from './UserCollectionPaperView.vue';
+import axios from "axios";
 export default {
-  name: "CollectionPatentBox",
+  name: "myPaperBox",
   data() {
     return {};
   },
-  methods:{
-    jump: function(patent){
-      if(this.$route.params.userID){
-        //console.log("yes");
-        //console.log(paper.resourceID);
-        this.$router.push({name:'Upatentview',params:{resourceID:patent.resourceID}});
-      }
-      else{
-        //console.log("yes");
-        //console.log(paper.resourceID);
-        this.$router.push({name:'patentview',params:{resourceID:patent.resourceID}});
-      }
+  methods: {
+    handleRender: function(paper) {
+        axios
+        .delete('myPaper/{}',{
+                params:{
+                    'userID':this.$route.params.userID
+                    }
+                },
+                this.paper.resourceID)
+                .then(res=> {
+                    if(res.status == 200){
+                        console.log("deleted successfully.");
+                        this.$route.go(0);
+                    }
+                })
     }
   },
-  props: ["patent"]
+  props: ["paper"]
 };
 </script>
