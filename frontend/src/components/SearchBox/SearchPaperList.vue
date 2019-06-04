@@ -48,7 +48,8 @@ export default {
         .get("/search/papers/", {
           params: {
             keywords: this.keywords,
-            byTime: false
+            byTime: false,
+            page:this.pageNum
           }
         })
         .then(res => {

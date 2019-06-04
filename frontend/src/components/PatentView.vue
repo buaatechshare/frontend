@@ -194,8 +194,9 @@ export default {
         comment: "",
         rate: 0,
         userID: this.$route.params.userID,
-        resourceID: "12333"
-      }
+        resourceID: this.resourceID,
+      },
+      resourceID: this.$route.query.resourceID
     };
   },
   methods: {
@@ -225,7 +226,7 @@ export default {
           },
           data: {
             userID: this.$route.params.userID,
-            resourceID: "12333"
+            resourceID: this.resourceID
           }
         });
       } else {
@@ -235,7 +236,7 @@ export default {
           },
           data: {
             userID: this.$route.params.userID,
-            resourceID: "12333"
+            resourceID: this.resourceID
           }
         });
       }
