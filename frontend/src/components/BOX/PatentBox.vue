@@ -1,19 +1,27 @@
+<style>
+.summary {
+  font-size: 13px;
+  margin-bottom: 3px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 10;
+  word-break: break-all;
+}
+</style>
 <template>
   <sui-card class="raised">
     <sui-card-content>
       <sui-icon name="male"></sui-icon>
       {{patent.rightholder}}
     </sui-card-content>
-    <sui-card-content>
+    <sui-card-content style="height:200px">
       <sui-card-header>
         <a @click="jump(patent)">{{patent.patentName}}</a>
       </sui-card-header>
       <br>
-      <div class="event">
-        <div class="content">
-          <div class="summary">{{patent.summary}}</div>
-        </div>
-      </div>
+      <div class="summary">{{patent.summary}}</div>
     </sui-card-content>
     <sui-card-content extra>
       <span slot="right">
@@ -32,12 +40,12 @@ export default {
       if (this.$route.params.userID) {
         this.$router.push({
           name: "Upatentview",
-          params: { resourceID: patent.resourceID }
+          query: { resourceID: patent.resourceID }
         });
       } else {
         this.$router.push({
           name: "patentview",
-          params: { resourceID: patent.resourceID }
+          query: { resourceID: patent.resourceID }
         });
       }
     }

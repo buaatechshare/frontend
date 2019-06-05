@@ -35,13 +35,25 @@ export default {
       sendsourcemodel: {
         id: "",
         isCheck: true,
-        isPass: true
+        isPass: true,
+        userID:0,
+        title:"",
+        author:"",
+        doi:"",
+        abstract:"",
       }
     };
   },
   methods: {
     sourcepass() {
+      
       this.sendsourcemodel.id=this.Model.id;
+      this.sendsourcemodel.userID=this.Model.userID;
+      this.sendsourcemodel.title=this.Model.title;
+      this.sendsourcemodel.author=this.Model.author;
+      this.sendsourcemodel.doi=this.Model.doi;
+      this.sendsourcemodel.abstract=this.Model.abstract;
+      console.log(this.sendsourcemodel);
       axios
         .patch("/paperCheck/"+ this.Model.id + "/", this.sendsourcemodel
         )
@@ -62,6 +74,7 @@ export default {
         .patch("/paperCheck/" + this.Model.id + "/", this.sendsourcemodel)
         .then(res => {
           console.log(res);
+          this.$Message.info("审核提交成功");
           if(res.status == 200){
             this.$Message.info("审核提交成功");
           };

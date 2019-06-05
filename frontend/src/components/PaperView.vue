@@ -29,7 +29,7 @@
           <div
             style="float:left"
             v-if="paperdetail.venue !== undefined"
-          >{{paperdetail.venue}}-{{paperdetail.volume}}</div>
+          >{{paperdetail.venue.raw}}-{{paperdetail.volume}}</div>
           <Divider type="vertical"/>
           <Icon v-if="iscollect==false" type="ios-heart-outline" size="22" @click="collectpaper"/>
           <Icon
@@ -45,7 +45,6 @@
         <div>
           <p class="paperlabel">作者：</p>
           <p style="color:grey;font-size:14px;float:left">
-            <!-- authors->author->author.name -->
             <span v-for="author in authors" style="margin-right:5px">
               <a>{{author.name}}</a>
               <Divider type="vertical"/>
@@ -57,6 +56,7 @@
         <!--摘要-->
         <div>
           <p class="paperlabel">摘要：</p>
+          
           <p class="papercontent">{{paperdetail.abstract}}</p>
           <br>
           <!--为了上下间距美观加入换行-->
@@ -126,7 +126,7 @@
         <div style="width:865px">
           <Card dis-hover>
             <p slot="title" style="font-size:17px">全文下载</p>
-            <p v-for="download in url">{{download}}</p>
+            <a v-for="download in url">{{download}}</a>
           </Card>
         </div>
 

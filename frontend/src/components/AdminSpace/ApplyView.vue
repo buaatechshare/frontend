@@ -29,13 +29,23 @@ export default {
       sendapplymodel: {
         formID: "",
         isCheck: true,
-        isPass: true
+        isPass: true,
+        expertID:0,
+        userID:0,
+        introduction:"",
+        constitution:"",
+        realName:""
       }
     };
   },
   methods: {
     applypass() {
       this.sendapplymodel.formID=this.Model.formID;
+      this.sendapplymodel.expertID=this.Model.expertID;
+      this.sendapplymodel.userID=this.Model.userID;
+      this.sendapplymodel.introduction=this.Model.introduction;
+      this.sendapplymodel.constitution=this.Model.constitution;
+      this.sendapplymodel.realName=this.Model.realName;
       axios
         .patch("/application/" + this.Model.formID + "/", this.sendapplymodel)
         .then(res => {

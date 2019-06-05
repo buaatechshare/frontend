@@ -35,8 +35,8 @@ export default {
       patents: [],
       professors: [],
       pageTotal: 100,
+      pageSize:10,
       pageNum: 1,
-      pageSize: 0,
       userID: 0
     };
   },

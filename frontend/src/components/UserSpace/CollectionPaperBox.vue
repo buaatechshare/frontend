@@ -27,11 +27,6 @@
           <a v-for="(author, index) in paper.author" :key="index" style="color:black">{{author.name+' '}}</a>
         </p>
       </div>
-      <!--div style="margin-top:5px;margin-bottom:5px">
-        <sui-button icon="star outline" size="mini" style="margin-right:5px" circular>收藏</sui-button>
-        <sui-button icon="linkify" size="mini" style="margin-right:5px" circular>引用</sui-button>
-        <sui-button icon="share" size="mini" style="margin-right:5px" circular>分享</sui-button>
-      </div-->
       <Divider style="margin-bottom:0px"/>
     </Card>
   </Row>

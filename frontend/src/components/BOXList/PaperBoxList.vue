@@ -48,7 +48,7 @@ export default {
       papers: [],
       pageTotal: 100,
       pageNum: 1,
-      pageSize: 0
+      pageSize: 10
     };
   },
   beforeCreate() {
@@ -57,6 +57,7 @@ export default {
       .then(res => {
         console.log(res);
         this.papers = res.data.results;
+        this.pageTotal = res.data.count;
       })
       .catch(err => {
         console.error(err);

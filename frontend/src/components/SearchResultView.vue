@@ -37,39 +37,13 @@
               append
             >专家</MenuItem>
           </Submenu>
+          
           <Submenu name="2">
-            <template slot="title">
-              <Icon type="ios-clock-outline" size="20"/>时间
-            </template>
-            <MenuItem name="2-1">2019以来</MenuItem>
-            <MenuItem name="2-2">2018以来</MenuItem>
-            <MenuItem name="2-3">2017以来</MenuItem>
-            <MenuItem name="2-4">
-              <!-- 日期选择器 -->
-              <DatePicker
-                type="year"
-                size="small"
-                placeholder="Select year"
-                style="width: 70px"
-                placement="top"
-              />-
-              <p></p>
-              <DatePicker
-                type="year"
-                size="small"
-                placeholder="Select year"
-                style="width: 70px"
-                placement="top"
-              />
-              <Button size="small" shape="circle" icon="ios-search"></Button>
-            </MenuItem>
-          </Submenu>
-          <Submenu name="3">
             <template slot="title">
               <Icon type="ios-list" size="20"/>排序方式
             </template>
-            <MenuItem name="3-1">相关性排序</MenuItem>
-            <MenuItem name="3-2">时间排序</MenuItem>
+            <MenuItem name="2-1">相关性排序</MenuItem>
+            <MenuItem name="2-2">时间排序</MenuItem>
           </Submenu>
         </Menu>
       </Sider>

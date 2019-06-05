@@ -98,6 +98,7 @@ export default {
         });
       this.themelist = [];
       this.taglist = [];
+      this.$router.push({name: "Upapers"});
     },
     foundTag() {
       axios

@@ -1,20 +1,29 @@
+<style>
+.summary {
+  font-size: 13px;
+  margin-bottom: 3px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 10;
+  word-break: break-all;
+}
+</style>
 <template>
   <sui-card @click="jump(paper)">
     <sui-card-content>
       <sui-icon name="male"></sui-icon>
-      {{paper.author}}
-      <sui-card-meta slot="right">
-        <sui-icon name="bell outline"></sui-icon>
-      </sui-card-meta>
+      <a v-for="(author, index) in paper.author" :key="index" style="color:black">
+        {{author.name+' '}}
+        <Divider type="vertical"/>
+      </a>
+      
     </sui-card-content>
-    <sui-card-content>
+    <sui-card-content style="height:300px">
       <sui-card-header>{{paper.paperName}}</sui-card-header>
       <br>
-      <div class="event">
-        <div class="content">
-          <div class="summary">{{paper.abstract}}</div>
-        </div>
-      </div>
+      <div class="summary">{{paper.abstract}}</div>
     </sui-card-content>
     <sui-card-content extra>
       <span slot="right">
@@ -33,20 +42,15 @@ export default {
   },
   methods: {
     jump: function() {
-      //this.$Message.info("Yes!!!!");
       if (this.$route.params.userID) {
-        //console.log("yes");
-        //console.log(paper.resourceID);
         this.$router.push({
           name: "Upaperview",
-          params: { resourceID: this.paper.resourceID }
+          query: { resourceID: this.paper.id }
         });
       } else {
-        //console.log("yes");
-        //console.log(paper.resourceID);
         this.$router.push({
           name: "paperview",
-          params: { resourceID: this.paper.resourceID }
+          query: { resourceID: this.paper.id }
         });
       }
     }
