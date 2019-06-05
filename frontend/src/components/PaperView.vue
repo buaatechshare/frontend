@@ -47,7 +47,8 @@
           <p style="color:grey;font-size:14px;float:left">
             <!-- authors->author->author.name -->
             <span v-for="author in authors" style="margin-right:5px">
-              <a>{{author.name}}</a><Divider type="vertical" />
+              <a>{{author.name}}</a>
+              <Divider type="vertical"/>
             </span>
           </p>
         </div>
@@ -67,7 +68,8 @@
           <p class="paperlabel">关键词：</p>
           <p class="papercontent">
             <span v-for="keyword in keywords" style="margin-right:5px">
-              <a>{{keyword}}</a><Divider type="vertical" />
+              <a>{{keyword}}</a>
+              <Divider type="vertical"/>
             </span>
           </p>
         </div>
@@ -76,7 +78,10 @@
         <div>
           <p class="paperlabel">学习领域：</p>
           <p class="papercontent">
-            <span v-for="field in fos" style="margin-right:10px">{{field}}<Divider type="vertical" /></span>
+            <span v-for="field in fos" style="margin-right:10px">
+              {{field}}
+              <Divider type="vertical"/>
+            </span>
           </p>
         </div>
         <div style="clear:both"></div>
@@ -199,30 +204,29 @@ export default {
       open: false,
       iscollect: false,
       paperdetail: [],
-      authors:[],
+      authors: [],
       keywords: [],
       fos: [],
       references: [],
       url: [],
       comments: [],
       resourceID: this.$route.query.resourceID,
-      starRate:0,
+      starRate: 0,
       commentModel: {
         content: "",
         rate: "",
         userID: this.$route.params.userID,
         resourceID: this.$route.query.resourceID
-      },
-      
+      }
     };
   },
   methods: {
     submit() {
-       if (this.commentModel.rate == 0 && this.commentModel.content == "") {
+      if (this.commentModel.rate == 0 && this.commentModel.content == "") {
         this.$Message.info("评论不能为空！");
         return;
       }
-      this.commentModel.rate=this.starRate.toString();
+      this.commentModel.rate = this.starRate.toString();
       console.log(this.commentModel);
       axios.post("/comment/", this.commentModel).then(res => {
         if (res.status == 201) {
@@ -237,6 +241,10 @@ export default {
       this.open = !this.open;
     },
     collectpaper() {
+      if (this.$route.params.userID == null) {
+        this.$Message.info("请先登录");
+        return;
+      }
       this.iscollect = !this.iscollect;
       if (this.iscollect) {
         axios.post("/collections/", {
@@ -275,7 +283,7 @@ export default {
           this.paperdetail = PD.data;
           console.log(PD.data);
           console.log(CO);
-          this.authors=this.paperdetail.authors;
+          this.authors = this.paperdetail.authors;
           this.keywords = this.paperdetail.keywords;
           this.fos = this.paperdetail.fos;
           this.references = this.paperdetail.references;

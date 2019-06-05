@@ -37,7 +37,8 @@
       </div>
     </div>
     <div style="float:right;margin-top:20px">
-      <sui-button basic content="关注" icon="bell outline"/>
+      <sui-button basic content="关注" icon="bell outline" v-if="isFollow=false" @click="follow"/>
+      <sui-button basic content="关注" icon="bell" v-if="isFollow=true" @click="follow"/>
     </div>
     <Divider style="margin-bottom:0px"/>
   </Card>
@@ -46,6 +47,11 @@
 export default {
   name: "searchProf",
   props: ["professor"],
+  data() {
+    return {
+      isFollow: false
+    };
+  },
   methods: {
     jump: function() {
       if (this.$route.params.userID) {
@@ -58,6 +64,34 @@ export default {
           name: "profview",
           params: { userID: this.professor.userID }
         });
+      }
+    },
+    follow: function() {
+      if (this.$route.params.userID == null) {
+        this.$Message.info("请先登录");
+        return;
+      }
+      this.isFollow = !this.isFollow;
+      if (this.isFollow) {
+        axios.post("/follow/", {
+          params: {
+            userID: this.$route.params.userID,
+            followID: this.professor.userID
+          }
+        });
+      } else {
+        axios
+          .delete("/follow/" + this.$route.params.userID + "/", {
+            params: {
+              followID: this.professor.userID
+            }
+          })
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.error(err);
+          });
       }
     }
   }
