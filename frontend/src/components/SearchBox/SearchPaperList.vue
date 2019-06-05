@@ -56,6 +56,7 @@ export default {
         })
         .then(res => {
           this.papers = res.data.results;
+          this.count = res.data.count;
           console.log(res);
         })
         .catch(err => {
