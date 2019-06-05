@@ -11,9 +11,9 @@
         <FormItem label="DOI">
             <Input v-model="paperModel.doi" placeholder="Enter something..."></Input>
         </FormItem>
-        <FormItem label="出版机构">
+        <!--FormItem label="出版机构">
             <Input v-model="paperModel.publisher" placeholder="Enter something..."></Input>
-        </FormItem>
+        </FormItem-->
         <!--FormItem label="关键词">
             <Input v-model="paperModel.keywords" placeholder="Enter something..."></Input>
         </FormItem-->
@@ -73,6 +73,15 @@ import axios from "axios";
             .post('/paperCheck/',formData, {headers:{'content-Type':'multipart/form-data'}})
             .then(res=>{
                 console.log(res);
+                if (res.status == 201)
+                {
+                    this.paperModel.title = "";
+                    this.paperModel.author = "";
+                    this.paperModel.doi = "";
+                    this.paperModel.abstract = "";
+                    this.paperModel.file = "";
+                    this.$Message.info("上传成功，请耐心等待管理员审核。");
+                }
             })
             }
         }

@@ -76,22 +76,25 @@ export default {
         if (valid) {
           this.loginModel.username = this.loginRule.username;
           this.loginModel.password = this.loginRule.password;
-          if (this.loginRule.isadmin == "admin") this.loginModel.isAdmin = true;
-          console.log(this.loginRule);
-          console.log("this is what you did");
-          console.log(this.loginModel);
+          if (this.loginRule.isAdmin == "admin") this.loginModel.isAdmin = true;
           axios
             .post("/login/", this.loginModel)
             .then(res => {
               console.log(res);
               if (res.status == 200) {
                 this.$Message.info("登录成功！");
-                this.$router.push({
-                  name: "user",
-                  params:{
-                    userID: res.data.userID,
-                  }
-                });
+                if (this.loginRule.isAdmin == "user") {
+                  this.$router.push({
+                    name: "user",
+                    params: { userID: res.data.userID }
+                  });
+                }
+                else{
+                  this.$router.push({
+                    name: "adminapplylistview",
+                    params: { userID: res.data.userID }
+                  });
+                }
               } else {
                 this.$Message.info("登录账号或者密码错误！");
               }

@@ -1,20 +1,20 @@
 <template>
   <div class="ui container horizontal">
     <div class="ui horizontal divider"></div>
-    <Input v-model="applyModel.name" style="width: 400px" readonly>
+    <Input v-model="Model.realName" style="width: 400px" readonly>
       <span slot="prepend">Name:</span>
     </Input>
     <br>
-    <Input v-model="applyModel.email" style="width: 400px" readonly>
+    <Input v-model="Model.constitution" style="width: 400px" readonly>
       >
-      <span slot="prepend">Email:</span>
+      <span slot="prepend">Constitution:</span>
     </Input>
     <br>
     <p>申请理由</p>
-    <Input v-model="applyModel.reason" type="textarea" :rows="4" readonly/>
+    <Input v-model="Model.introduction" type="textarea" :rows="4" readonly/>
     <p></p>
-    <Button type="primary">通过</Button>
-    <Button style="margin-left: 8px">拒绝</Button>
+    <Button type="primary" @click="applypass">通过</Button>
+    <Button style="margin-left: 8px" @click="applyrefuse">拒绝</Button>
     <div class="ui horizontal divider"></div>
   </div>
 </template>
@@ -25,30 +25,44 @@ export default {
   name: "userApplyView",
   data() {
     return {
-      applyModel: {
-        name: "",
-        email: "",
-        reason: ""
+      Model: this.$route.query.apply,
+      sendapplymodel: {
+        formID: "",
+        isCheck: true,
+        isPass: true
       }
     };
   },
-  beforeCreate() {
-    axios
-      .get("/userinfo/{}", {
-        params: {
-          userID: this.$route.params.userID
-        }
-      })
-      .then(res => {
-        console.log("yes");
-        //console.log(this.$route.params.userID);
-        this.applyModel.name = res.data.username;
-        this.applyModel.email = res.data.email;
-        console.log(this.applyModel.name);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+  methods: {
+    applypass() {
+      this.sendapplymodel.formID=this.Model.formID;
+      axios
+        .patch("/application/" + this.Model.formID + "/", this.sendapplymodel)
+        .then(res => {
+          console.log(res);
+          if(res.status == 200){
+            this.$Message.info("审核提交成功");
+          };
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    applyrefuse() {
+      this.sendapplymodel.formID=this.Model.formID;
+      this.sendapplymodel.isPass=false;
+      axios
+        .patch("/application/"+ this.Model.formID + "/",this.sendapplymodel)
+        .then(res => {
+          console.log(res);
+          if(res.status == 200){
+            this.$Message.info("审核提交成功");
+          };
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   }
 };
 </script>

@@ -19,13 +19,27 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpapertitle">
-        <a>title</a>
+        <a @click="jump(sourceModel)">{{sourceModel.title}}</a>
       </div>
-      <div class="searchpapercontent">author</div>
+      <div class="searchpapercontent">{{sourceModel.author}}</div>
       <Divider style="margin-bottom:0px"/>
     </Card>
   </Row>
 </template>
 <script>
-export default {};
+export default {
+  name: "searchsourceModel",
+  data() {
+    return {};
+  },
+  props: ["sourceModel"],
+  methods: {
+    jump: function() {
+      this.$router.push({
+        name: "adminsourceview",
+        query: { source: this.sourceModel }
+      });
+    }
+  }
+};
 </script>

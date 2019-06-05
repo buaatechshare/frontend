@@ -232,6 +232,10 @@ export default {
       }
       this.commentModel.rate = this.starRate.toString();
       console.log(this.commentModel);
+      if (this.$route.params.userID == null) {
+        this.$Message.info("请先登录");
+        return;
+      }
       axios.post("/comment/", this.commentModel).then(res => {
         if (res.status == 201) {
           this.$Message.info("评论成功！");
@@ -251,13 +255,15 @@ export default {
       }
       this.iscollect = !this.iscollect;
       if (this.iscollect) {
-        axios.post("/collections/", this.addCollectionModel);
+        axios.post("/collections/", {
+          params: {
+            userID: this.$route.params.userID,
+            resourceID: this.resourceID
+          }
+        });
       } else {
         axios.delete("/collections/", {
           params: {
-            userID: this.$route.params.userID
-          },
-          data: {
             userID: this.$route.params.userID,
             resourceID: this.resourceID
           }

@@ -9,6 +9,7 @@
   float: left;
   margin-top: 10px;
   margin-bottom: 12px;
+  width: 700px; 
 }
 .searchproftitle {
   font-size: 20px;
@@ -44,6 +45,7 @@
   </Card>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "searchProf",
   props: ["professor"],

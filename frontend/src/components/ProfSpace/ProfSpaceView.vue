@@ -47,9 +47,9 @@
             </MenuItem>
           </Submenu>
 
-          <MenuItem name="manage" :to="{name: 'PManageView'}">
+          <!--MenuItem name="manage" :to="{name: 'PManageView'}">
             <Icon type="md-leaf"/>成果管理
-          </MenuItem>
+          </MenuItem-->
 
           <MenuItem name="upload" :to="{name: 'ProfUploadView'}">
             <Icon type="md-leaf"/>上传成果
