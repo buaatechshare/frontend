@@ -46,8 +46,9 @@
           <p class="paperlabel">作者：</p>
           <p style="color:grey;font-size:14px;float:left">
             <!-- authors->author->author.name -->
-            <span v-for="author in paperdetail.author" style="margin-right:5px">
-              <a>{{author}}</a>
+            <span v-for="author in authors" style="margin-right:5px">
+              <a>{{author.name}}</a>
+              <Divider type="vertical"/>
             </span>
           </p>
         </div>
@@ -68,6 +69,7 @@
           <p class="papercontent">
             <span v-for="keyword in keywords" style="margin-right:5px">
               <a>{{keyword}}</a>
+              <Divider type="vertical"/>
             </span>
           </p>
         </div>
@@ -76,7 +78,10 @@
         <div>
           <p class="paperlabel">学习领域：</p>
           <p class="papercontent">
-            <span v-for="field in fos" style="margin-right:10px">{{field}}</span>
+            <span v-for="field in fos" style="margin-right:10px">
+              {{field}}
+              <Divider type="vertical"/>
+            </span>
           </p>
         </div>
         <div style="clear:both"></div>
@@ -132,7 +137,7 @@
           <h3 is="sui-header" style="width:865px" dividing>评论列表</h3>
           <sui-comment v-for="comment in comments" :key="index">
             <sui-comment-content>
-              <a is="sui-comment-author" style="pointer-events:none">{{comment.name}}</a>
+              <a is="sui-comment-author" style="pointer-events:none">{{comment.userID.name}}</a>
               <sui-comment-metadata>
                 <Rate disabled="true" v-model="comment.rate"/>
               </sui-comment-metadata>
@@ -159,7 +164,7 @@
                 <sui-icon name="bell outline"/>评分
               </div>
               <FormItem style="margin-bottom:10px">
-                <Rate v-model="commentModel.rate"/>
+                <Rate v-model="starRate"/>
               </FormItem>
               <div style="margin-bottom:10px">
                 <sui-icon name="edit outline"/>评论
@@ -199,27 +204,36 @@ export default {
       open: false,
       iscollect: false,
       paperdetail: [],
+      authors: [],
       keywords: [],
       fos: [],
       references: [],
       url: [],
       comments: [],
-      commentModel: {
-        comment: "",
-        rate: 0,
+      resourceID: this.$route.query.resourceID,
+      starRate: 0,
+      addCollectionModel:{
         userID: this.$route.params.userID,
-        resourceID: "12333"
+        resourceID: this.$route.query.resourceID
+      },
+      commentModel: {
+        content: "",
+        rate: "",
+        userID: this.$route.params.userID,
+        resourceID: this.$route.query.resourceID
       }
     };
   },
   methods: {
     submit() {
-      if (this.commentModel.rate == 0 && this.commentModel.comment == "") {
+      if (this.commentModel.rate == 0 && this.commentModel.content == "") {
         this.$Message.info("评论不能为空！");
         return;
       }
-      axios.post("/comment", this.commentModel).then(res => {
-        if (res.status == 200) {
+      this.commentModel.rate = this.starRate.toString();
+      console.log(this.commentModel);
+      axios.post("/comment/", this.commentModel).then(res => {
+        if (res.status == 201) {
           this.$Message.info("评论成功！");
           this.open = !this.open;
         } else {
@@ -231,25 +245,21 @@ export default {
       this.open = !this.open;
     },
     collectpaper() {
+      if (this.$route.params.userID == null) {
+        this.$Message.info("请先登录");
+        return;
+      }
       this.iscollect = !this.iscollect;
       if (this.iscollect) {
-        axios.post("/collections/{}", {
-          params: {
-            userID: this.$route.params.userID
-          },
-          data: {
-            userID: this.$route.params.userID,
-            resourceID: "12333"
-          }
-        });
+        axios.post("/collections/", this.addCollectionModel);
       } else {
-        axios.delete("/collections/{}", {
+        axios.delete("/collections/", {
           params: {
             userID: this.$route.params.userID
           },
           data: {
             userID: this.$route.params.userID,
-            resourceID: "12333"
+            resourceID: this.resourceID
           }
         });
       }
@@ -259,22 +269,22 @@ export default {
   created() {
     axios
       .all([
-        axios.get("/paperDetail/", {
-          params: { paperID: this.$route.params.resourceID }
-        }),
+        axios.get("/paperDetail/" + this.$route.query.resourceID + "/"),
         axios.get("/comment/", {
-          params: { paperID: this.$route.params.resourceID }
+          params: { resourceID: this.$route.query.resourceID }
         })
       ])
       .then(
         axios.spread((PD, CO) => {
           this.paperdetail = PD.data;
           console.log(PD.data);
+          console.log(CO);
+          this.authors = this.paperdetail.authors;
           this.keywords = this.paperdetail.keywords;
           this.fos = this.paperdetail.fos;
           this.references = this.paperdetail.references;
           this.url = this.paperdetail.url;
-          this.comments = CO.data.comments;
+          this.comments = CO.data.results;
         })
       );
   }

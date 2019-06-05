@@ -1,7 +1,7 @@
 <template>
   <div>
     <CollectionPatentBox v-for="(patent, index) in patents" v-bind:patent="patent" :key="index"/>
-    <Page :total="100" show-elevator style="margin-bottom:100px"/>
+    <!--Page :total="100" show-elevator style="margin-bottom:100px"/-->
   </div>
 </template>
 

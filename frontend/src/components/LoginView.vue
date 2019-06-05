@@ -88,7 +88,7 @@ export default {
                 this.$Message.info("登录成功！");
                 this.$router.push({
                   name: "user",
-                  params: { userID: res.data.userID }
+                  query: { userID: res.data.userID }
                 });
               } else {
                 this.$Message.info("登录账号或者密码错误！");

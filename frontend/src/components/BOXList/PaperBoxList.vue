@@ -6,14 +6,14 @@
     </sui-card-group>
     <div class="ui horizontal divider"></div>
     <div style="text-align:center">
-    <Page
-      :total="pageTotal"
-      :current="pageNum"
-      :page-size="pageSize"
-      @on-change="handlePage"
-      show-elevator
-      style="margin-bottom:100px"
-    />
+      <Page
+        :total="pageTotal"
+        :current="pageNum"
+        :page-size="pageSize"
+        @on-change="handlePage"
+        show-elevator
+        style="margin-bottom:100px"
+      />
     </div>
   </div>
 </template>
@@ -53,10 +53,10 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/papers/")
+      .get("/papersRec/0/")
       .then(res => {
+        console.log(res);
         this.papers = res.data.papers;
-        console.log(this.papers);
       })
       .catch(err => {
         console.error(err);

@@ -5,7 +5,7 @@
       <MessageBox v-for="(message, index) in messages" v-bind:message="message" :key="index"/>
     </sui-card-group>
     <div class="ui horizontal divider"></div>
-    <Page :total="100" show-elevator style="margin-bottom:100px"/>
+    <!--Page :total="100" show-elevator style="margin-bottom:100px"/-->
   </div>
 </template>
 
@@ -24,9 +24,10 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/messages/")
+      .get("/messages/",{params:{receiverID:this.$route.params.userID}})
       .then(res => {
-        this.messages = res.data.messages;
+        console.log(res);
+        this.messages = res.data.results;
         console.log(this.messages);
       })
       .catch(err => {

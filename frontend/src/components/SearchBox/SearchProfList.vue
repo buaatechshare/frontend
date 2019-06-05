@@ -7,17 +7,28 @@
 </style>
 <template>
   <div>
-    <div class="searchnum">找到63条相关结果</div>
-    <searchprof v-for="(professor, index) in professors" v-bind:professor="professor" :key="index"></searchprof>
+    <div v-for="resultcount in resultcounts" class="searchnum">找到{{resultcount}}条相关结果</div>
+    <searchprof
+      v-for="(professor, index) in this.professors"
+      v-bind:professor="professor"
+      :key="index"
+    ></searchprof>
     <!--未和后端数据对接版本-->
     <div style="text-align:center">
-      <Page :total="100" show-elevator/>
+      <Page
+        :total="pageTotal"
+        :current="pageNum"
+        :page-size="pageSize"
+        @on-change="handlePage"
+        show-elevator
+      />
     </div>
   </div>
 </template>
 <script>
 import searchprof from "./SearchProf.vue";
 import axios from "axios";
+import Vue from "vue";
 export default {
   components: {
     searchprof
@@ -25,24 +36,81 @@ export default {
   data() {
     return {
       keywords: "",
-      professors: []
+      professors: [],
+      pageTotal: 100,
+      pageNum: 1,
+      pageSize: 10,
+      resultcounts: [0]
     };
   },
+  methods: {
+    handlePage(value) {
+      this.pageNum = value;
+      this.getProfMessages();
+    },
+    //翻页
+    getProfMessages() {
+      this.keywords = this.$route.query.keywords;
+      axios
+        .get("/search/professors/", {
+          params: {
+            keywords: this.keywords,
+            page: this.pageNum
+          }
+        })
+        .then(res => {
+          this.professors = res.data.results;
+          this.pageTotal = res.data.count;
+          console.log(res);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    },
+    //多次搜索
+    newask() {
+      this.keywords = this.$route.query.keywords;
+      axios
+        .get("/search/professors/", {
+          params: {
+            keywords: this.keywords,
+            byTime: false,
+            page: 1
+          }
+        })
+        .then(res => {
+          Vue.set(this.resultcounts, 0, res.data.count);
+          this.professors = res.data.results;
+          this.pageTotal = res.data.count;
+          console.log(res);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  },
+  //初次搜索
   created() {
     this.keywords = this.$route.query.keywords;
     axios
-      .get("/search/professors", {
+      .get("/search/professors/", {
         params: {
-          keywords: this.keywords
+          keywords: this.keywords,
+          page: 1
         }
       })
       .then(res => {
+        Vue.set(this.resultcounts, 0, res.data.count);
         console.log(res);
-        this.professors = res.data.professor;
+        this.professors = res.data.results;
+        this.pageTotal = res.data.count;
       })
       .catch(err => {
         console.error(err);
       });
+  },
+  watch: {
+    $route: "newask"
   }
 };
 </script>

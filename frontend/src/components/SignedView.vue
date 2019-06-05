@@ -48,6 +48,7 @@
         :color="myColors"
         :showTooltip="false"
         :wordClick="wordClickHandler"
+        :fontSize="[40,50]"
         :rotate="{from:0, to:0, numOfOrientation:1}"
       ></wordcloud>
     </div>
@@ -58,6 +59,7 @@ import Vue from "vue";
 import wordcloud from "vue-wordcloud";
 import axios from "axios";
 var themelist = [""];
+var taglist = [""];
 export default {
   name: "app",
   components: {
@@ -71,11 +73,21 @@ export default {
       Vue.set(this.themelist, this.themelist.length, name);
     },
     sendinterests() {
-      axios//mock上接口有问题
-        .post("/interests/", {
-          data: {
+      for (var i = 0;
+        i < (this.defaultWords.length > 30 ? 30 : this.defaultWords.length);
+        i++) {
+        for (var j = 0; j < this.themelist.length; j++) {
+          if (this.themelist[j] == this.defaultWords[i].field) {
+            this.taglist.push({ fieldID: this.defaultWords[i].fieldID });
+          }
+        }
+      }
+      console.log(this.taglist);
+      axios
+        .post("/field/", {
+          params: {
             userID: this.$route.params.userID,
-            field: this.themelist
+            field: this.taglist
           }
         })
         .then(res => {
@@ -85,32 +97,34 @@ export default {
           console.error(err);
         });
       this.themelist = [];
+      this.taglist = [];
     },
     foundTag() {
-      console.log(this.receiverTag);
       axios
-        .get("/interests/",{
-          params:{
-            keywords:this.receiverTag
+        .get("/field/", {
+          params: {
+            keywords: this.receiverTag
           }
         })
         .then(res => {
-          this.defaultWords = res.data.tags;
-          console.log(res.data.tags);
-          for (var i = 0; i < this.defaultWords.length; i++) {
+          this.defaultWords = res.data.tag;
+          console.log(res.data.tag);
+          for (
+            var i = 0;
+            i < (this.defaultWords.length > 30 ? 30 : this.defaultWords.length);
+            i++
+          ) {
             this.interestTags.push({
-              value: Math.ceil(Math.random() * 20),
-              name: this.defaultWords[i]
+              value: Math.floor(Math.random() * 3),
+              name: this.defaultWords[i].field
             });
           }
         })
         .catch(err => {
           console.error(err);
         });
-    },
-    
+    }
   },
-
   data() {
     return {
       show: true,
@@ -118,7 +132,8 @@ export default {
       myColors: ["#1f77b4", "#629fc9", "#94bedb", "#c9e0ef"],
       defaultWords: [],
       interestTags: [],
-      receiverTag: ""
+      receiverTag: "",
+      taglist: []
     };
   }
 };

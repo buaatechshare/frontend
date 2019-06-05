@@ -19,12 +19,12 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpapertitle">
-        <a @click="jump(paper)">{{paper.paperName}}</a>
+        <a @click="jump(paper)">{{paper.title}}</a>
       </div>
       <div class="searchpapercontent">{{paper.abstract}}</div>
       <div name="searchpaperauthor">
         <p style="color:black;font-size:12px">
-          <a style="color:black" v-for="(author, index) in paper.author">{{author.name+" "}}</a>
+          <a style="color:black" v-for="(author, index) in paper.authors">{{author.name+" "}}</a>
         </p>
       </div>
       <Divider style="margin-bottom:0px"/>
@@ -43,12 +43,12 @@ export default {
       if (this.$route.params.userID) {
         this.$router.push({
           name: "Upaperview",
-          params: { resourceID: this.paper.id }
+          query: { resourceID: this.paper.id }
         });
       } else {
         this.$router.push({
           name: "paperview",
-          params: { resourceID: this.paper.id }
+          query: { resourceID: this.paper.id }
         });
       }
     }

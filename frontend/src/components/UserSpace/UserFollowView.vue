@@ -1,7 +1,7 @@
 <template>
   <div>
     <ProfBox v-for="(prof, index) in follows" v-bind:prof="prof" :key="index"/>
-    <Page :total="100" show-elevator style="margin-bottom:100px"/>
+    <!--Page :total="100" show-elevator style="margin-bottom:100px"/-->
   </div>
 </template>
 

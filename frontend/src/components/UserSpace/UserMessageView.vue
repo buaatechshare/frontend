@@ -24,7 +24,7 @@ export default {
   },
   beforeCreate() {
     axios
-      .get("/messages/")
+      .get("/messages/",{params:{receiverID:this.$route.params.userID}})
       .then(res => {
         console.log(res);
         this.messages = res.data.results;
