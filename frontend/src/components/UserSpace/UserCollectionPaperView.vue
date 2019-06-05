@@ -19,11 +19,13 @@ export default {
     };
   },
   beforeCreate() {
+    console.log("what?");
     axios
-      .get("/papers")
+      .get("/collections/"+this.$route.params.userID+"/",{params:{resType:"paper"}})
       .then(res => {
-        this.papers = res.data.papers;
-        console.log(this.papers);
+        console.log(res.data.results);
+        this.papers = res.data.results;
+        //console.log(this.papers);
       })
       .catch(err => {
         console.error(err);

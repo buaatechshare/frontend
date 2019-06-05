@@ -12,8 +12,8 @@
       </MenuItem>
       <MenuItem style="float:right">
         <ButtonGroup>
-          <Button :size="buttonSize" type="primary" to="/login">login</Button>
-          <Button :size="buttonSize" to="/register">signup</Button>
+          <Button  type="primary" to="/login">login</Button>
+          <Button  to="/register">signup</Button>
         </ButtonGroup>
       </MenuItem>
       <MenuItem style="width: 40%">

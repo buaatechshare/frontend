@@ -1,14 +1,13 @@
 <template>
-  <sui-card @click="jump(patent)" class="raised">
+  <sui-card class="raised">
     <sui-card-content>
       <sui-icon name="male"></sui-icon>
-      {{patent.rightHolder}}
-      <sui-card-meta slot="right">
-        <sui-icon name="bell outline"></sui-icon>
-      </sui-card-meta>
+      {{patent.rightholder}}
     </sui-card-content>
     <sui-card-content>
-      <sui-card-header>{{patent.patentName}}</sui-card-header>
+      <sui-card-header>
+        <a @click="jump(patent)">{{patent.patentName}}</a>
+      </sui-card-header>
       <br>
       <div class="event">
         <div class="content">
@@ -29,12 +28,17 @@
 export default {
   name: "patentBox",
   methods: {
-    jump: function(patent){
-      if(this.$route.params.userID){
-        this.$router.push({name:'Upatentview',params:{resourceID:patent.resourceID}});
-      }
-      else{
-        this.$router.push({name:'patentview',params:{resourceID:patent.resourceID}});
+    jump: function(patent) {
+      if (this.$route.params.userID) {
+        this.$router.push({
+          name: "Upatentview",
+          params: { resourceID: patent.resourceID }
+        });
+      } else {
+        this.$router.push({
+          name: "patentview",
+          params: { resourceID: patent.resourceID }
+        });
       }
     }
   },

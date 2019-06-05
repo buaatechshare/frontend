@@ -8,7 +8,14 @@
         </sui-card-group>
       </div>
       <div class="ui horizontal divider"></div>
-      <Page :total="100" show-elevator style="margin-bottom:100px"/>
+      <Page
+        :total="pageTotal"
+        :current="pageNum"
+        :page-size="pageSize"
+        @on-change="handlePage"
+        show-elevator
+        style="margin-bottom:100px"
+      />
     </div>
   </div>
 </template>
@@ -23,18 +30,43 @@ export default {
   },
   data() {
     return {
-      patents: []
+      patents: [],
+      professors: [],
+      pageTotal: 100,
+      pageNum: 1,
+      pageSize: 0,
+      userID: 0
     };
   },
+  methods: {
+    handlePage(value) {
+      this.pageNum = value;
+      axios
+        .get("/patentsRec/0/", {
+          params: {
+            page: this.pageNum
+          }
+        })
+        .then(res => {
+          console.log(res);
+          this.patents = res.data.results;
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  },
   beforeCreate() {
-    axios
-      .get("/patents/")
-      .then(res => {
-        this.patents = res.data.patents;
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    if (this.$route.query)
+      axios
+        .get("/patentsRec/0/")
+        .then(res => {
+          console.log(res);
+          this.patents = res.data.results;
+        })
+        .catch(err => {
+          console.error(err);
+        });
   }
 };
 </script>
