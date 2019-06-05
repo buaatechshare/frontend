@@ -39,26 +39,8 @@ export default {
   props: ["message"],
   methods: {
     handleRender: function(message) {
-      //console.log("mudamudamuda!");
       //console.log(message.senderName)
-      this.$router.push({name:'UserSendMessage',params: {receiverName: message.senderID.name, receiverID: message.senderID.userID}})
-      /*this.$Modal.confirm({
-        render: h => {
-          
-          return h("Input", {
-            props: {
-              value: this.value,
-              autofocus: true,
-              placeholder: "请输入回复"
-            },
-            on: {
-              input: val => {
-                this.value = val;
-              }
-            }
-          });
-        }
-      });*/
+      this.$router.push({name:'PUserSendMessage',params: {receiverName: message.senderID.name, receiverID: message.senderID.userID}})
     }
   }
 };

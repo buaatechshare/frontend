@@ -29,7 +29,14 @@ export default {
   },
   methods:{
     submit:function(){
-      axios.patch("/userinfo/"+this.$route.params.userID+"/", this.userinfoModel)
+      axios
+      .patch("/userinfo/"+this.$route.params.userID+"/", this.userinfoModel)
+      .then(res=>{
+        if(res.status == 200)
+        {
+          this.$Message.info("修改成功！");
+        }
+      })
     }
   },
     //todo: click to submit changes. But currently no match interface.
@@ -37,7 +44,7 @@ export default {
     axios
       .get("/userinfo/"+this.$route.params.userID+"/")
       .then(res => {
-        console.log("yes");
+        //console.log("yes");s
         //console.log(this.$route.params.userID);
         console.log(res);
         this.userinfoModel.name = res.data.name;

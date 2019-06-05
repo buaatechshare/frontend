@@ -20,14 +20,6 @@
         <Button type="primary" @click="send">发送</Button>
       </FormItem>
     </Form>
-
-    <!--<Modal title="提示" @on-ok="ok">
-      <br>
-      <p>信件已发送。</p>
-      <p>
-        <br>
-      </p>
-    </Modal>-->
   </div>
 </template>
 <script>
@@ -66,8 +58,10 @@ export default {
           console.log(res);
           if(res.status == 201)
           {
+            this.message.receiverName="";
+            this.message.content="";
             this.$Message.info("发送成功！");
-            this.$router.go(0);
+            
           }
           else{
             this.$Message.info("send message failed.");
@@ -76,10 +70,6 @@ export default {
         .catch(err => {
           console.error(err);
         });
-    },
-    ok() {
-      this.$Message.info("message sent successfully.");
-      this.$router.go(0);
     },
     searchUser(query) {
       if (query != "") {

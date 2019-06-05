@@ -43,17 +43,19 @@ export default {
     return {};
   },
   methods: {
-    jump: function(paper){
-      //this.$Message.info("Yes!!!!");
-      if(this.$route.params.userID){
-        //console.log("yes");
-        //console.log(paper.resourceID);
-        this.$router.push({name:'Upaperview',params:{resourceID:paper.resourceID}});
-      }
-      else{
-        //console.log("yes");
-        //console.log(paper.resourceID);
-        this.$router.push({name:'paperview',params:{resourceID:paper.resourceID}});
+    jump: function(paper) {
+      console.log("fuck");
+      console.log(paper);
+      if (this.$route.params.userID) {
+        this.$router.push({
+          name: "Upaperview",
+          query: { resourceID: paper.paperID }
+        });
+      } else {
+        this.$router.push({
+          name: "paperview",
+          query: { resourceID: paper.paperID }
+        });
       }
     }
   },

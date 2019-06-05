@@ -160,11 +160,13 @@ export default [{
             path: 'UserMessage',
             component: PUserMessageView
           },
+          
           {
             name: 'PUserSendMessage',
             path: 'SendMessage',
             component: UserSendMessage
           },
+          
           {
             name: 'PManageView',
             path: 'ProfManageView',
@@ -174,7 +176,7 @@ export default [{
             name: 'ProfUploadView',
             path: 'ProfUploadView',
             component: ProfUploadView
-          }
+          },
         ]
       },
       {

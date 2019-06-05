@@ -44,16 +44,19 @@ export default {
     return {};
   },
   methods:{
-    jump: function(patent){
-      if(this.$route.params.userID){
-        //console.log("yes");
-        //console.log(paper.resourceID);
-        this.$router.push({name:'Upatentview',params:{resourceID:patent.resourceID}});
-      }
-      else{
-        //console.log("yes");
-        //console.log(paper.resourceID);
-        this.$router.push({name:'patentview',params:{resourceID:patent.resourceID}});
+    jump: function(patent) {
+      console.log("fuck");
+      console.log(patent);
+      if (this.$route.params.userID) {
+        this.$router.push({
+          name: "Upatentview",
+          query: { resourceID: patent.patentID }
+        });
+      } else {
+        this.$router.push({
+          name: "patentview",
+          query: { resourceID: patent.patentID }
+        });
       }
     }
   },

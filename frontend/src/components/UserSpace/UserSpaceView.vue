@@ -39,10 +39,10 @@
             <template slot="title">
               <Icon type="ios-analytics"/>站内信
             </template>
-            <MenuItem name="collectionPapers" :to="{name: 'UserSendMessage'}">
+            <MenuItem name="sendMessage" :to="{name: 'UserSendMessage'}">
               <Icon type="md-heart"/>写信
             </MenuItem>
-            <MenuItem name="collectionPatents" :to="{name:'UserMessageView'}">
+            <MenuItem name="messageList" :to="{name:'UserMessageView'}">
               <Icon type="md-heart"/>收信
             </MenuItem>
           </Submenu>
