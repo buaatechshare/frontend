@@ -47,6 +47,9 @@ export default {
         )
         .then(res => {
           console.log(res);
+          if(res.status == 200){
+            this.$Message.info("审核提交成功");
+          };
         })
         .catch(err => {
           console.error(err);
@@ -59,6 +62,9 @@ export default {
         .patch("/paperCheck/" + this.Model.id + "/", this.sendsourcemodel)
         .then(res => {
           console.log(res);
+          if(res.status == 200){
+            this.$Message.info("审核提交成功");
+          };
         })
         .catch(err => {
           console.error(err);

@@ -212,6 +212,10 @@ export default {
       comments: [],
       resourceID: this.$route.query.resourceID,
       starRate: 0,
+      addCollectionModel:{
+        userID: this.$route.params.userID,
+        resourceID: this.$route.query.resourceID
+      },
       commentModel: {
         content: "",
         rate: "",
@@ -228,6 +232,10 @@ export default {
       }
       this.commentModel.rate = this.starRate.toString();
       console.log(this.commentModel);
+      if (this.$route.params.userID == null) {
+        this.$Message.info("请先登录");
+        return;
+      }
       axios.post("/comment/", this.commentModel).then(res => {
         if (res.status == 201) {
           this.$Message.info("评论成功！");

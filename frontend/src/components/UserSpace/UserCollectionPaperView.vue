@@ -1,7 +1,7 @@
 <template>
   <div>
     <CollectionPaperBox v-for="(paper, index) in papers" v-bind:paper="paper" :key="index"/>
-    <Page :total="100" show-elevator style="margin-bottom:100px"/>
+    <!--Page :total="100" show-elevator style="margin-bottom:100px"/-->
   </div>
 </template>
 
@@ -19,7 +19,6 @@ export default {
     };
   },
   beforeCreate() {
-    console.log("what?");
     axios
       .get("/collections/"+this.$route.params.userID+"/",{params:{resType:"paper"}})
       .then(res => {

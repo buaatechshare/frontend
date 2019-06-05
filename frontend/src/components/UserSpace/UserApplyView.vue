@@ -33,14 +33,18 @@ export default {
   },
   methods:{
     send: function(){
+      console.log(this.application);
       axios
       .post("/application/",this.application)
       .then(res=>{
         console.log(res);
         if(res.status == 201)
         {
+          this.application.introduction="";
+          this.application.realName="";
+          this.application.constitution="";
           this.$Message.info("申请表单提交成功！");
-          this.$route.go(0);
+          //this.$router.go(0);
         }
         else{
           this.$Message.info("表单提交失败");

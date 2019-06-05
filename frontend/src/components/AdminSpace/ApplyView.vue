@@ -40,6 +40,9 @@ export default {
         .patch("/application/" + this.Model.formID + "/", this.sendapplymodel)
         .then(res => {
           console.log(res);
+          if(res.status == 200){
+            this.$Message.info("审核提交成功");
+          };
         })
         .catch(err => {
           console.error(err);
@@ -52,6 +55,9 @@ export default {
         .patch("/application/"+ this.Model.formID + "/",this.sendapplymodel)
         .then(res => {
           console.log(res);
+          if(res.status == 200){
+            this.$Message.info("审核提交成功");
+          };
         })
         .catch(err => {
           console.error(err);

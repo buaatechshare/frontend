@@ -39,17 +39,17 @@
             <template slot="title">
               <Icon type="ios-analytics"/>站内信
             </template>
-            <MenuItem name="collectionPapers" :to="{name: 'PUserSendMessage'}">
+            <MenuItem name="sendMessage" :to="{name: 'PUserSendMessage'}">
               <Icon type="md-heart"/>写信
             </MenuItem>
-            <MenuItem name="collectionPatents" :to="{name:'PUserMessageView'}">
+            <MenuItem name="MessageList" :to="{name:'PUserMessageView'}">
               <Icon type="md-heart"/>收信
             </MenuItem>
           </Submenu>
 
-          <MenuItem name="manage" :to="{name: 'PManageView'}">
+          <!--MenuItem name="manage" :to="{name: 'PManageView'}">
             <Icon type="md-leaf"/>成果管理
-          </MenuItem>
+          </MenuItem-->
 
           <MenuItem name="upload" :to="{name: 'ProfUploadView'}">
             <Icon type="md-leaf"/>上传成果

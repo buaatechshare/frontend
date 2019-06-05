@@ -14,8 +14,8 @@
       <MenuItem name="patents" :to="{name: 'Upatents'}">
         <sui-icon name="sticky note"></sui-icon>patent
       </MenuItem>
-      <MenuItem name="userspace" style="float:right" :to="{name: 'userspace'}">
-        <sui-icon name="user circle outline" size="big"></sui-icon>
+      <MenuItem name="userspace" style="float:right" >
+        <sui-icon name="user circle outline" size="big" @click="jump()"></sui-icon>
       </MenuItem>
       <MenuItem style="width: 40%">
         <Input search placeholder="Search..." @on-search="SearchFunction()" v-model="keywords"/>
@@ -25,6 +25,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "userIndex",
   data() {
@@ -38,6 +39,24 @@ export default {
         name: "Usearchresult",
         query: { keywords: this.keywords }
       });
+    },
+    jump() {
+      axios
+      .get("/userinfo/"+this.$route.params.userID+"/")
+      .then(res => {
+        console.log(res);
+        if(res.data.isExpert){
+          this.$router.push({
+            name:"profspace"
+          });
+        }
+        else{
+          this.$router.push({
+            name:"userspace"
+          });
+        }
+      })
+      
     }
   }
 };
