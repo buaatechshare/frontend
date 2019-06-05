@@ -22,8 +22,9 @@ export default {
     axios
       .get("/collections/"+this.$route.params.userID+"/",{params:{resType:"patent"}})
       .then(res => {
-        console.log(res.data.results);
-        this.papers = res.data.results;
+        console.log("patent");
+        console.log(res);
+        this.patents = res.data.results;
         //console.log(this.papers);
       })
       .catch(err => {

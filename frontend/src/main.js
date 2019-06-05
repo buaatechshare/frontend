@@ -14,7 +14,7 @@ Vue.use(SuiVue);
 Vue.use(VueRouter);
 Vue.use(axios);
 
-// axios.defaults.baseURL = '  https://www.easy-mock.com/mock/5cdc07a972d20750a604ae1c/example';
+//axios.defaults.baseURL = '  https://www.easy-mock.com/mock/5cdc07a972d20750a604ae1c/example';
 axios.defaults.baseURL = 'http://10.135.170.39:8000/'
 Vue.config.productionTip = false;
 

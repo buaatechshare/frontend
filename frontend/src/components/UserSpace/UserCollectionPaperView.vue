@@ -19,7 +19,6 @@ export default {
     };
   },
   beforeCreate() {
-    console.log("what?");
     axios
       .get("/collections/"+this.$route.params.userID+"/",{params:{resType:"paper"}})
       .then(res => {

@@ -33,6 +33,7 @@ export default {
   },
   methods:{
     send: function(){
+      console.log(this.application);
       axios
       .post("/application/",this.application)
       .then(res=>{
