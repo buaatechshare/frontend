@@ -56,7 +56,7 @@ export default {
       .get("/papersRec/0/")
       .then(res => {
         console.log(res);
-        this.papers = res.data.papers;
+        this.papers = res.data.results;
       })
       .catch(err => {
         console.error(err);
