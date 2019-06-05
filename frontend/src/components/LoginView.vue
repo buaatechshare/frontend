@@ -83,7 +83,6 @@ export default {
               console.log(res);
               if (res.status == 200) {
                 this.$Message.info("登录成功！");
-<<<<<<< HEAD
                 if (this.loginRule.isAdmin == "user") {
                   this.$router.push({
                     name: "user",
@@ -92,16 +91,10 @@ export default {
                 }
                 else{
                   this.$router.push({
-                    name: "adminsourcelistview",
+                    name: "adminapplylistview",
                     params: { userID: res.data.userID }
                   });
                 }
-=======
-                this.$router.push({
-                  name: "user",
-                  query: { userID: res.data.userID }
-                });
->>>>>>> 01c5680d96839887ab3775fe2c1ef0ece4b9324b
               } else {
                 this.$Message.info("登录账号或者密码错误！");
               }

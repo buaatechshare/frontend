@@ -8,14 +8,16 @@
         </sui-card-group>
       </div>
       <div class="ui horizontal divider"></div>
-      <Page
-        :total="pageTotal"
-        :current="pageNum"
-        :page-size="pageSize"
-        @on-change="handlePage"
-        show-elevator
-        style="margin-bottom:100px"
-      />
+      <div style="text-align:center">
+        <Page
+          :total="pageTotal"
+          :current="pageNum"
+          :page-size="pageSize"
+          @on-change="handlePage"
+          show-elevator
+          style="margin-bottom:100px"
+        />
+      </div>
     </div>
   </div>
 </template>

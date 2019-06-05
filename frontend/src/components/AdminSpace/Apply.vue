@@ -19,11 +19,11 @@
   <Row>
     <Card dis-hover style="border:0px">
       <div class="searchpapertitle">
-        <a @click="jump(applyModel)">{{applyModel}}</a>
+        <a @click="jump(applyModel)">{{applyModel.realName}}</a>
       </div>
-      <div class="searchpapercontent">{{email}}</div>
+      <div class="searchpapercontent">{{applyModel.introduction}}</div>
       <div name="searchpaperauthor">
-        <p style="color:black;font-size:12px">{{reason}}</p>
+        <p style="color:black;font-size:12px">{{applyModel.constitution}}</p>
       </div>
       <Divider style="margin-bottom:0px"/>
     </Card>
@@ -39,8 +39,8 @@ export default {
   methods: {
     jump: function() {
       this.$router.push({
-        name: "adminapply",
-        query: { resourceID: this.paper.id }
+        name: "adminapplyview",
+        query: { apply: this.applyModel }
       });
     }
   }

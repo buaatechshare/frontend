@@ -35,14 +35,15 @@ export default {
     getPaperMessages() {
       this.keywords = this.$route.query.keywords;
       axios
-        .get("/paperCheck/", {
+        .get("/application/", {
           params: {
             pageSize: 10,
             page: this.pageNum
           }
         })
         .then(res => {
-          this.applyModel=res.data.results;
+          console.log(res);
+          this.applyModels=res.data.results;
         })
         .catch(err => {
           console.error(err);
@@ -51,14 +52,16 @@ export default {
   },
   created() {
     axios
-      .get("/paperCheck/", {
+      .get("/application/", {
         params: {
           page: 1,
           pageSize: 10
         }
       })
       .then(res => {
-        this.applyModel=res.data.results;
+        console.log(res);
+        this.applyModels=res.data.results;
+        console.log(this.applyModels);
         this.pageTotal=res.data.count;
       })
       .catch(err => {

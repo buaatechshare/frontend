@@ -249,9 +249,6 @@ export default {
       if (this.iscollect) {
         axios.post("/collections/", {
           params: {
-            userID: this.$route.params.userID
-          },
-          data: {
             userID: this.$route.params.userID,
             resourceID: this.resourceID
           }
@@ -259,9 +256,6 @@ export default {
       } else {
         axios.delete("/collections/", {
           params: {
-            userID: this.$route.params.userID
-          },
-          data: {
             userID: this.$route.params.userID,
             resourceID: this.resourceID
           }

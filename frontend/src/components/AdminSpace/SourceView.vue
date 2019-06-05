@@ -31,19 +31,20 @@ import axios from "axios";
 export default {
   data() {
     return {
-      Model: this.$route.query.source
+      Model: this.$route.query.source,
+      sendsourcemodel: {
+        id: "",
+        isCheck: true,
+        isPass: true
+      }
     };
   },
   methods: {
     sourcepass() {
+      this.sendsourcemodel.id=this.Model.id;
       axios
-        .patch("/paperCheck/", {
-          params: {
-            id: this.Model.id,
-            isCheck: true,
-            isPass: false
-          }
-        })
+        .patch("/paperCheck/"+ this.Model.id + "/", this.sendsourcemodel
+        )
         .then(res => {
           console.log(res);
         })
@@ -52,14 +53,10 @@ export default {
         });
     },
     sourcerefuse() {
+      this.sendsourcemodel.id=this.Model.id;
+      this.sendsourcemodel.isPass=false;
       axios
-        .patch("/paperCheck/", {
-          params: {
-            id: this.Model.id,
-            isCheck: true,
-            isPass: false
-          }
-        })
+        .patch("/paperCheck/" + this.Model.id + "/", this.sendsourcemodel)
         .then(res => {
           console.log(res);
         })

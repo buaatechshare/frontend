@@ -59,7 +59,7 @@ export default {
         }
       })
       .then(res => {
-        console.log(res);
+        console.log(res.data.results);
         this.sourceModels=res.data.results;
         this.pageTotal=res.data.count;
       })

@@ -17,11 +17,11 @@
         width="230"
       >
         <Menu active-name="1" theme="light" width="auto" :open-names="['1']">
-          <MenuItem name="1" :to="{name:'adminsourcelistview'}" >
-            <Icon type="ios-analytics" size="20"/>资源审核
+          <MenuItem name="1" :to="{name:'adminapplylistview'}" >
+            <Icon type="ios-analytics" size="20"/>专家认证审核
           </MenuItem>
-          <MenuItem name="2" :to="{name:'adminapplylistview'}">
-            <Icon type="ios-contacts-outline" size="20"/>专家认证审核
+          <MenuItem name="2" :to="{name:'adminsourcelistview'}">
+            <Icon type="ios-contacts-outline" size="20"/>资源审核
           </MenuItem>
         </Menu>
       </Sider>
